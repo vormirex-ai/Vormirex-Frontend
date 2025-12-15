@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import "./App.css";
-import logoWithoutText from "./assets/logo.png"; // Make sure this path is correct
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState } from 'react';
+import './App.css';
+import logoWithoutText from './assets/logo.png'; // Ensure this path is correct
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPlus,
   faCode,
@@ -21,26 +21,72 @@ import {
   faBookOpen,
   faCalculator,
   faDatabase,
+  faFire,
+  faGraduationCap,
   faTimes,
-} from "@fortawesome/free-solid-svg-icons";
+  faBars, // <-- Added for mobile menu button
+} from '@fortawesome/free-solid-svg-icons';
+
+const ComingSoonModal = ({ isOpen, onClose }) => {
+  if (!isOpen) return null;
+
+  const imageTag = '';
+
+  return (
+    <div className="coming-soon-modal-overlay">
+      <div className="coming-soon-modal-content">
+        <button className="modal-close-button" onClick={onClose}>
+          <FontAwesomeIcon icon={faTimes} />
+        </button>
+        <div className="modal-body">
+          <h2 className="modal-title">Feature Under Construction!</h2>
+          {imageTag}
+          <p className="modal-message">
+            We are working hard to bring this exciting feature to you. **Stay
+            tuned for the launch! 🚀**
+          </p>
+          <div className="modal-info">
+            <FontAwesomeIcon icon={faLightbulb} /> Anticipated Release: Q2 2026
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default function App() {
-  const [showModal, setShowModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(false); // <-- New state
+  const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false); // <-- New state
 
-  const handleFeatureClick = () => {
-    setShowModal(true);
+  const showComingSoon = () => {
+    setIsModalOpen(true);
   };
 
-  const handleInputSubmit = (e) => {
-    if (e.key === "Enter") {
-      setShowModal(true);
-    }
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  // New toggle functions
+  const toggleLeftSidebar = () => {
+    setIsLeftSidebarOpen(!isLeftSidebarOpen);
+    setIsRightSidebarOpen(false); // Close the other one
+  };
+
+  const toggleRightSidebar = () => {
+    setIsRightSidebarOpen(!isRightSidebarOpen);
+    setIsLeftSidebarOpen(false); // Close the other one
   };
 
   return (
     <div className="dashboard-container">
-      {/* LEFT SIDEBAR */}
-      <aside className="sidebar-left">
+      {/* Modal */}
+      <ComingSoonModal isOpen={isModalOpen} onClose={closeModal} />
+
+      {/* LEFT SIDEBAR - Added conditional class */}
+      <aside
+        className={`sidebar-left ${isLeftSidebarOpen ? 'sidebar-open' : ''}`}
+      >
         <div className="sidebar-header">
           <img
             src={logoWithoutText}
@@ -50,7 +96,7 @@ export default function App() {
           <span className="sidebar-company-name">VORMIREX</span>
         </div>
 
-        <button className="new-chat-button" onClick={handleFeatureClick}>
+        <button className="new-chat-button" onClick={showComingSoon}>
           <FontAwesomeIcon icon={faPlus} /> New Chat
         </button>
 
@@ -58,19 +104,19 @@ export default function App() {
           <div className="nav-section">
             <h3>SUBJECTS</h3>
             <ul>
-              <li onClick={handleFeatureClick}>
+              <li onClick={showComingSoon}>
                 <FontAwesomeIcon icon={faCode} className="nav-icon" />
                 Cyber Security
               </li>
-              <li onClick={handleFeatureClick}>
+              <li onClick={showComingSoon}>
                 <FontAwesomeIcon icon={faDatabase} className="nav-icon" />
                 Data Science
               </li>
-              <li onClick={handleFeatureClick}>
+              <li onClick={showComingSoon}>
                 <FontAwesomeIcon icon={faLightbulb} className="nav-icon" />
                 AI / ML
               </li>
-              <li onClick={handleFeatureClick}>
+              <li onClick={showComingSoon}>
                 <FontAwesomeIcon icon={faChartLine} className="nav-icon" />
                 Data Analytics
               </li>
@@ -80,35 +126,35 @@ export default function App() {
           <div className="nav-section">
             <h3>CUSTOM COURSES</h3>
             <ul>
-              <li onClick={handleFeatureClick}>
-                <FontAwesomeIcon icon={faCubes} className="nav-icon" /> Booster
-                Pack
+              <li onClick={showComingSoon}>
+                <FontAwesomeIcon icon={faCubes} className="nav-icon" />
+                Booster Pack
               </li>
-              <li onClick={handleFeatureClick}>
-                <FontAwesomeIcon icon={faLaptopCode} className="nav-icon" />{" "}
+              <li onClick={showComingSoon}>
+                <FontAwesomeIcon icon={faLaptopCode} className="nav-icon" />
                 Coding Mastery
               </li>
-              <li onClick={handleFeatureClick}>
-                <FontAwesomeIcon icon={faClipboardList} className="nav-icon" />{" "}
+              <li onClick={showComingSoon}>
+                <FontAwesomeIcon icon={faClipboardList} className="nav-icon" />
                 Exam Prep
               </li>
-              <li onClick={handleFeatureClick}>
-                <FontAwesomeIcon icon={faChartLine} className="nav-icon" /> Your
-                Progress
+              <li onClick={showComingSoon}>
+                <FontAwesomeIcon icon={faChartLine} className="nav-icon" />
+                Your Progress
               </li>
-              <li onClick={handleFeatureClick}>
-                <FontAwesomeIcon icon={faBookmark} className="nav-icon" /> Saved
-                Chats
+              <li onClick={showComingSoon}>
+                <FontAwesomeIcon icon={faBookmark} className="nav-icon" />
+                Saved Chats
               </li>
             </ul>
           </div>
         </nav>
 
         <div className="sidebar-footer">
-          <div className="footer-link" onClick={handleFeatureClick}>
+          <div className="footer-link" onClick={showComingSoon}>
             <FontAwesomeIcon icon={faCog} className="nav-icon" /> Settings
           </div>
-          <div className="footer-link" onClick={handleFeatureClick}>
+          <div className="footer-link" onClick={showComingSoon}>
             <FontAwesomeIcon icon={faUserCircle} className="nav-icon" /> Profile
           </div>
         </div>
@@ -117,16 +163,28 @@ export default function App() {
       {/* MAIN CONTENT */}
       <main className="main-content">
         <header className="top-bar">
+          {/* NEW: Mobile Menu Button */}
+          <button className="mobile-menu-toggle" onClick={toggleLeftSidebar}>
+            <FontAwesomeIcon icon={faBars} />
+          </button>
+
           <div className="logo-mobile">VORMIREX</div>
+
           <div className="search-box">
             <FontAwesomeIcon icon={faSearch} />
             <input
               type="text"
               placeholder="Search Topics, Questions..."
-              onKeyDown={handleInputSubmit}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  showComingSoon();
+                }
+              }}
             />
           </div>
-          <div className="tools-button">
+          {/* Updated the Tools button to toggle the right sidebar */}
+          <div className="tools-button" onClick={toggleRightSidebar}>
             Learning Tools <FontAwesomeIcon icon={faThumbtack} />
           </div>
         </header>
@@ -138,21 +196,26 @@ export default function App() {
           </div>
 
           <div className="quick-pill-actions">
-            <button onClick={handleFeatureClick}>Explain My Homework</button>
-            <button onClick={handleFeatureClick}>Teach Me Python Basics</button>
-            <button onClick={handleFeatureClick}>Solve A Math Problem</button>
-            <button onClick={handleFeatureClick}>Give Me A Quiz Test</button>
+            <button onClick={showComingSoon}>Explain My Homework</button>
+            <button onClick={showComingSoon}>Teach Me Python Basics</button>
+            <button onClick={showComingSoon}>Solve A Math Problem</button>
+            <button onClick={showComingSoon}>Give Me A Quiz Test</button>
           </div>
 
           <div className="ask-box">
             <input
               type="text"
               placeholder="Ask Your Doubts..."
-              onKeyDown={handleInputSubmit}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault(); // Prevents any default behavior like form submit
+                  showComingSoon();
+                }
+              }}
             />
             <div className="ask-box-icons">
-              <FontAwesomeIcon icon={faPaperclip} />
-              <FontAwesomeIcon icon={faMicrophone} />
+              <FontAwesomeIcon icon={faPaperclip} onClick={showComingSoon} />
+              <FontAwesomeIcon icon={faMicrophone} onClick={showComingSoon} />
             </div>
           </div>
         </section>
@@ -162,93 +225,83 @@ export default function App() {
         </footer>
       </main>
 
-      {/* RIGHT SIDEBAR */}
-      <aside className="sidebar-right">
+      {/* RIGHT SIDEBAR - Added conditional class */}
+      <aside
+        className={`sidebar-right ${isRightSidebarOpen ? 'sidebar-open' : ''}`}
+      >
         <h2>Learning Tools</h2>
 
-        <div className="progress-card">
+        <div className="progress-card" onClick={showComingSoon}>
           <h3>TODAY'S PROGRESS</h3>
           <div className="progress-details">
             <div className="daily-goals">
-              <span className="number">3/5</span>
-              <p>Daily Goals</p>
+              <span className="number tech-progress">45/60</span>
+              <p>Skill Points</p>
             </div>
             <div className="day-streak">
-              <span className="number">12</span>
-              <p>Day Streak</p>
+              <span className="number tech-streak">
+                <FontAwesomeIcon icon={faFire} className="streak-fire-icon" />{' '}
+                12
+              </span>
+              <p>Coding Streak</p>
             </div>
           </div>
         </div>
 
         <div className="recent-questions">
-          <h3>RECENT QUESTIONS</h3>
+          <h3>RECENT CHATS</h3>
           <ul>
-            <li>
-              <FontAwesomeIcon icon={faCircleQuestion} /> Quadratic Equation
+            <li className="recent-item" onClick={showComingSoon}>
+              <FontAwesomeIcon icon={faCircleQuestion} /> SQL Joins: LEFT vs.
+              INNER
             </li>
-            <li>
-              <FontAwesomeIcon icon={faCircleQuestion} /> Photosynthesis
+            <li className="recent-item" onClick={showComingSoon}>
+              <FontAwesomeIcon icon={faCircleQuestion} /> Python Decorators
             </li>
-            <li>
-              <FontAwesomeIcon icon={faCircleQuestion} /> Python Loops
+            <li className="recent-item" onClick={showComingSoon}>
+              <FontAwesomeIcon icon={faCircleQuestion} /> Cross-Site Scripting
+              (XSS)
             </li>
           </ul>
         </div>
 
         <div className="qa-grid">
-          <div className="qa-card" onClick={handleFeatureClick}>
+          <div className="qa-card" onClick={showComingSoon}>
             <FontAwesomeIcon icon={faBookOpen} className="qa-icon" />
-            <h4>Summarize Topic</h4>
+            <h4>Summarize Tech Article</h4>
           </div>
-          <div className="qa-card" onClick={handleFeatureClick}>
+          <div className="qa-card" onClick={showComingSoon}>
             <FontAwesomeIcon icon={faCircleQuestion} className="qa-icon" />
-            <h4>Create Quiz</h4>
+            <h4>Generate Coding Challenge</h4>
           </div>
-          <div className="qa-card" onClick={handleFeatureClick}>
+          <div className="qa-card" onClick={showComingSoon}>
             <FontAwesomeIcon icon={faPaperclip} className="qa-icon" />
-            <h4>Convert to Notes</h4>
+            <h4>Convert Code to Docs</h4>
           </div>
-          <div className="qa-card" onClick={handleFeatureClick}>
+          <div className="qa-card" onClick={showComingSoon}>
             <FontAwesomeIcon icon={faCalculator} className="qa-icon" />
-            <h4>Step-by-Step</h4>
+            <h4>Debug Step-by-Step</h4>
           </div>
         </div>
 
         <div className="recommended-card">
-          <h3>RECOMMENDED</h3>
+          <h3>
+            <FontAwesomeIcon icon={faGraduationCap} /> RECOMMENDED
+          </h3>
           <div className="exam-prep-bundle">
-            <h4>Exam Prep Bundle</h4>
-            <p>Comprehensive Preparation For Upcoming Exams.</p>
+            <h4>Certification Prep Bundle</h4>
+            <p>
+              Master CompTIA Security+ and AWS Certified Cloud Practitioner.
+            </p>
             <button
-              className="start-learning-button"
-              onClick={handleFeatureClick}
+              className="start-learning-button primary-button"
+              onClick={showComingSoon}
             >
               Start Learning
             </button>
           </div>
         </div>
       </aside>
-
-      {/* COMING SOON MODAL */}
-      {showModal && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-[#1e1e1e] text-white p-16 rounded-2xl shadow-2xl border border-gray-700 relative w-full max-w-2xl text-center">
-            <button
-              onClick={() => setShowModal(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
-            >
-              <FontAwesomeIcon icon={faTimes} size="lg" />
-            </button>
-            <h2 className="text-3xl font-bold mb-4">Coming Soon</h2>
-            <p className="text-gray-300 text-base mb-8">
-              We are working hard to bring this feature to you!
-            </p>
-            <div className="text-xs text-[#6aece1] font-semibold tracking-widest uppercase">
-              By Vormirex
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
