@@ -79,6 +79,26 @@ html {
     opacity: 1;
   }
 }
+@media (max-width: 500px) {
+  .quick-pill-actions {
+    flex-wrap: nowrap; /* ❌ stop wrapping */
+    overflow-x: auto; /* ✅ allow horizontal scroll */
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    gap: 12px;
+    padding-bottom: 10px;
+  }
+
+  .quick-pill-actions button {
+    white-space: nowrap; /* text stays in one line */
+    flex-shrink: 0; /* prevents button shrinking */
+  }
+
+  /* optional: hide scrollbar for clean UI */
+  .quick-pill-actions::-webkit-scrollbar {
+    display: none;
+  }
+}
 
 .modal-close-button {
   position: absolute;
