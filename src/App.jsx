@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import logoWithoutText from './assets/logo.png'; // Ensure this path is correct
+import logoWithoutText from './assets/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPlus,
@@ -24,13 +24,12 @@ import {
   faFire,
   faGraduationCap,
   faTimes,
-  faBars, // <-- Added for mobile menu button
+  faBars,
 } from '@fortawesome/free-solid-svg-icons';
 
+/* ---------------- MODAL ---------------- */
 const ComingSoonModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
-
-  const imageTag = '';
 
   return (
     <div className="coming-soon-modal-overlay">
@@ -38,12 +37,13 @@ const ComingSoonModal = ({ isOpen, onClose }) => {
         <button className="modal-close-button" onClick={onClose}>
           <FontAwesomeIcon icon={faTimes} />
         </button>
+
         <div className="modal-body">
           <h2 className="modal-title">Feature Under Construction!</h2>
-          {imageTag}
+          <img src="https://via.placeholder.com/150" alt="Coming Soon" />
           <p className="modal-message">
-            We are working hard to bring this exciting feature to you. **Stay
-            tuned for the launch! 🚀**
+            We are working hard to bring this exciting feature to you. Stay
+            tuned for the launch! 🚀
           </p>
           <div className="modal-info">
             <FontAwesomeIcon icon={faLightbulb} /> Anticipated Release: Q2 2026
@@ -54,39 +54,40 @@ const ComingSoonModal = ({ isOpen, onClose }) => {
   );
 };
 
+/* ---------------- APP ---------------- */
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(false); // <-- New state
-  const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false); // <-- New state
+  const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(false);
+  const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false);
 
-  const showComingSoon = () => {
-    setIsModalOpen(true);
-  };
+  const showComingSoon = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  // New toggle functions
   const toggleLeftSidebar = () => {
     setIsLeftSidebarOpen(!isLeftSidebarOpen);
-    setIsRightSidebarOpen(false); // Close the other one
+    setIsRightSidebarOpen(false);
   };
 
   const toggleRightSidebar = () => {
     setIsRightSidebarOpen(!isRightSidebarOpen);
-    setIsLeftSidebarOpen(false); // Close the other one
+    setIsLeftSidebarOpen(false);
   };
 
   return (
     <div className="dashboard-container">
-      {/* Modal */}
       <ComingSoonModal isOpen={isModalOpen} onClose={closeModal} />
 
-      {/* LEFT SIDEBAR - Added conditional class */}
+      {/* LEFT SIDEBAR */}
       <aside
         className={`sidebar-left ${isLeftSidebarOpen ? 'sidebar-open' : ''}`}
       >
+        <button
+          className="sidebar-close-button close-left"
+          onClick={toggleLeftSidebar}
+        >
+          <FontAwesomeIcon icon={faTimes} />
+        </button>
+
         <div className="sidebar-header">
           <img
             src={logoWithoutText}
@@ -105,20 +106,16 @@ export default function App() {
             <h3>SUBJECTS</h3>
             <ul>
               <li onClick={showComingSoon}>
-                <FontAwesomeIcon icon={faCode} className="nav-icon" />
-                Cyber Security
+                <FontAwesomeIcon icon={faCode} /> Cyber Security
               </li>
               <li onClick={showComingSoon}>
-                <FontAwesomeIcon icon={faDatabase} className="nav-icon" />
-                Data Science
+                <FontAwesomeIcon icon={faDatabase} /> Data Science
               </li>
               <li onClick={showComingSoon}>
-                <FontAwesomeIcon icon={faLightbulb} className="nav-icon" />
-                AI / ML
+                <FontAwesomeIcon icon={faLightbulb} /> AI / ML
               </li>
               <li onClick={showComingSoon}>
-                <FontAwesomeIcon icon={faChartLine} className="nav-icon" />
-                Data Analytics
+                <FontAwesomeIcon icon={faChartLine} /> Data Analytics
               </li>
             </ul>
           </div>
@@ -127,24 +124,19 @@ export default function App() {
             <h3>CUSTOM COURSES</h3>
             <ul>
               <li onClick={showComingSoon}>
-                <FontAwesomeIcon icon={faCubes} className="nav-icon" />
-                Booster Pack
+                <FontAwesomeIcon icon={faCubes} /> Booster Pack
               </li>
               <li onClick={showComingSoon}>
-                <FontAwesomeIcon icon={faLaptopCode} className="nav-icon" />
-                Coding Mastery
+                <FontAwesomeIcon icon={faLaptopCode} /> Coding Mastery
               </li>
               <li onClick={showComingSoon}>
-                <FontAwesomeIcon icon={faClipboardList} className="nav-icon" />
-                Exam Prep
+                <FontAwesomeIcon icon={faClipboardList} /> Exam Prep
               </li>
               <li onClick={showComingSoon}>
-                <FontAwesomeIcon icon={faChartLine} className="nav-icon" />
-                Your Progress
+                <FontAwesomeIcon icon={faChartLine} /> Your Progress
               </li>
               <li onClick={showComingSoon}>
-                <FontAwesomeIcon icon={faBookmark} className="nav-icon" />
-                Saved Chats
+                <FontAwesomeIcon icon={faBookmark} /> Saved Chats
               </li>
             </ul>
           </div>
@@ -152,10 +144,10 @@ export default function App() {
 
         <div className="sidebar-footer">
           <div className="footer-link" onClick={showComingSoon}>
-            <FontAwesomeIcon icon={faCog} className="nav-icon" /> Settings
+            <FontAwesomeIcon icon={faCog} /> Settings
           </div>
           <div className="footer-link" onClick={showComingSoon}>
-            <FontAwesomeIcon icon={faUserCircle} className="nav-icon" /> Profile
+            <FontAwesomeIcon icon={faUserCircle} /> Profile
           </div>
         </div>
       </aside>
@@ -163,7 +155,6 @@ export default function App() {
       {/* MAIN CONTENT */}
       <main className="main-content">
         <header className="top-bar">
-          {/* NEW: Mobile Menu Button */}
           <button className="mobile-menu-toggle" onClick={toggleLeftSidebar}>
             <FontAwesomeIcon icon={faBars} />
           </button>
@@ -175,15 +166,12 @@ export default function App() {
             <input
               type="text"
               placeholder="Search Topics, Questions..."
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  e.preventDefault();
-                  showComingSoon();
-                }
-              }}
+              onKeyDown={(e) =>
+                e.key === 'Enter' && (e.preventDefault(), showComingSoon())
+              }
             />
           </div>
-          {/* Updated the Tools button to toggle the right sidebar */}
+
           <div className="tools-button" onClick={toggleRightSidebar}>
             Learning Tools <FontAwesomeIcon icon={faThumbtack} />
           </div>
@@ -206,12 +194,9 @@ export default function App() {
             <input
               type="text"
               placeholder="Ask Your Doubts..."
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  e.preventDefault(); // Prevents any default behavior like form submit
-                  showComingSoon();
-                }
-              }}
+              onKeyDown={(e) =>
+                e.key === 'Enter' && (e.preventDefault(), showComingSoon())
+              }
             />
             <div className="ask-box-icons">
               <FontAwesomeIcon icon={faPaperclip} onClick={showComingSoon} />
@@ -225,10 +210,17 @@ export default function App() {
         </footer>
       </main>
 
-      {/* RIGHT SIDEBAR - Added conditional class */}
+      {/* RIGHT SIDEBAR */}
       <aside
         className={`sidebar-right ${isRightSidebarOpen ? 'sidebar-open' : ''}`}
       >
+        <button
+          className="sidebar-close-button close-right"
+          onClick={toggleRightSidebar}
+        >
+          <FontAwesomeIcon icon={faTimes} />
+        </button>
+
         <h2>Learning Tools</h2>
 
         <div className="progress-card" onClick={showComingSoon}>
@@ -240,8 +232,7 @@ export default function App() {
             </div>
             <div className="day-streak">
               <span className="number tech-streak">
-                <FontAwesomeIcon icon={faFire} className="streak-fire-icon" />{' '}
-                12
+                <FontAwesomeIcon icon={faFire} /> 12
               </span>
               <p>Coding Streak</p>
             </div>
@@ -252,34 +243,34 @@ export default function App() {
           <h3>RECENT CHATS</h3>
           <ul>
             <li className="recent-item" onClick={showComingSoon}>
-              <FontAwesomeIcon icon={faCircleQuestion} /> SQL Joins: LEFT vs.
+              <FontAwesomeIcon icon={faCircleQuestion} /> SQL Joins: LEFT vs
               INNER
             </li>
             <li className="recent-item" onClick={showComingSoon}>
               <FontAwesomeIcon icon={faCircleQuestion} /> Python Decorators
             </li>
             <li className="recent-item" onClick={showComingSoon}>
-              <FontAwesomeIcon icon={faCircleQuestion} /> Cross-Site Scripting
-              (XSS)
+              <FontAwesomeIcon icon={faCircleQuestion} /> XSS (Cross-Site
+              Scripting)
             </li>
           </ul>
         </div>
 
         <div className="qa-grid">
           <div className="qa-card" onClick={showComingSoon}>
-            <FontAwesomeIcon icon={faBookOpen} className="qa-icon" />
+            <FontAwesomeIcon icon={faBookOpen} />
             <h4>Summarize Tech Article</h4>
           </div>
           <div className="qa-card" onClick={showComingSoon}>
-            <FontAwesomeIcon icon={faCircleQuestion} className="qa-icon" />
+            <FontAwesomeIcon icon={faCircleQuestion} />
             <h4>Generate Coding Challenge</h4>
           </div>
           <div className="qa-card" onClick={showComingSoon}>
-            <FontAwesomeIcon icon={faPaperclip} className="qa-icon" />
+            <FontAwesomeIcon icon={faPaperclip} />
             <h4>Convert Code to Docs</h4>
           </div>
           <div className="qa-card" onClick={showComingSoon}>
-            <FontAwesomeIcon icon={faCalculator} className="qa-icon" />
+            <FontAwesomeIcon icon={faCalculator} />
             <h4>Debug Step-by-Step</h4>
           </div>
         </div>
