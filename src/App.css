@@ -79,26 +79,6 @@ html {
     opacity: 1;
   }
 }
-@media (max-width: 500px) {
-  .quick-pill-actions {
-    flex-wrap: nowrap; /* ❌ stop wrapping */
-    overflow-x: auto; /* ✅ allow horizontal scroll */
-    justify-content: flex-start;
-    -webkit-overflow-scrolling: touch;
-    gap: 12px;
-    padding-bottom: 10px;
-  }
-
-  .quick-pill-actions button {
-    white-space: nowrap; /* text stays in one line */
-    flex-shrink: 0; /* prevents button shrinking */
-  }
-
-  /* optional: hide scrollbar for clean UI */
-  .quick-pill-actions::-webkit-scrollbar {
-    display: none;
-  }
-}
 
 .modal-close-button {
   position: absolute;
@@ -255,14 +235,37 @@ html {
   display: flex;
   flex-direction: column;
   position: relative;
+  /* Added for watermark stacking context */
+  overflow: hidden;
 }
 
+/* 🔥 NEW WATERMARK CSS 🔥 */
+/* 🔥 NEW WATERMARK CSS - PERFECTLY CENTERED & SMALLER 🔥 */
+/* 🔥 WATERMARK LOGO - MOVED UPWARDS & CENTERED 🔥 */
+.watermark-logo {
+  background-image: url('./assets/logo.png');
+  background-repeat: no-repeat;
+  background-position: center 35%; /* Moves the logo upwards (smaller % = higher up) */
+  background-size: 30vmax; /* Keeps your current size */
+  opacity: 0.05;
+  filter: grayscale(100%);
+  pointer-events: none;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
 .top-bar {
   display: flex;
   align-items: center;
   padding: 15px 30px;
   border-bottom: 1px solid var(--color-border);
   gap: 20px;
+  position: relative; /* Ensure header is above watermark */
+  z-index: 3;
 }
 
 .logo-mobile {
@@ -313,6 +316,8 @@ html {
   padding: 50px;
   padding-top: 100px;
   text-align: center;
+  position: relative; /* Ensure content is above the watermark */
+  z-index: 2;
 }
 
 .logo-with-text {
@@ -340,7 +345,7 @@ html {
   gap: 12px;
   justify-content: center;
   margin-bottom: 25px;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Default behavior for larger screens */
 }
 
 .quick-pill-actions button {
@@ -372,6 +377,8 @@ html {
   border-radius: 25px;
   padding: 10px 20px;
   margin-top: 10px;
+  position: relative; /* Ensure ask-box is above watermark */
+  z-index: 2;
 }
 
 .ask-box input {
@@ -398,6 +405,7 @@ html {
   text-align: center;
   font-size: 10px;
   color: var(--color-text-secondary);
+  z-index: 3; /* Ensure footer is above everything else */
 }
 
 /* Right Sidebar - Desktop Styles */
@@ -681,17 +689,25 @@ html {
     padding-top: 50px;
   }
 
+  /* --- MODIFIED CODE FOR 2x2 GRID BELOW 500PX --- */
   .quick-pill-actions {
-    justify-content: flex-start;
-    overflow-x: auto;
-    padding-bottom: 10px;
-    margin-left: 20px;
-    margin-right: 20px;
+    display: grid; /* Use Grid for controlled 2x2 layout */
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 10px; /* Spacing between the grid items */
+    justify-content: center;
+    margin: 0 auto 25px auto; /* Center the grid, maintain bottom margin */
+    max-width: 400px; /* Optional: Adjust max-width if needed */
+    padding: 0 20px; /* Add horizontal padding instead of margin to the list itself */
   }
 
   .quick-pill-actions button {
-    flex-shrink: 0;
+    flex-shrink: 1; /* Allow buttons to shrink/grow in the grid */
+    width: 100%; /* Ensure button fills the grid cell */
+    white-space: normal; /* Allow button text to wrap */
+    padding: 10px 10px; /* Adjust padding for smaller buttons */
+    font-size: 13px; /* Slightly smaller font */
   }
+  /* ------------------------------------------- */
 
   .logo-with-text {
     flex-direction: column;
