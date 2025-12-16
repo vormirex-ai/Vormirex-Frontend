@@ -53,8 +53,6 @@ const ComingSoonModal = ({ isOpen, onClose }) => {
     </div>
   );
 };
-
-/* ---------------- APP ---------------- */
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(false);
@@ -154,6 +152,9 @@ export default function App() {
 
       {/* MAIN CONTENT */}
       <main className="main-content">
+        {/* 🔥 NEW WATERMARK ELEMENT 🔥 */}
+        <div className="watermark-logo"></div>
+        {/* --------------------------- */}
         <header className="top-bar">
           <button className="mobile-menu-toggle" onClick={toggleLeftSidebar}>
             <FontAwesomeIcon icon={faBars} />
@@ -179,10 +180,13 @@ export default function App() {
 
         <section className="ai-central-area">
           <div className="logo-with-text">
-            <img src={logoWithoutText} className="logo-img" alt="Vormirex" />
-            <h2 className="company-name">VORMIREX</h2>
+            <img
+              src={logoWithoutText}
+              className="logo-img"
+              alt="Vormirex Logo"
+            />
+            <span className="company-name">VORMIREX</span>
           </div>
-
           <div className="quick-pill-actions">
             <button onClick={showComingSoon}>Explain My Homework</button>
             <button onClick={showComingSoon}>Teach Me Python Basics</button>
@@ -210,17 +214,17 @@ export default function App() {
         </footer>
       </main>
 
-      {/* RIGHT SIDEBAR */}
+      {/* RIGHT SIDEBAR - Added conditional class */}
       <aside
         className={`sidebar-right ${isRightSidebarOpen ? 'sidebar-open' : ''}`}
       >
+        {/* CLOSE BUTTON – MOBILE */}
         <button
           className="sidebar-close-button close-right"
           onClick={toggleRightSidebar}
         >
           <FontAwesomeIcon icon={faTimes} />
         </button>
-
         <h2>Learning Tools</h2>
 
         <div className="progress-card" onClick={showComingSoon}>
@@ -232,7 +236,8 @@ export default function App() {
             </div>
             <div className="day-streak">
               <span className="number tech-streak">
-                <FontAwesomeIcon icon={faFire} /> 12
+                <FontAwesomeIcon icon={faFire} className="streak-fire-icon" />{' '}
+                12
               </span>
               <p>Coding Streak</p>
             </div>
@@ -243,34 +248,34 @@ export default function App() {
           <h3>RECENT CHATS</h3>
           <ul>
             <li className="recent-item" onClick={showComingSoon}>
-              <FontAwesomeIcon icon={faCircleQuestion} /> SQL Joins: LEFT vs
+              <FontAwesomeIcon icon={faCircleQuestion} /> SQL Joins: LEFT vs.
               INNER
             </li>
             <li className="recent-item" onClick={showComingSoon}>
               <FontAwesomeIcon icon={faCircleQuestion} /> Python Decorators
             </li>
             <li className="recent-item" onClick={showComingSoon}>
-              <FontAwesomeIcon icon={faCircleQuestion} /> XSS (Cross-Site
-              Scripting)
+              <FontAwesomeIcon icon={faCircleQuestion} /> Cross-Site Scripting
+              (XSS)
             </li>
           </ul>
         </div>
 
         <div className="qa-grid">
           <div className="qa-card" onClick={showComingSoon}>
-            <FontAwesomeIcon icon={faBookOpen} />
+            <FontAwesomeIcon icon={faBookOpen} className="qa-icon" />
             <h4>Summarize Tech Article</h4>
           </div>
           <div className="qa-card" onClick={showComingSoon}>
-            <FontAwesomeIcon icon={faCircleQuestion} />
+            <FontAwesomeIcon icon={faCircleQuestion} className="qa-icon" />
             <h4>Generate Coding Challenge</h4>
           </div>
           <div className="qa-card" onClick={showComingSoon}>
-            <FontAwesomeIcon icon={faPaperclip} />
+            <FontAwesomeIcon icon={faPaperclip} className="qa-icon" />
             <h4>Convert Code to Docs</h4>
           </div>
           <div className="qa-card" onClick={showComingSoon}>
-            <FontAwesomeIcon icon={faCalculator} />
+            <FontAwesomeIcon icon={faCalculator} className="qa-icon" />
             <h4>Debug Step-by-Step</h4>
           </div>
         </div>
