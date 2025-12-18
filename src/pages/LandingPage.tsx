@@ -34,7 +34,7 @@ const LandingPage: React.FC = () => {
 
         <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
           <Link
-            to="/dashboard"
+            to="/"
             className="px-8 py-4 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full text-lg font-bold hover:scale-105 transition-transform shadow-lg shadow-purple-500/30"
           >
             Launch Dashboard

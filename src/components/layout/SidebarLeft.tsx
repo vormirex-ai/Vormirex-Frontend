@@ -46,7 +46,7 @@ const SidebarLeft: React.FC<SidebarLeftProps> = ({
         <FontAwesomeIcon icon={faPlus} /> New Chat
       </button>
 
-      <button className="new-chat-button" onClick={() => navigate("/")}>
+      <button className="new-chat-button" onClick={() => navigate("/landing")}>
         <FontAwesomeIcon icon={faGlobe} /> VORMIREX
       </button>
 
