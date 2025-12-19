@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import logo from "../assets/logo.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import logo from '../assets/logo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faChild,
   faBookOpen,
@@ -19,14 +19,16 @@ import {
   faSmile,
   faStar,
   faUsers,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
 
 const LandingPage: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const toggleMenu = () => setIsOpen(!isOpen);
-  const goToDashboard = () => navigate("/");
+  const closeMenu = () => setIsOpen(false);
+
+  const goToDashboard = () => navigate('/');
 
   return (
     <>
@@ -38,30 +40,57 @@ const LandingPage: React.FC = () => {
             <span className="logo-text">VORMIREX</span>
           </div>
 
+          {/* Hamburger Icon for Mobile */}
+          <div className="hamburger" onClick={toggleMenu}>
+            <FontAwesomeIcon icon={isOpen ? faTimes : faBars} />
+          </div>
+
           {/* Added dynamic class 'active' based on state */}
-          <ul className={isOpen ? "nav-links active" : "nav-links"}>
+          <ul className={`nav-links ${isOpen ? 'active' : ''}`}>
             <li>
-              <a href="#" onClick={() => setIsOpen(false)}>
+              <a href="#" onClick={closeMenu}>
                 Features
               </a>
             </li>
             <li>
-              <a href="#" onClick={() => setIsOpen(false)}>
+              <a href="#" onClick={closeMenu}>
                 Courses
               </a>
             </li>
             <li>
-              <a href="#" onClick={() => setIsOpen(false)}>
+              <a href="#" onClick={closeMenu}>
                 Pricing
               </a>
             </li>
             <li>
-              <a href="#" onClick={() => setIsOpen(false)}>
+              <a href="#" onClick={closeMenu}>
                 About
               </a>
             </li>
+            {/* Mobile-specific: Include buttons inside menu */}
+            <li className="mobile-buttons">
+              <button
+                className="btn-signin"
+                onClick={() => {
+                  closeMenu();
+                  goToDashboard();
+                }}
+              >
+                Sign In
+              </button>
+              <button
+                className="btn-start"
+                onClick={() => {
+                  closeMenu();
+                  goToDashboard();
+                }}
+              >
+                Start Free
+              </button>
+            </li>
           </ul>
 
+          {/* Desktop: Keep buttons outside the menu */}
           <div className="nav-buttons">
             <button className="btn-signin" onClick={goToDashboard}>
               Sign In
@@ -69,15 +98,6 @@ const LandingPage: React.FC = () => {
             <button className="btn-start" onClick={goToDashboard}>
               Start Free
             </button>
-
-            {/* The Hamburger Icon */}
-            <div className="menu-icon" onClick={toggleMenu}>
-              {isOpen ? (
-                <FontAwesomeIcon icon={faTimes} />
-              ) : (
-                <FontAwesomeIcon icon={faBars} />
-              )}
-            </div>
           </div>
         </nav>
       </header>
@@ -427,7 +447,6 @@ const LandingPage: React.FC = () => {
 
         {/* Cards */}
         <div className="vrx-bfe-cards">
-          {/* 1. School Kids */}
           <div className="vrx-bfe-card">
             <div className="vrx-bfe-icon vrx-bfe-pink">
               <FontAwesomeIcon icon={faChild} size="lg" color="white" />
@@ -436,7 +455,6 @@ const LandingPage: React.FC = () => {
             <p className="vrx-bfe-card-desc">Fun learning for young minds</p>
           </div>
 
-          {/* 2. Exam Learners */}
           <div className="vrx-bfe-card">
             <div className="vrx-bfe-icon vrx-bfe-blue">
               <FontAwesomeIcon icon={faBookOpen} size="lg" color="white" />
@@ -445,7 +463,6 @@ const LandingPage: React.FC = () => {
             <p className="vrx-bfe-card-desc">Ace your tests with strategy</p>
           </div>
 
-          {/* 3. Coding Students */}
           <div className="vrx-bfe-card">
             <div className="vrx-bfe-icon vrx-bfe-green">
               <FontAwesomeIcon icon={faLaptopCode} size="lg" color="white" />
@@ -454,7 +471,6 @@ const LandingPage: React.FC = () => {
             <p className="vrx-bfe-card-desc">Master programming easily</p>
           </div>
 
-          {/* 4. English Learners */}
           <div className="vrx-bfe-card">
             <div className="vrx-bfe-icon vrx-bfe-purple">
               <FontAwesomeIcon icon={faLanguage} size="lg" color="white" />
@@ -463,7 +479,6 @@ const LandingPage: React.FC = () => {
             <p className="vrx-bfe-card-desc">Speak fluently with practice</p>
           </div>
 
-          {/* 5. Job Seekers */}
           <div className="vrx-bfe-card">
             <div className="vrx-bfe-icon vrx-bfe-orange">
               <FontAwesomeIcon icon={faBriefcase} size="lg" color="white" />
@@ -478,7 +493,7 @@ const LandingPage: React.FC = () => {
       <div className="vrx-features-section">
         <div className="vrx-features-container">
           <h1 className="vrx-features-heading">
-            Powerful{" "}
+            Powerful{' '}
             <span className="vrx-features-gradient-text">Features</span>
           </h1>
           <p className="vrx-features-subtitle">

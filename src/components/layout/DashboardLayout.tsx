@@ -1,13 +1,15 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import './DashboardLayout.css';
+
 import {
   faSearch,
   faThumbtack,
   faPaperclip,
   faMicrophone,
   faBars,
-} from "@fortawesome/free-solid-svg-icons";
-import logoWithoutText from "../../assets/logo.png";
+} from '@fortawesome/free-solid-svg-icons';
+import logoWithoutText from '../../assets/logo.png';
 
 interface DashboardLayoutProps {
   toggleLeftSidebar: () => void;
@@ -38,7 +40,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
             type="text"
             placeholder="Search Topics, Questions..."
             onKeyDown={(e) =>
-              e.key === "Enter" && (e.preventDefault(), showComingSoon())
+              e.key === 'Enter' && (e.preventDefault(), showComingSoon())
             }
           />
         </div>
@@ -65,7 +67,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
             type="text"
             placeholder="Ask Your Doubts..."
             onKeyDown={(e) =>
-              e.key === "Enter" && (e.preventDefault(), showComingSoon())
+              e.key === 'Enter' && (e.preventDefault(), showComingSoon())
             }
           />
           <div className="ask-box-icons">

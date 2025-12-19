@@ -1,11 +1,16 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from 'react';
+import './SidebarRight.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faTimes,
   faFire,
+  faCircleQuestion,
+  faBookOpen,
+  faPaperclip,
+  faCalculator,
   faGraduationCap,
-} from "@fortawesome/free-solid-svg-icons";
-import { RECENT_CHATS, QA_CARDS } from "../../constants";
+} from '@fortawesome/free-solid-svg-icons';
+import { RECENT_CHATS, QA_CARDS } from '../../constants';
 
 interface SidebarRightProps {
   isOpen: boolean;
@@ -19,7 +24,7 @@ const SidebarRight: React.FC<SidebarRightProps> = ({
   showComingSoon,
 }) => {
   return (
-    <aside className={`sidebar-right ${isOpen ? "sidebar-open" : ""}`}>
+    <aside className={`sidebar-right ${isOpen ? 'sidebar-open' : ''}`}>
       {/* CLOSE BUTTON – MOBILE */}
       <button
         className="sidebar-close-button close-right"
@@ -48,21 +53,38 @@ const SidebarRight: React.FC<SidebarRightProps> = ({
       <div className="recent-questions">
         <h3>RECENT CHATS</h3>
         <ul>
-          {RECENT_CHATS.map((chat, index) => (
-            <li key={index} className="recent-item" onClick={showComingSoon}>
-              <FontAwesomeIcon icon={chat.icon} /> {chat.label}
-            </li>
-          ))}
+          <li className="recent-item" onClick={showComingSoon}>
+            <FontAwesomeIcon icon={faCircleQuestion} /> SQL Joins: LEFT vs.
+            INNER
+          </li>
+          <li className="recent-item" onClick={showComingSoon}>
+            <FontAwesomeIcon icon={faCircleQuestion} /> Python Decorators
+          </li>
+          <li className="recent-item" onClick={showComingSoon}>
+            <FontAwesomeIcon icon={faCircleQuestion} /> Cross-Site Scripting
+            (XSS)
+          </li>
         </ul>
       </div>
 
+      {/* QA CARDS */}
       <div className="qa-grid">
-        {QA_CARDS.map((card, index) => (
-          <div key={index} className="qa-card" onClick={showComingSoon}>
-            <FontAwesomeIcon icon={card.icon} className="qa-icon" />
-            <h4>{card.label}</h4>
-          </div>
-        ))}
+        <div className="qa-card" onClick={showComingSoon}>
+          <FontAwesomeIcon icon={faBookOpen} className="qa-icon" />
+          <h4>Summarize Tech Article</h4>
+        </div>
+        <div className="qa-card" onClick={showComingSoon}>
+          <FontAwesomeIcon icon={faCircleQuestion} className="qa-icon" />
+          <h4>Generate Coding Challenge</h4>
+        </div>
+        <div className="qa-card" onClick={showComingSoon}>
+          <FontAwesomeIcon icon={faPaperclip} className="qa-icon" />
+          <h4>Convert Code to Docs</h4>
+        </div>
+        <div className="qa-card" onClick={showComingSoon}>
+          <FontAwesomeIcon icon={faCalculator} className="qa-icon" />
+          <h4>Debug Step-by-Step</h4>
+        </div>
       </div>
 
       <div className="recommended-card">
