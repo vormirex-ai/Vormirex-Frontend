@@ -68,25 +68,26 @@ const SidebarLeft: React.FC<SidebarLeftProps> = ({
         <div className="nav-section">
           <h3>SUBJECTS</h3>
           <ul>
-            <li onClick={showComingSoon}>
+            <li onClick={() => navigate('/course/cyber-security')}>
               <FontAwesomeIcon icon={faCode} className="nav-icon" /> Cyber
               Security
             </li>
-            <li onClick={showComingSoon}>
+            <li onClick={() => navigate('/course/data-science')}>
               <FontAwesomeIcon icon={faDatabase} className="nav-icon" /> Data
               Science
             </li>
-            <li onClick={showComingSoon}>
-              <FontAwesomeIcon icon={faLightbulb} className="nav-icon" /> AI /
-              ML
-            </li>
-            <li onClick={showComingSoon}>
+            <li onClick={() => navigate('/course/data-analytics')}>
               <FontAwesomeIcon icon={faChartLine} className="nav-icon" /> Data
               Analytics
             </li>
+            <li onClick={showComingSoon}>
+              {' '}
+              {/* Keep coming soon for others if no data yet */}
+              <FontAwesomeIcon icon={faLightbulb} className="nav-icon" /> AI /
+              ML
+            </li>
           </ul>
         </div>
-
         {/* CUSTOM COURSES */}
         <div className="nav-section">
           <h3>CUSTOM COURSES</h3>
