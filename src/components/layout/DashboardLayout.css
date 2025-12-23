@@ -150,7 +150,6 @@ body {
 }
 
 .quick-pill-actions button:hover {
-  border-color: var(--color-primary);
   transform: translateY(-3px);
 }
 
@@ -164,7 +163,6 @@ body {
   width: 100%;
   max-width: 800px;
   background-color: var(--bg-dark);
-  border: 1px solid var(--color-border);
   border-radius: 28px;
   padding: 12px 20px;
   transition: all 0.3s ease;
@@ -254,7 +252,6 @@ body {
   .ask-box {
     max-width: 100%;
     background-color: #1a1a1a;
-    border: 2px solid var(--color-primary);
     padding: 16px 20px;
     min-height: 56px;
     margin-top: 24px;
@@ -266,7 +263,7 @@ body {
 
   .ask-box:focus-within {
     border-color: var(--color-teal);
-    box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.25);
+    box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.25);
   }
 
   .logo-with-text {
@@ -284,9 +281,7 @@ body {
   .ask-box {
     min-height: 58px;
     background-color: #181818;
-    border: 2px solid var(--color-primary);
     padding: 14px 18px;
-    box-shadow: 0 0 0 1px rgba(138, 43, 226, 0.25);
   }
 
   .ask-box:focus-within {
