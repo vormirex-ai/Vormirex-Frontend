@@ -107,7 +107,6 @@ const Whatisvormirex = (props: Props) => {
 
       <style>{`
         .vx-container {
-          background: #050a10;
           min-height: 600px;
           display: flex;
           align-items: center;
