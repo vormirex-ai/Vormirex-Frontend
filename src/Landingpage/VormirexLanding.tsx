@@ -194,33 +194,36 @@ const VormirexLanding: React.FC<LandingPageProps> = ({
         }
 
         /* WATERMARK LOGO */
-        .watermark-logo {
-          position: fixed;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%) scale(0.9);
-          opacity: 0;
-          z-index: 1;
-          pointer-events: none;
-          width: 500px;
-          height: 500px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: opacity 0.5s ease, transform 0.5s ease;
-        }
+/* WATERMARK LOGO */
+.watermark-logo {
+  position: fixed;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 420px;
+  height: 420px;
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
 
-        .watermark-logo.visible {
-          opacity: 0.05;
-          transform: translate(-50%, -50%) scale(1);
-        }
+.watermark-logo.visible {
+  opacity: 0.02; /* VERY SUBTLE */
+}
 
-        .watermark-logo img {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-          filter: brightness(0) invert(1);
-        }
+.watermark-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: blur(1.2px);
+}
+@media (max-width: 768px) {
+  .watermark-logo {
+    width: 260px;
+    height: 260px;
+  }
+}
 
         /* NAVBAR STYLING */
         .nav-wrapper {
