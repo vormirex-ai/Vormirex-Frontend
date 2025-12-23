@@ -150,7 +150,6 @@ body {
 }
 
 .quick-pill-actions button:hover {
-  border-color: var(--color-primary);
   transform: translateY(-3px);
 }
 
@@ -264,7 +263,7 @@ body {
 
   .ask-box:focus-within {
     border-color: var(--color-teal);
-    box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.25);
+    box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.25);
   }
 
   .logo-with-text {
