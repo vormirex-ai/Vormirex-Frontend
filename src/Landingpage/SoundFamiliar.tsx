@@ -77,7 +77,6 @@ const SoundFamiliar = () => {
         }
 
         .sound-familiar-container {
-          background-color: #050a10;
           color: #ffffff;
           padding: 100px 20px;
           font-family: 'Inter', sans-serif;
