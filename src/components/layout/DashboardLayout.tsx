@@ -24,9 +24,9 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
 }) => {
   return (
     <main className="main-content">
-      {/* 🔥 NEW WATERMARK ELEMENT 🔥 */}
+      {/* WATERMARK ELEMENT */}
       <div className="watermark-logo"></div>
-      {/* --------------------------- */}
+
       <header className="top-bar">
         <button className="mobile-menu-toggle" onClick={toggleLeftSidebar}>
           <FontAwesomeIcon icon={faBars} />
@@ -55,6 +55,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
           <img src={logoWithoutText} className="logo-img" alt="Vormirex Logo" />
           <span className="company-name">VORMIREX</span>
         </div>
+
         <div className="quick-pill-actions">
           <button onClick={showComingSoon}>Explain My Homework</button>
           <button onClick={showComingSoon}>Teach Me Python Basics</button>
@@ -71,8 +72,17 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
             }
           />
           <div className="ask-box-icons">
-            <FontAwesomeIcon icon={faPaperclip} onClick={showComingSoon} />
-            <FontAwesomeIcon icon={faMicrophone} onClick={showComingSoon} />
+            {/* Added .fa-icon class for proper mobile styling */}
+            <FontAwesomeIcon
+              icon={faPaperclip}
+              className="fa-icon"
+              onClick={showComingSoon}
+            />
+            <FontAwesomeIcon
+              icon={faMicrophone}
+              className="fa-icon"
+              onClick={showComingSoon}
+            />
           </div>
         </div>
       </section>
