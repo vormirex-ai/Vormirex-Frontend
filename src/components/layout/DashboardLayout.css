@@ -123,6 +123,8 @@ body {
 .company-name {
   font-size: 28px;
   font-weight: bold;
+  margin: 0; /* h1 has default margins, reset them */
+  color: var(--color-text-main);
 }
 
 /* =========================
@@ -322,6 +324,11 @@ body {
   /* HIDE LOGO TEXT (CRITICAL FIX) */
   .logo-mobile {
     display: none;
+  }
+  @media (max-width: 900px) {
+    .logo-mobile {
+      display: block;
+    }
   }
 
   /* SEARCH – FULLY VISIBLE */

@@ -32,11 +32,20 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
           <FontAwesomeIcon icon={faBars} />
         </button>
 
-        <div className="logo-mobile">VORMIREX</div>
+        {/* SEO FIX: Use an H1 for the mobile brand name or a hidden one if necessary */}
+        <h1 className="logo-mobile">VORMIREX</h1>
 
         <div className="search-box">
+          <label
+            htmlFor="top-search"
+            className="sr-only"
+            style={{ display: 'none' }}
+          >
+            Search Topics
+          </label>
           <FontAwesomeIcon icon={faSearch} />
           <input
+            id="top-search"
             type="text"
             placeholder="Search Topics, Questions..."
             onKeyDown={(e) =>
@@ -52,9 +61,20 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
 
       <section className="ai-central-area">
         <div className="logo-with-text">
-          <img src={logoWithoutText} className="logo-img" alt="Vormirex Logo" />
-          <span className="company-name">VORMIREX</span>
+          <img
+            src={logoWithoutText}
+            className="logo-img"
+            alt="Vormirex - AI-Powered Learning Platform Logo"
+          />
+          {/* SEO FIX: Changed from span to h1 for primary keyword ranking */}
+          <h1 className="company-name">VORMIREX</h1>
         </div>
+
+        {/* SEO FIX: Added a hidden descriptive sub-heading for context */}
+        <p style={{ display: 'none' }}>
+          Vormirex is an AI-powered learning platform designed to help students
+          master coding, data science, and more.
+        </p>
 
         <div className="quick-pill-actions">
           <button onClick={showComingSoon}>Explain My Homework</button>
@@ -66,21 +86,23 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
         <div className="ask-box">
           <input
             type="text"
+            aria-label="Ask your doubts"
             placeholder="Ask Your Doubts..."
             onKeyDown={(e) =>
               e.key === 'Enter' && (e.preventDefault(), showComingSoon())
             }
           />
           <div className="ask-box-icons">
-            {/* Added .fa-icon class for proper mobile styling */}
             <FontAwesomeIcon
               icon={faPaperclip}
               className="fa-icon"
+              title="Attach File"
               onClick={showComingSoon}
             />
             <FontAwesomeIcon
               icon={faMicrophone}
               className="fa-icon"
+              title="Voice Search"
               onClick={showComingSoon}
             />
           </div>
