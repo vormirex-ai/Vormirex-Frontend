@@ -94,10 +94,15 @@
 }
 
 .course-desc {
-  color: var(--color-text-secondary);
+  color: black; /* soft neon white */
+  font-weight: 700; /* BOLD */
+  font-size: 40px;
+  line-height: 1.7;
   max-width: 70ch;
-  line-height: 1.6;
-  animation: fadeIn 620ms ease-out both;
+
+  /* glow effect to match image */
+  text-shadow: 0 0 6px rgba(106, 236, 225, 0.35),
+    0 0 14px rgba(106, 236, 225, 0.25);
 }
 
 /* ---------- BADGES ---------- */
@@ -332,9 +337,10 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    180deg,
-    transparent 40%,
-    rgba(0, 0, 0, 0.85) 100%
+    to bottom,
+    rgba(0, 0, 0, 0.4) 0%,
+    /* Top: slightly dimmed */ rgba(18, 18, 18, 0.9) 100%
+      /* Bottom: nearly solid dark */
   );
   z-index: 1;
 }
@@ -372,4 +378,31 @@
   font-weight: 600;
   font-size: 1.1rem;
   color: #a0d8ff;
+}
+/* ---------- IMAGE MODAL ---------- */
+.image-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  cursor: zoom-out;
+
+  opacity: 0;
+  animation: fadeIn 220ms forwards;
+}
+
+.image-modal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }

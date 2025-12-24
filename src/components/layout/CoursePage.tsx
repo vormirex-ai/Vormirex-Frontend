@@ -3,100 +3,64 @@ import { useNavigate, useParams } from 'react-router-dom';
 import './CoursePage.css';
 import { COURSES, CourseId, CourseLevel } from '../../data/courses';
 
+/* =======================
+   IMAGE IMPORTS
+======================= */
+import CyberHero from '../../assets/Cyber1.jpg';
+import DataScienceHero from '../../assets/DataSciemce.png';
+import DataAnalyticsHero from '../../assets/DataAnaltics.png';
+
+import WhyCyber from '../../assets/Whylearncyber.png';
+import WhyDS from '../../assets/Whylearndatascience.png';
+import WhyDA from '../../assets/whylearndataanalytics.jpg';
+
+import CareerCyber from '../../assets/CarrerCyber.png';
+import CareerDS from '../../assets/Carrerinanalytics.jpg';
+import CareerDA from '../../assets/Carrrerindatasciemce.jpg';
+
+import GainCyber from '../../assets/GainCyber.png';
+import GainDS from '../../assets/Gainindatascience.jpg';
+import GainDA from '../../assets/gainindataanalytics.jpg';
+
 export default function CoursePage() {
   const navigate = useNavigate();
   const { courseId } = useParams<{ courseId: CourseId }>();
-
   const course = courseId ? COURSES[courseId] : undefined;
   const [level, setLevel] = useState<CourseLevel>('Foundation');
+
+  // For modal
+  const [modalImage, setModalImage] = useState<string | null>(null);
+  const openImage = (img: string) => setModalImage(img);
+  const closeImage = () => setModalImage(null);
 
   const levelBlock = useMemo(() => {
     if (!course) return null;
     return course.levels.find((l) => l.level === level) ?? course.levels[0];
   }, [course, level]);
 
-  // Hero Backgrounds
   const heroBg = useMemo(() => {
-    if (!courseId) return '';
-    const images: Record<CourseId, string[]> = {
-      'cyber-security': [
-        'https://content.kaspersky-labs.com/se/com/content/en-global/images/repository/isc/2017-images/What-is-Cyber-Security/What-is-Cyber-Security.jpg',
-      ],
-      'data-science': [
-        'https://stl.tech/wp-content/uploads/2022/12/data-science22.jpg',
-      ],
-      'data-analytics': [
-        'https://www.shutterstock.com/image-photo/displaying-overlay-on-dark-blur-600nw-2642780447.jpg',
-        'https://www.shutterstock.com/image-illustration/multiple-digital-dashboards-colorful-charts-260nw-2570483443.jpg',
-        'https://thumbs.dreamstime.com/b/business-analytics-dashboard-data-visualization-charts-graphs-modern-dark-blue-visualizing-key-performance-indicators-384611160.jpg',
-      ],
+    const heroImages: Record<CourseId, string> = {
+      'cyber-security': CyberHero,
+      'data-science': DataScienceHero,
+      'data-analytics': DataAnalyticsHero,
     };
-    const options = images[courseId] || images['cyber-security'];
-    return options[Math.floor(Math.random() * options.length)];
+    return heroImages[courseId as CourseId] || CyberHero;
   }, [courseId]);
 
-  // Bottom Card Images
   const cardImages = useMemo(() => {
-    const getRandom = (arr: string[]) =>
-      arr[Math.floor(Math.random() * arr.length)];
-
-    const allImages: Record<
+    const images: Record<
       CourseId,
-      { whyLearn: string[]; career: string[]; gain: string[] }
+      { whyLearn: string; career: string; gain: string }
     > = {
       'cyber-security': {
-        whyLearn: [
-          'https://marvel-b1-cdn.bc0a.com/f00000000310757/www.fortinet.com/content/dam/fortinet/images/cyberglossary/4-common-cyber-threats.png',
-        ],
-        career: ['https://miro.medium.com/1*ziYL9ayXs5zO8wrnuXif6Q.jpeg'],
-        gain: [
-          'https://cdn.sketchbubble.com/pub/media/catalog/product/optimized1/2/c/2c34cafa480e68e3a6830c40ab2a4cff93fb1e0501a7fbd24661387a00787b8b/cybersecurity-skills-mc-slide1.png',
-        ],
+        whyLearn: WhyCyber,
+        career: CareerCyber,
+        gain: GainCyber,
       },
-      'data-science': {
-        whyLearn: [
-          'https://jaro-website.s3.ap-south-1.amazonaws.com/2025/02/The-Ultimate-Guide-to-Data-Science-Everything-You-Need-to-Know-in-2025.jpg',
-          'https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_Data_Science.jpg',
-          'https://staticcdn.mbzuai.ac.ae/mbzuaiwpprd01/2025/06/stats-banner-img1.jpg',
-        ],
-        career: [
-          'https://thumbs.dreamstime.com/b/futuristic-user-interface-set-hud-future-infographic-elements-technology-science-theme-analysis-system-scanning-graphs-waves-108344996.jpg',
-          'https://thumbs.dreamstime.com/b/business-infographic-charts-futuristic-graphs-holographic-bar-ui-panels-dark-theme-vector-template-illustration-dashboard-digital-182460738.jpg',
-          'https://thumbs.dreamstime.com/b/futuristic-holographic-interface-displaying-complex-data-molecular-structures-dark-abstract-background-futuristic-421077862.jpg',
-        ],
-        gain: [
-          'http://nirvacana.com/thoughts/wp-content/uploads/2018/01/RoadToDataScientist1.png',
-          'https://365datascience.com/resources/blog/thumb@1024_e17qstf4da7-required-cloud-skills-for-data-scientists-2025.webp',
-          'https://miro.medium.com/1*mGweBeCpQcaZXisggX8J1w.png',
-        ],
-      },
-      'data-analytics': {
-        whyLearn: [
-          'https://cdn.dribbble.com/userupload/43507872/file/original-df7180b18e97f8487d50bd65cba0a013.png',
-          'https://i0.wp.com/blog.happyfox.com/wp-content/uploads/2020/12/Screenshots-02.png?resize=940%2C587&ssl=1',
-          'https://miro.medium.com/v2/resize:fit:1400/1*0aQBwcNUui76a-uqjxagUg.jpeg',
-        ],
-        career: [
-          'https://cdn.dribbble.com/userupload/45969034/file/392b2a90c9e64a739e4966a45ff8ef4b.png?format=webp&resize=400x300&vertical=center',
-          'https://cdn.dribbble.com/userupload/17901228/file/original-de5ab5345e2514feeb06f876470f85fc.png?resize=752x&vertical=center',
-          'https://fiverr-res.cloudinary.com/videos/t_main1,q_auto,f_auto/simglfz68lkvfoasitif/set-up-professional-data-analytics-solutions.png',
-        ],
-        gain: [
-          'https://www.classcentral.com/report/wp-content/uploads/2022/07/ibm-cognitive-class-courses-e1658150162565.png',
-          'https://www.sans.org/_next/image?url=https%3A%2F%2Fimages.contentstack.io%2Fv3%2Fassets%2Fbltabe50a4554f8e97f%2Fblt58b2bbf49247b5d7%2F69021292d462799894049766%2FCyber_Ranges_Thumbnail.png&w=2560&q=75',
-          'https://www.edx.org/_next/image?url=https%3A%2F%2Fprod-discovery.edx-cdn.org%2Forganization%2Flogos%2Fa7e2febc-e366-4b23-9fc3-5659cf53d452-8f8e75936e00.png&w=384&q=75',
-        ],
-      },
+      'data-science': { whyLearn: WhyDS, career: CareerDS, gain: GainDS },
+      'data-analytics': { whyLearn: WhyDA, career: CareerDA, gain: GainDA },
     };
-
-    const selected =
-      allImages[courseId as CourseId] || allImages['cyber-security'];
-
-    return {
-      whyLearn: getRandom(selected.whyLearn),
-      career: getRandom(selected.career),
-      gain: getRandom(selected.gain),
-    };
+    return images[courseId as CourseId] || images['cyber-security'];
   }, [courseId]);
 
   if (!course) {
@@ -104,7 +68,8 @@ export default function CoursePage() {
       <div className="course-page">
         <div className="course-shell">
           <div className="course-hero">
-            <h1>Course not found</h1>
+            <div className="course-hero-overlay" />
+            <h1 className="course-title">Course not found</h1>
             <button
               className="course-btn"
               onClick={() => navigate('/dashboard')}
@@ -120,13 +85,14 @@ export default function CoursePage() {
   return (
     <div className="course-page">
       <div className="course-shell">
-        {/* ---------- HERO ---------- */}
+        {/* ---------- HERO SECTION ---------- */}
         <header
           className="course-hero"
           style={{ backgroundImage: `url(${heroBg})` }}
         >
           <div className="course-hero-overlay" />
 
+          {/* Top Navigation Row */}
           <div className="course-hero-top">
             <button className="course-btn ghost" onClick={() => navigate(-1)}>
               ← Back
@@ -148,15 +114,20 @@ export default function CoursePage() {
             </div>
           </div>
 
+          {/* Main Hero Content */}
           <h1 className="course-title">{course.title}</h1>
           <p className="course-subtitle">{course.subtitle}</p>
-          <p className="course-desc">{course.description}</p>
 
-          {levelBlock?.duration && (
-            <p className="course-duration">
-              Duration: <strong>{levelBlock.duration}</strong>
-            </p>
-          )}
+          <div className="hero-action-area">
+            {levelBlock?.duration && (
+              <p className="course-duration">
+                Duration: <strong>{levelBlock.duration}</strong>
+              </p>
+            )}
+            <button className="course-btn main-cta">
+              Enroll Now & Transform Your Future
+            </button>
+          </div>
 
           {levelBlock?.highlights && (
             <div className="course-badges">
@@ -169,29 +140,44 @@ export default function CoursePage() {
           )}
         </header>
 
-        {/* ---------- BOTTOM IMAGE CARDS ---------- */}
-        <div className="course-info-cards">
-          <div className="info-card">
-            <img src={cardImages.whyLearn} alt="Why Learn" />
+        {/* ---------- INFO CARDS ---------- */}
+        <section className="course-info-cards">
+          <div className="info-card reveal delay-1">
+            <img
+              src={cardImages.whyLearn}
+              alt="Why Learn"
+              onClick={() => openImage(cardImages.whyLearn)}
+              style={{ cursor: 'pointer' }}
+            />
             <p className="info-card-title">
               {courseId === 'data-science'
-                ? 'Why Learn Data Science'
+                ? 'Why Data Science'
                 : courseId === 'data-analytics'
-                ? 'Why Learn Data Analytics'
-                : 'Why Learn Cyber'}
+                ? 'Why Data Analytics'
+                : 'Why Cyber Security'}
             </p>
           </div>
 
-          <div className="info-card">
-            <img src={cardImages.career} alt="Career Opportunities" />
+          <div className="info-card reveal delay-2">
+            <img
+              src={cardImages.career}
+              alt="Career Opportunities"
+              onClick={() => openImage(cardImages.career)}
+              style={{ cursor: 'pointer' }}
+            />
             <p className="info-card-title">Career Opportunities</p>
           </div>
 
-          <div className="info-card">
-            <img src={cardImages.gain} alt="What You'll Gain" />
-            <p className="info-card-title">What You'll Gain</p>
+          <div className="info-card reveal delay-3">
+            <img
+              src={cardImages.gain}
+              alt="What You’ll Gain"
+              onClick={() => openImage(cardImages.gain)}
+              style={{ cursor: 'pointer' }}
+            />
+            <p className="info-card-title">What You’ll Gain</p>
           </div>
-        </div>
+        </section>
 
         {/* ---------- CURRICULUM ---------- */}
         <section className="course-content">
@@ -202,7 +188,7 @@ export default function CoursePage() {
               <details
                 key={m.title}
                 className="module reveal"
-                style={{ animationDelay: `${idx * 60}ms` }}
+                style={{ animationDelay: `${idx * 100}ms` }}
                 open={idx === 0}
               >
                 <summary className="module-summary">
@@ -219,6 +205,13 @@ export default function CoursePage() {
             ))}
           </div>
         </section>
+
+        {/* ---------- IMAGE MODAL ---------- */}
+        {modalImage && (
+          <div className="image-modal" onClick={closeImage}>
+            <img src={modalImage} alt="Full View" />
+          </div>
+        )}
       </div>
     </div>
   );
