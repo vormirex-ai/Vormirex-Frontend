@@ -23,7 +23,7 @@ import logoWithoutText from '../../assets/logo.png';
 interface SidebarLeftProps {
   isOpen: boolean;
   toggleSidebar: () => void;
-  showComingSoon: () => void;
+  showComingSoon: () => void; // Still kept for other items like New Chat, Settings, etc.
 }
 
 const SidebarLeft: React.FC<SidebarLeftProps> = ({
@@ -81,34 +81,33 @@ const SidebarLeft: React.FC<SidebarLeftProps> = ({
               Analytics
             </li>
             <li onClick={showComingSoon}>
-              {' '}
-              {/* Keep coming soon for others if no data yet */}
               <FontAwesomeIcon icon={faLightbulb} className="nav-icon" /> AI /
               ML
             </li>
           </ul>
         </div>
-        {/* CUSTOM COURSES */}
+
+        {/* CUSTOM COURSES - NOW FULLY LINKED */}
         <div className="nav-section">
           <h3>CUSTOM COURSES</h3>
           <ul>
-            <li onClick={showComingSoon}>
+            <li onClick={() => navigate('/custom/booster-pack')}>
               <FontAwesomeIcon icon={faCubes} className="nav-icon" /> Booster
               Pack
             </li>
-            <li onClick={showComingSoon}>
+            <li onClick={() => navigate('/custom/coding-mastery')}>
               <FontAwesomeIcon icon={faLaptopCode} className="nav-icon" />{' '}
               Coding Mastery
             </li>
-            <li onClick={showComingSoon}>
+            <li onClick={() => navigate('/custom/exam-prep')}>
               <FontAwesomeIcon icon={faClipboardList} className="nav-icon" />{' '}
               Exam Prep
             </li>
-            <li onClick={showComingSoon}>
+            <li onClick={() => navigate('/custom/your-progress')}>
               <FontAwesomeIcon icon={faChartLine} className="nav-icon" /> Your
               Progress
             </li>
-            <li onClick={showComingSoon}>
+            <li onClick={() => navigate('/custom/saved-chats')}>
               <FontAwesomeIcon icon={faBookmark} className="nav-icon" /> Saved
               Chats
             </li>
