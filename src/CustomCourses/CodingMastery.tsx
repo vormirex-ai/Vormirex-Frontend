@@ -1,6 +1,14 @@
 import React from 'react';
 import CustomCoursePage from './CustomCoursePage';
 
+// Import local images
+import codingMastery from '../CustomCourses/assets/codingmastery.png';
+import codingMastery1 from '../CustomCourses/assets/codingmastery1.png';
+import codingMastery2 from '../CustomCourses/assets/codingmastery2.png';
+import codingMastery3 from '../CustomCourses/assets/codingmastery3.png';
+import codingMastery4 from '../CustomCourses/assets/codingmastery4.png';
+import codingPDF from '../CustomCourses/assets/CoursesPdf (2).pdf'; // PDF import
+
 const CodingMastery: React.FC = () => {
   return (
     <CustomCoursePage
@@ -22,13 +30,14 @@ const CodingMastery: React.FC = () => {
           text: 'The AI code reviews are better than most human tutors.',
         },
       ]}
-      heroImageUrl="https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?ixlib=rb-4.0.3&auto=format&fit=crop&q=80"
+      heroImageUrl={codingMastery} // hero image
       featureImages={[
-        'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3',
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKPhvNF1iFmeZ0jwPNyswZklbsOQ1ErgfoIg&s',
-        'https://images.unsplash.com/photo-1587620962725-abab7fe55159?ixlib=rb-4.0.3',
-        'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3',
-      ]}
+        codingMastery1,
+        codingMastery2,
+        codingMastery3,
+        codingMastery4,
+      ]} // feature images
+      pdfUrl={codingPDF} // Pass PDF to component
     />
   );
 };
