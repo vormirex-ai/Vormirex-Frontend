@@ -2,11 +2,14 @@
   min-height: 100vh;
   background-color: var(--bg-medium);
   color: var(--color-text-main);
+  overflow-x: hidden;
 }
 
+/* Hero Section */
 .custom-hero {
-  height: 80vh;
-  min-height: 600px;
+  height: 100vh;
+  min-height: 400px;
+
   background-size: cover;
   background-position: center;
   display: flex;
@@ -66,6 +69,7 @@
   box-shadow: 0 15px 40px rgba(0, 255, 255, 0.6);
 }
 
+/* Benefits Section */
 .section-title {
   text-align: center;
   font-size: 3rem;
@@ -92,7 +96,7 @@
   text-align: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   transition: all 0.5s ease;
-  opacity: 0;
+  opacity: 0; /* Necessary for your animation */
 }
 
 .benefit-card:hover {
@@ -114,6 +118,7 @@
   line-height: 1.6;
 }
 
+/* Testimonials */
 .testimonials-section {
   padding: 100px 40px;
   background-color: var(--bg-dark);
@@ -149,6 +154,7 @@
   font-size: 1.2rem;
 }
 
+/* Final CTA */
 .final-cta-section {
   text-align: center;
   padding: 120px 40px;
@@ -209,6 +215,7 @@
 .animate-fade-in {
   animation: fadeIn 1.4s ease-out forwards;
 }
+
 .animate-slide-up {
   animation: slideUp 1s ease-out forwards;
   opacity: 0;
@@ -245,7 +252,7 @@
   animation-delay: 3s;
 }
 
-/* Responsive */
+/* Responsive - FIXING THE 474px ISSUE */
 @media (max-width: 968px) {
   .custom-title {
     font-size: 3.5rem;
@@ -258,13 +265,81 @@
   }
 }
 
-@media (max-width: 600px) {
+/* Merged Mobile Queries to stop the background from disappearing */
+@media (max-width: 968px) {
   .custom-title {
-    font-size: 2.8rem;
+    font-size: 3.5rem;
+  }
+  .custom-desc {
+    font-size: 1.4rem;
+  }
+  .section-title {
+    font-size: 2.5rem;
+  }
+  .custom-hero {
+    height: 70vh;
+    min-height: 500px; /* smaller than desktop but still large enough */
+    background-position: center;
+  }
+  .hero-cta,
+  .final-cta-button {
+    font-size: 1.4rem;
+    padding: 18px 45px;
+  }
+}
+
+/* Small tablets / large phones */
+@media (max-width: 618px) {
+  .custom-hero {
+    height: 65vh;
+    min-height: 450px; /* safe minimum */
+    background-position: center;
+  }
+  .custom-title {
+    font-size: 2.6rem;
   }
   .hero-cta,
   .final-cta-button {
     font-size: 1.3rem;
     padding: 16px 40px;
+  }
+}
+
+/* Mobile / small screens */
+@media (max-width: 480px) {
+  .custom-hero {
+    height: 60vh;
+    min-height: 400px; /* ensures image fully visible at tiny widths */
+    background-position: center;
+  }
+  .custom-title {
+    font-size: 2.2rem;
+  }
+  .benefits-grid {
+    grid-template-columns: 1fr; /* single column layout */
+  }
+  .hero-cta,
+  .final-cta-button {
+    font-size: 1.2rem;
+    padding: 14px 35px;
+  }
+}
+
+/* Optional extra small phones */
+@media (max-width: 374px) {
+  .custom-hero {
+    height: 55vh;
+    min-height: 380px;
+  }
+  .custom-title {
+    font-size: 2rem;
+  }
+  .custom-desc {
+    font-size: 1.2rem;
+  }
+  .hero-cta,
+  .final-cta-button {
+    font-size: 1.1rem;
+    padding: 12px 30px;
   }
 }

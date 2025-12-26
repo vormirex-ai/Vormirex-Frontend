@@ -1,6 +1,14 @@
 import React from 'react';
 import CustomCoursePage from './CustomCoursePage';
 
+// Import local images
+import savedchats from '../CustomCourses/assets/savedchats.jpg';
+import savedchats1 from '../CustomCourses/assets/savedchats1.jpg';
+import savedchats2 from '../CustomCourses/assets/savedchat2.png';
+import savedchats3 from '../CustomCourses/assets/savedchat3.png';
+import savedchats4 from '../CustomCourses/assets/savedchats4.png';
+import savedChatsPDF from '../CustomCourses/assets/CoursesPdf (2).pdf'; // PDF import
+
 const SavedChats: React.FC = () => {
   return (
     <CustomCoursePage
@@ -17,15 +25,14 @@ const SavedChats: React.FC = () => {
           name: 'David H.',
           text: 'I refer back to my saved explanations all the time — pure gold.',
         },
-        { name: 'Anita G.', text: 'Like having my own private tutor archive.' },
+        {
+          name: 'Anita G.',
+          text: 'Like having my own private tutor archive.',
+        },
       ]}
-      heroImageUrl="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?ixlib=rb-4.0.3&auto=format&fit=crop&q=80"
-      featureImages={[
-        'https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?ixlib=rb-4.0.3',
-        'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?ixlib=rb-4.0.3',
-        'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3',
-        'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3',
-      ]}
+      heroImageUrl={savedchats} // hero image
+      featureImages={[savedchats1, savedchats2, savedchats3, savedchats4]} // feature images
+      pdfUrl={savedChatsPDF} // Pass PDF to component
     />
   );
 };

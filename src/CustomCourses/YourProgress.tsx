@@ -1,6 +1,14 @@
 import React from 'react';
 import CustomCoursePage from './CustomCoursePage';
 
+// Import local images
+import yourprogress from '../CustomCourses/assets/yourprogress.png';
+import yourprogress1 from '../CustomCourses/assets/yourprogress1.png';
+import yourprogress2 from '../CustomCourses/assets/yourprogress2.png';
+import yourprogress3 from '../CustomCourses/assets/yourprogress3.jpg';
+import yourprogress4 from '../CustomCourses/assets/yourprogress4.jpg';
+import progressPDF from '../CustomCourses/assets/CoursesPdf (2).pdf'; // PDF import
+
 const YourProgress: React.FC = () => {
   return (
     <CustomCoursePage
@@ -22,13 +30,14 @@ const YourProgress: React.FC = () => {
           text: 'Finally understand where I need to improve — game changer!',
         },
       ]}
-      heroImageUrl="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&q=80"
+      heroImageUrl={yourprogress}
       featureImages={[
-        'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3',
-        'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3',
-        'https://images.unsplash.com/photo-1542744094-3a5e1c0a4d5d?ixlib=rb-4.0.3',
-        'https://images.unsplash.com/photo-1551434678-e76b9232c0a5?ixlib=rb-4.0.3',
+        yourprogress1,
+        yourprogress2,
+        yourprogress3,
+        yourprogress4,
       ]}
+      pdfUrl={progressPDF} // Pass PDF to component
     />
   );
 };

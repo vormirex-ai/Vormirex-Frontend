@@ -8,6 +8,7 @@ interface CustomCoursePageProps {
   testimonials?: { name: string; text: string }[];
   heroImageUrl: string;
   featureImages: string[];
+  pdfUrl?: string; // Added PDF prop
 }
 
 const CustomCoursePage: React.FC<CustomCoursePageProps> = ({
@@ -17,9 +18,19 @@ const CustomCoursePage: React.FC<CustomCoursePageProps> = ({
   testimonials = [],
   heroImageUrl,
   featureImages,
+  pdfUrl,
 }) => {
+  const handlePdfOpen = () => {
+    if (pdfUrl) {
+      window.open(pdfUrl, '_blank'); // Open PDF in new tab
+    } else {
+      alert('PDF not available.');
+    }
+  };
+
   return (
     <main className="custom-course-main">
+      {/* Hero Section */}
       <section
         className="custom-hero"
         style={{ backgroundImage: `url(${heroImageUrl})` }}
@@ -27,12 +38,16 @@ const CustomCoursePage: React.FC<CustomCoursePageProps> = ({
         <div className="hero-content">
           <h1 className="custom-title animate-fade-in">{title}</h1>
           <p className="custom-desc animate-fade-in delay-1">{description}</p>
-          <button className="hero-cta animate-fade-in delay-2">
+          <button
+            className="hero-cta animate-fade-in delay-2"
+            onClick={handlePdfOpen}
+          >
             Enroll Now & Transform Your Future
           </button>
         </div>
       </section>
 
+      {/* Benefits Section */}
       <section className="benefits-section">
         <h2 className="section-title animate-fade-in delay-3">
           Why Thousands of Students Choose This
@@ -41,7 +56,10 @@ const CustomCoursePage: React.FC<CustomCoursePageProps> = ({
           {benefits.map((benefit, idx) => (
             <div
               key={idx}
-              className={`benefit-card animate-slide-up delay-${idx + 4}`}
+              className={`benefit-card animate-slide-up delay-${Math.min(
+                idx + 4,
+                10
+              )}`}
             >
               {featureImages[idx] && (
                 <img
@@ -56,6 +74,7 @@ const CustomCoursePage: React.FC<CustomCoursePageProps> = ({
         </div>
       </section>
 
+      {/* Testimonials Section */}
       {testimonials.length > 0 && (
         <section className="testimonials-section">
           <h2 className="section-title animate-fade-in delay-7">
@@ -65,7 +84,10 @@ const CustomCoursePage: React.FC<CustomCoursePageProps> = ({
             {testimonials.map((t, idx) => (
               <div
                 key={idx}
-                className={`testimonial-card animate-slide-up delay-${idx + 8}`}
+                className={`testimonial-card animate-slide-up delay-${Math.min(
+                  idx + 8,
+                  10
+                )}`}
               >
                 <p className="testimonial-text">"{t.text}"</p>
                 <p className="testimonial-name">— {t.name}</p>
@@ -75,14 +97,18 @@ const CustomCoursePage: React.FC<CustomCoursePageProps> = ({
         </section>
       )}
 
+      {/* Final CTA Section */}
       <section className="final-cta-section">
         <h2 className="animate-fade-in delay-9">
           Ready to Unlock Your Potential?
         </h2>
-        <p>
+        <p className="animate-fade-in delay-9">
           Join over 50,000+ learners mastering tech skills with VORMIREX AI.
         </p>
-        <button className="final-cta-button animate-fade-in delay-10">
+        <button
+          className="final-cta-button animate-fade-in delay-10"
+          onClick={handlePdfOpen}
+        >
           Start Learning Today – It's Free to Begin!
         </button>
       </section>
