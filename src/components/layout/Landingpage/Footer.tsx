@@ -1,6 +1,6 @@
 import React from 'react';
 import { Twitter, Instagram, Youtube, Linkedin } from 'lucide-react';
-import logo from '../assets/logo.png'; // ✅ update path if needed
+import logo from '../../../assets/logo.png'; // ✅ update path if needed
 
 interface FooterLink {
   label: string;
