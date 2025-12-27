@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Sparkles, Play, Circle } from 'lucide-react';
-import Navbar from '../components/common/Navbar';
-import logo from '../assets/logo.png';
+import Navbar from '../../common/Navbar';
+import logo from '../../../assets/logo.png';
 
 interface LandingPageProps {
   brandName?: string;
