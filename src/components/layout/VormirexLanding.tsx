@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Sparkles, Play, Circle } from 'lucide-react';
-import Navbar from '../common/Navbar';
 import logo from '../../assets/logo.png';
 
 interface LandingPageProps {
@@ -33,13 +32,6 @@ const VormirexLanding: React.FC<LandingPageProps> = ({
       <div className={`watermark-logo ${scrolled ? 'visible' : ''}`}>
         <img src={logo} alt="Vormirex Watermark" />
       </div>
-
-      {/* Navigation Wrapper */}
-      <Navbar
-        brandName={brandName}
-        onSignIn={goToDashboard}
-        onStartFree={goToDashboard}
-      />
 
       {/* Hero Section */}
       <main className="hero">
