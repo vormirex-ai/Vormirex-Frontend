@@ -557,3 +557,22 @@ html {
     padding: 8px 15px;
   }
 }
+
+.nav-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding-right: 10px;
+}
+
+.nav-section-header:hover h3,
+.nav-section-header:hover .section-toggle-icon {
+  color: var(--color-text-main);
+}
+
+.section-toggle-icon {
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  transition: transform 0.2s;
+}
