@@ -8,19 +8,25 @@ import { COURSES, CourseId, CourseLevel } from '../../data/courses';
 ======================= */
 import CyberHero from '../../assets/cyber.png';
 import DataScienceHero from '../../assets/datascience.jpg';
-import DataAnalyticsHero from '../../assets/dataanalytics.jpeg';
+import DataAnalyticsHero from '../../assets/dataanaltics.jpg';
 
-import WhyCyber from '../../assets/cyber1.jpg';
-import WhyDS from '../../assets/whylearndatascience.jpg';
-import WhyDA from '../../assets/whylearndataanaltics.jpg';
+import WhyCyber from '../../assets/whylearncyber.jpg';
+import WhyDS from '../../assets/whylearndatascince.jpeg';
+import WhyDA from '../../assets/whylearndataana.jpeg';
 
-import CareerCyber from '../../assets/carrerincyber.jpg';
-import CareerDA from '../../assets/carrerindataanaltics.jpg';
-import CareerDS from '../../assets/carrerindatascience.jpg';
+import CareerCyber from '../../assets/carrerincyber.jpeg';
+import CareerDA from '../../assets/carrerindataana.jpeg';
+import CareerDS from '../../assets/carrerindatascience.jpeg';
 
-import GainCyber from '../../assets/gainincyber.jpg';
-import GainDS from '../../assets/gainindatascience.jpg';
-import GainDA from '../../assets/gainindataanaltics.jpg';
+import GainCyber from '../../assets/gainincyber.jpeg';
+import GainDS from '../../assets/gainindatascience.jpeg';
+import GainDA from '../../assets/carerindataana.jpeg';
+
+/* =======================
+   SINGLE PDF IMPORT
+======================= */
+// Import your single syllabus file here
+import SyllabusPDF from '../../assets/CoursesPdf (2).pdf';
 
 export default function CoursePage() {
   const navigate = useNavigate();
@@ -28,10 +34,14 @@ export default function CoursePage() {
   const course = courseId ? COURSES[courseId] : undefined;
   const [level, setLevel] = useState<CourseLevel>('Foundation');
 
-  // For modal
   const [modalImage, setModalImage] = useState<string | null>(null);
   const openImage = (img: string) => setModalImage(img);
   const closeImage = () => setModalImage(null);
+
+  // Simple function to open the one imported PDF
+  const handleViewSyllabus = () => {
+    window.open(SyllabusPDF, '_blank', 'noopener,noreferrer');
+  };
 
   const levelBlock = useMemo(() => {
     if (!course) return null;
@@ -67,16 +77,10 @@ export default function CoursePage() {
     return (
       <div className="course-page">
         <div className="course-shell">
-          <div className="course-hero">
-            <div className="course-hero-overlay" />
-            <h1 className="course-title">Course not found</h1>
-            <button
-              className="course-btn"
-              onClick={() => navigate('/dashboard')}
-            >
-              Back to Dashboard
-            </button>
-          </div>
+          <button className="course-btn" onClick={() => navigate(-1)}>
+            Back
+          </button>
+          <h1 className="course-title">Course not found</h1>
         </div>
       </div>
     );
@@ -91,13 +95,10 @@ export default function CoursePage() {
           style={{ backgroundImage: `url(${heroBg})` }}
         >
           <div className="course-hero-overlay" />
-
-          {/* Top Navigation Row */}
           <div className="course-hero-top">
             <button className="course-btn ghost" onClick={() => navigate(-1)}>
               ← Back
             </button>
-
             <div className="course-level-tabs">
               <button
                 className={`tab ${level === 'Foundation' ? 'active' : ''}`}
@@ -113,92 +114,60 @@ export default function CoursePage() {
               </button>
             </div>
           </div>
-
-          {/* Main Hero Content (text on image) */}
           <h1 className="course-title">{course.title}</h1>
           <p className="course-subtitle">{course.subtitle}</p>
-
           {levelBlock?.duration && (
             <p className="course-duration">
               Duration: <strong>{levelBlock.duration}</strong>
             </p>
           )}
-
-          {levelBlock?.highlights && (
-            <div className="course-badges">
-              {levelBlock.highlights.map((h) => (
-                <span key={h} className="badge">
-                  {h}
-                </span>
-              ))}
-            </div>
-          )}
         </header>
 
-        {/* Button outside the hero/image */}
+        {/* ---------- PDF ACTION BUTTON ---------- */}
         <div className="hero-action-area">
-          {/* Updated shorter & mobile-friendly text */}
-          <button className="course-btn main-cta">
-            Enroll Now & Transform Yourself
+          <button className="course-btn main-cta" onClick={handleViewSyllabus}>
+            Download Full Syllabus (PDF)
           </button>
         </div>
 
         {/* ---------- INFO CARDS ---------- */}
         <section className="course-info-cards">
-          <div className="info-card reveal delay-1">
+          <div className="info-card reveal">
             <img
               src={cardImages.whyLearn}
               alt="Why Learn"
               onClick={() => openImage(cardImages.whyLearn)}
-              style={{ cursor: 'pointer' }}
             />
-            <p className="info-card-title">
-              {courseId === 'data-science'
-                ? 'Why Data Science'
-                : courseId === 'data-analytics'
-                ? 'Why Data Analytics'
-                : 'Why Cyber Security'}
-            </p>
+            <p className="info-card-title">Why {course.title}</p>
           </div>
-
-          <div className="info-card reveal delay-2">
+          <div className="info-card reveal">
             <img
               src={cardImages.career}
-              alt="Career Opportunities"
+              alt="Career"
               onClick={() => openImage(cardImages.career)}
-              style={{ cursor: 'pointer' }}
             />
-            <p className="info-card-title">Career Opportunities</p>
+            <p className="info-card-title">Career Path</p>
           </div>
-
-          <div className="info-card reveal delay-3">
+          <div className="info-card reveal">
             <img
               src={cardImages.gain}
-              alt="What You’ll Gain"
+              alt="Gain"
               onClick={() => openImage(cardImages.gain)}
-              style={{ cursor: 'pointer' }}
             />
-            <p className="info-card-title">What You’ll Gain</p>
+            <p className="info-card-title">What You'll Gain</p>
           </div>
         </section>
 
         {/* ---------- CURRICULUM ---------- */}
         <section className="course-content">
           <h2 className="section-title">{level} Curriculum</h2>
-
           <div className="modules">
             {levelBlock?.modules.map((m, idx) => (
-              <details
-                key={m.title}
-                className="module reveal"
-                style={{ animationDelay: `${idx * 100}ms` }}
-                open={idx === 0}
-              >
+              <details key={m.title} className="module reveal" open={idx === 0}>
                 <summary className="module-summary">
                   <span className="module-title">{m.title}</span>
                   <span className="module-meta">{m.items.length} topics</span>
                 </summary>
-
                 <ul className="module-list">
                   {m.items.map((it) => (
                     <li key={it}>{it}</li>
