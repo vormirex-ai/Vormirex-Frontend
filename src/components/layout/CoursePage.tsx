@@ -6,21 +6,21 @@ import { COURSES, CourseId, CourseLevel } from '../../data/courses';
 /* =======================
    IMAGE IMPORTS
 ======================= */
-import CyberHero from '../../assets/Cyber1.jpg';
-import DataScienceHero from '../../assets/DataSciemce.png';
-import DataAnalyticsHero from '../../assets/DataAnaltics.png';
+import CyberHero from '../../assets/cyber.png';
+import DataScienceHero from '../../assets/datascience.jpg';
+import DataAnalyticsHero from '../../assets/dataanaltics.jpg';
 
-import WhyCyber from '../../assets/Whylearncyber.png';
-import WhyDS from '../../assets/Whylearndatascience.png';
-import WhyDA from '../../assets/whylearndataanalytics.jpg';
+import WhyCyber from '../../assets/whylearncyber.jpg';
+import WhyDS from '../../assets/whylearndatascince.jpeg';
+import WhyDA from '../../assets/whylearndataana.jpeg';
 
-import CareerCyber from '../../assets/CarrerCyber.png';
-import CareerDS from '../../assets/Carrerinanalytics.jpg';
-import CareerDA from '../../assets/Carrrerindatasciemce.jpg';
+import CareerCyber from '../../assets/carrerincyber.jpeg';
+import CareerDA from '../../assets/carrerindataana.jpeg';
+import CareerDS from '../../assets/carrerindatascience.jpeg';
 
-import GainCyber from '../../assets/GainCyber.png';
-import GainDS from '../../assets/Gainindatascience.jpg';
-import GainDA from '../../assets/gainindataanalytics.jpg';
+import GainCyber from '../../assets/gainincyber.jpeg';
+import GainDS from '../../assets/gainindatascience.jpeg';
+import GainDA from '../../assets/carerindataana.jpeg';
 
 export default function CoursePage() {
   const navigate = useNavigate();
@@ -114,20 +114,15 @@ export default function CoursePage() {
             </div>
           </div>
 
-          {/* Main Hero Content */}
+          {/* Main Hero Content (text on image) */}
           <h1 className="course-title">{course.title}</h1>
           <p className="course-subtitle">{course.subtitle}</p>
 
-          <div className="hero-action-area">
-            {levelBlock?.duration && (
-              <p className="course-duration">
-                Duration: <strong>{levelBlock.duration}</strong>
-              </p>
-            )}
-            <button className="course-btn main-cta">
-              Enroll Now & Transform Your Future
-            </button>
-          </div>
+          {levelBlock?.duration && (
+            <p className="course-duration">
+              Duration: <strong>{levelBlock.duration}</strong>
+            </p>
+          )}
 
           {levelBlock?.highlights && (
             <div className="course-badges">
@@ -139,6 +134,14 @@ export default function CoursePage() {
             </div>
           )}
         </header>
+
+        {/* Button outside the hero/image */}
+        <div className="hero-action-area">
+          {/* Updated shorter & mobile-friendly text */}
+          <button className="course-btn main-cta">
+            Enroll Now & Transform Yourself
+          </button>
+        </div>
 
         {/* ---------- INFO CARDS ---------- */}
         <section className="course-info-cards">
