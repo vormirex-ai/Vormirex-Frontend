@@ -1,4 +1,3 @@
-// src/App.tsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -9,7 +8,8 @@ import DashboardWrapper from './components/layout/DashboardWrapper';
 // Pages
 import DashboardPage from './pages/DashboardPage';
 import LandingPage from './pages/LandingPage';
-import CourseDetails from './components/layout/CoursePage'; // adjust path if needed
+import CourseDetails from './components/layout/CoursePage';
+import VormirexAuth from './components/login/login';
 
 // Custom Features
 import BoosterPack from './CustomCourses/BoosterPack';
@@ -22,12 +22,15 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Dashboard - NO top navbar */}
+        {/* Login is now the STARTING page */}
+        <Route path="/" element={<VormirexAuth />} />
+
+        {/* Dashboard is moved to /dashboard */}
         <Route element={<DashboardWrapper />}>
-          <Route path="/" element={<DashboardPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
         </Route>
 
-        {/* All other pages - WITH top navbar */}
+        {/* All other pages with Top Navbar */}
         <Route element={<AppLayout />}>
           <Route path="/landing" element={<LandingPage />} />
           <Route path="/course/:courseId" element={<CourseDetails />} />
@@ -40,7 +43,7 @@ function App() {
           <Route path="/custom/saved-chats" element={<SavedChats />} />
         </Route>
 
-        {/* 404 - You can choose which layout to use */}
+        {/* 404 - Not Found */}
         <Route
           path="*"
           element={
@@ -55,7 +58,7 @@ function App() {
             >
               <h1>404 - Page Not Found</h1>
               <a href="/" style={{ color: '#6aece1', fontSize: '1.2rem' }}>
-                ← Back to Dashboard
+                ← Back to Login
               </a>
             </div>
           }
