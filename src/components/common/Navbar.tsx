@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import ComingSoonModal from './ComingSoonModal';
 import logo from '../../assets/logo.png';
 import './Navbar.css';
 
@@ -15,12 +16,14 @@ const Navbar: React.FC<NavbarProps> = ({
   onStartFree,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <header className="nav-wrapper">
+    <>
+      <header className="nav-wrapper">
       <nav className="navbar">
         {/* Left: Logo Section */}
         <div className="logo">
@@ -33,26 +36,28 @@ const Navbar: React.FC<NavbarProps> = ({
 
         {/* Center: Desktop Nav Links / Mobile Drawer */}
         <ul className={`nav-links ${isOpen ? 'active' : ''}`}>
-          <li>
-            <a href="#features" onClick={closeMenu}>
-              Features
-            </a>
-          </li>
-          <li>
-            <a href="#courses" onClick={closeMenu}>
-              Courses
-            </a>
-          </li>
-          <li>
-            <a href="#pricing" onClick={closeMenu}>
-              Pricing
-            </a>
-          </li>
-          <li>
-            <a href="#about" onClick={closeMenu}>
-              About
-            </a>
-          </li>
+          {/* Dynamic Nav Links */}
+          {[
+            { label: 'Features', href: '#features' },
+            { label: 'Courses', href: '#', isComingSoon: true },
+            { label: 'Pricing', href: '#pricing' },
+            { label: 'About', href: '#', isComingSoon: true },
+          ].map((link) => (
+            <li key={link.label}>
+              <a
+                href={link.href}
+                onClick={(e) => {
+                  if (link.isComingSoon) {
+                    e.preventDefault();
+                    setIsModalOpen(true);
+                  }
+                  closeMenu();
+                }}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
 
           {/* Mobile-only Buttons */}
           <li className="mobile-buttons">
@@ -93,7 +98,11 @@ const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
       </nav>
-    </header>
+
+      </header>
+
+      <ComingSoonModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+    </>
   );
 };
 

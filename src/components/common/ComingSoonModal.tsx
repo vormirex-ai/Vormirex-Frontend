@@ -1,6 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes, faLightbulb } from "@fortawesome/free-solid-svg-icons";
+import { faTimes, faLightbulb, faRocket } from "@fortawesome/free-solid-svg-icons";
+import "./ComingSoonModal.css";
 
 interface ComingSoonModalProps {
   isOpen: boolean;
@@ -22,7 +23,7 @@ const ComingSoonModal: React.FC<ComingSoonModalProps> = ({
 
         <div className="modal-body">
           <h2 className="modal-title">Feature Under Construction!</h2>
-          <img src="https://via.placeholder.com/150" alt="Coming Soon" />
+          <div className="coming-soon-text">COMING SOON</div>
           <p className="modal-message">
             We are working hard to bring this exciting feature to you. Stay
             tuned for the launch! 🚀
