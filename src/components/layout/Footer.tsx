@@ -39,7 +39,6 @@ const Footer = (props: Props) => {
         links: [
           { label: 'About Us', href: '#' },
           { label: 'Careers', href: '#' },
-          { label: 'Press Kit', href: '#' },
           { label: 'Blog', href: '#' },
           { label: 'Contact', href: '#' },
         ],
