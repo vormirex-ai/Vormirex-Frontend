@@ -4,11 +4,11 @@ import './CoursePage.css';
 import { COURSES, CourseId, CourseLevel } from '../../data/courses';
 
 /* =======================
-   IMAGE IMPORTS
+   ASSET IMPORTS
 ======================= */
-import CyberHero from '../../assets/cyber.png';
-import DataScienceHero from '../../assets/datascience.jpg';
-import DataAnalyticsHero from '../../assets/dataanaltics.jpg';
+import CyberVideo from '../../assets/cybersecurity.mp4';
+import DataScienceVideo from '../../assets/datascience.mp4';
+import DataAnalyticsVideo from '../../assets/dataanalytics.mp4';
 
 import WhyCyber from '../../assets/whylearncyber.jpg';
 import WhyDS from '../../assets/whylearndatascince.jpeg';
@@ -22,10 +22,6 @@ import GainCyber from '../../assets/gainincyber.jpeg';
 import GainDS from '../../assets/gainindatascience.jpeg';
 import GainDA from '../../assets/carerindataana.jpeg';
 
-/* =======================
-   SINGLE PDF IMPORT
-======================= */
-// Import your single syllabus file here
 import SyllabusPDF from '../../assets/CoursesPdf (2).pdf';
 
 export default function CoursePage() {
@@ -38,7 +34,6 @@ export default function CoursePage() {
   const openImage = (img: string) => setModalImage(img);
   const closeImage = () => setModalImage(null);
 
-  // Simple function to open the one imported PDF
   const handleViewSyllabus = () => {
     window.open(SyllabusPDF, '_blank', 'noopener,noreferrer');
   };
@@ -48,13 +43,13 @@ export default function CoursePage() {
     return course.levels.find((l) => l.level === level) ?? course.levels[0];
   }, [course, level]);
 
-  const heroBg = useMemo(() => {
-    const heroImages: Record<CourseId, string> = {
-      'cyber-security': CyberHero,
-      'data-science': DataScienceHero,
-      'data-analytics': DataAnalyticsHero,
+  const heroVideo = useMemo(() => {
+    const videoMap: Record<CourseId, string> = {
+      'cyber-security': CyberVideo,
+      'data-science': DataScienceVideo,
+      'data-analytics': DataAnalyticsVideo,
     };
-    return heroImages[courseId as CourseId] || CyberHero;
+    return videoMap[courseId as CourseId] || CyberVideo;
   }, [courseId]);
 
   const cardImages = useMemo(() => {
@@ -90,16 +85,31 @@ export default function CoursePage() {
     <div className="course-page">
       <div className="course-shell">
         {/* ---------- HERO SECTION ---------- */}
-        <header
-          className="course-hero"
-          style={{ backgroundImage: `url(${heroBg})` }}
-        >
+        <header className="course-hero">
+          <video
+            key={heroVideo}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="hero-video-bg"
+          >
+            <source src={heroVideo} type="video/mp4" />
+          </video>
+
           <div className="course-hero-overlay" />
+
           <div className="course-hero-top">
             <button className="course-btn ghost" onClick={() => navigate(-1)}>
               ← Back
             </button>
-            <div className="course-level-tabs">
+
+            {/* Added conditional class for Data Science width control */}
+            <div
+              className={`course-level-tabs ${
+                courseId === 'data-science' ? 'ds-tabs' : ''
+              }`}
+            >
               <button
                 className={`tab ${level === 'Foundation' ? 'active' : ''}`}
                 onClick={() => setLevel('Foundation')}
@@ -114,13 +124,6 @@ export default function CoursePage() {
               </button>
             </div>
           </div>
-          <h1 className="course-title">{course.title}</h1>
-          <p className="course-subtitle">{course.subtitle}</p>
-          {levelBlock?.duration && (
-            <p className="course-duration">
-              Duration: <strong>{levelBlock.duration}</strong>
-            </p>
-          )}
         </header>
 
         {/* ---------- PDF ACTION BUTTON ---------- */}

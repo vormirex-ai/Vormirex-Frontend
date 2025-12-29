@@ -1,11 +1,8 @@
-/* =========================================
-   1. ROOT VARIABLES & GLOBAL SETUP
-   ========================================= */
 :root {
   --bg-dark: #0a0a0b;
   --bg-card: #161618;
   --bg-glass: rgba(255, 255, 255, 0.03);
-  --color-primary: #6aece1; /* Teal */
+  --color-primary: #6aece1;
   --color-primary-glow: rgba(106, 236, 225, 0.4);
   --color-border: rgba(106, 236, 225, 0.15);
   --text-main: #ffffff;
@@ -27,24 +24,32 @@
   margin: 0 auto;
 }
 
-/* =========================================
-   2. HERO SECTION
-   ========================================= */
+/* --- HERO SECTION --- */
 .course-hero {
   position: relative;
-  min-height: 480px;
+  height: 320px; /* Decreased Height */
+  min-height: 320px;
   border-radius: 30px;
-  background-size: cover;
-  background-position: center;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 60px;
+  padding: 40px;
   overflow: hidden;
   border: 1px solid var(--color-border);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
   margin-bottom: 30px;
-  margin-top: 0;
+  background: #000;
+}
+
+.hero-video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Full image visible, no cropping */
+  z-index: 0;
+  pointer-events: none;
 }
 
 .course-hero-overlay {
@@ -52,24 +57,22 @@
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(10, 10, 11, 0.95) 0%,
-    rgba(10, 10, 11, 0.4) 50%,
-    rgba(0, 0, 0, 0.2) 100%
+    rgba(10, 10, 11, 0.4) 0%,
+    transparent 100%
   );
   z-index: 1;
 }
 
 .course-hero-top {
   position: absolute;
-  top: 30px;
-  left: 30px;
-  right: 30px;
+  top: 25px;
+  left: 25px;
+  right: 25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 10;
 }
-
 /* --- BUTTONS & TABS --- */
 .course-btn {
   padding: 12px 24px;
@@ -375,4 +378,8 @@
   .info-card img {
     height: 180px;
   }
+}
+.course-level-tabs.ds-tabs {
+  min-width: 200px;
+  max-width: 220px;
 }

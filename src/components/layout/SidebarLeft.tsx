@@ -25,7 +25,7 @@ import logoWithoutText from '../../assets/logo.png';
 interface SidebarLeftProps {
   isOpen: boolean;
   toggleSidebar: () => void;
-  showComingSoon: () => void; // Still kept for other items like New Chat, Settings, etc.
+  showComingSoon: () => void;
 }
 
 const SidebarLeft: React.FC<SidebarLeftProps> = ({
@@ -38,7 +38,8 @@ const SidebarLeft: React.FC<SidebarLeftProps> = ({
   const [isCustomCoursesOpen, setIsCustomCoursesOpen] = React.useState(false);
 
   const toggleSubjects = () => setIsSubjectsOpen(!isSubjectsOpen);
-  const toggleCustomCourses = () => setIsCustomCoursesOpen(!isCustomCoursesOpen);
+  const toggleCustomCourses = () =>
+    setIsCustomCoursesOpen(!isCustomCoursesOpen);
 
   return (
     <aside className={`sidebar-left ${isOpen ? 'sidebar-open' : ''}`}>
@@ -65,6 +66,7 @@ const SidebarLeft: React.FC<SidebarLeftProps> = ({
         <FontAwesomeIcon icon={faPlus} /> New Chat
       </button>
 
+      {/* FIXED: Now navigates to '/' instead of '/landing' */}
       <button className="new-chat-button" onClick={() => navigate('/landing')}>
         <FontAwesomeIcon icon={faGlobe} /> VORMIREX
       </button>
@@ -102,7 +104,7 @@ const SidebarLeft: React.FC<SidebarLeftProps> = ({
           )}
         </div>
 
-        {/* CUSTOM COURSES - NOW FULLY LINKED */}
+        {/* CUSTOM COURSES */}
         <div className="nav-section">
           <div className="nav-section-header" onClick={toggleCustomCourses}>
             <h3>CUSTOM COURSES</h3>

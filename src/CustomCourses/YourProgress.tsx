@@ -3,10 +3,10 @@ import CustomCoursePage from './CustomCoursePage';
 
 // Import local images
 import yourprogress from '../CustomCourses/assets/yourprogress.png';
-import yourprogress1 from '../CustomCourses/assets/yourprogress1.png';
-import yourprogress2 from '../CustomCourses/assets/yourprogress2.png';
-import yourprogress3 from '../CustomCourses/assets/yourprogress3.jpg';
-import yourprogress4 from '../CustomCourses/assets/yourprogress4.jpg';
+import yourprogress1 from '../CustomCourses/assets/heatmaps.jpg';
+import yourprogress2 from '../CustomCourses/assets/badges.jpg';
+import yourprogress3 from '../CustomCourses/assets/airecommends.jpg';
+import yourprogress4 from '../CustomCourses/assets/improvement.jpg';
 import progressPDF from '../CustomCourses/assets/CoursesPdf (2).pdf'; // PDF import
 
 const YourProgress: React.FC = () => {
