@@ -16,12 +16,20 @@ const LandingPage = () => {
     <div className="app-wrapper">
       <VormirexLanding />
       <SoundFamiliar />
-      <Whatisvormirex />
-      <BuiltForEveryone />
+      <section id="about">
+        <Whatisvormirex />
+      </section>
+      <section id="features">
+        <BuiltForEveryone />
+      </section>
       <HowItWorks />
-      <CourseGrid />
+      <section id="courses">
+        <CourseGrid />
+      </section>
       <TestimonialSection />
-      <PricingSection />
+      <section id="pricing">
+        <PricingSection />
+      </section>
       <LearningCTA />
       <Footer />
     </div>

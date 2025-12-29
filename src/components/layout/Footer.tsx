@@ -1,10 +1,13 @@
-import React from 'react';
-import { Twitter, Instagram, Youtube, Linkedin } from 'lucide-react';
+import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebook, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import ComingSoonModal from '../common/ComingSoonModal';
 import logo from '../../assets/logo.png'; // ✅ update path if needed
 
 interface FooterLink {
   label: string;
   href: string;
+  isComingSoon?: boolean;
 }
 
 interface FooterSection {
@@ -20,47 +23,26 @@ interface Props {
 }
 
 const Footer = (props: Props) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const {
     companyName = 'VORMIREX',
     description = 'Making learning feel like playing. Your AI-powered education companion.',
     sections = [
       {
-        title: 'Product',
-        links: [
-          { label: 'Features', href: '#' },
-          { label: 'Courses', href: '#' },
-          { label: 'Pricing', href: '#' },
-          { label: 'AI Tutor', href: '#' },
-          { label: 'Mobile App', href: '#' },
-        ],
-      },
-      {
         title: 'Company',
         links: [
-          { label: 'About Us', href: '#' },
-          { label: 'Careers', href: '#' },
-          { label: 'Blog', href: '#' },
-          { label: 'Contact', href: '#' },
+          { label: 'Features', href: '#features' },
+          { label: 'Courses', href: '#', isComingSoon: true },
+          { label: 'Pricing', href: '#pricing' },
+          { label: 'About Us', href: '#', isComingSoon: true },
         ],
       },
       {
-        title: 'Resources',
+        title: 'Get in touch',
         links: [
-          { label: 'Help Center', href: '#' },
-          { label: 'Community', href: '#' },
-          { label: 'Tutorials', href: '#' },
-          { label: 'API Docs', href: '#' },
-          { label: 'Status', href: '#' },
-        ],
-      },
-      {
-        title: 'Legal',
-        links: [
-          { label: 'Privacy', href: '#' },
-          { label: 'Terms', href: '#' },
-          { label: 'Cookies', href: '#' },
-          { label: 'Licenses', href: '#' },
-          { label: 'Security', href: '#' },
+          { label: '+91 8123831056', href: 'tel:+918123831056' },
+          { label: 'info@vormirex.com', href: 'mailto:info@vormirex.com' },
         ],
       },
     ],
@@ -80,19 +62,13 @@ const Footer = (props: Props) => {
             </div>
 
             <p className="brand-description">{description}</p>
-
+            {/* Kept social links as user mentioned logo and description part is good, usually these go together */}
             <div className="social-links">
-              <a href="#" className="social-icon">
-                <Twitter size={18} />
+              <a href="https://www.facebook.com/profile.php?id=61584727210742" className="social-icon" target="_blank" rel="noopener noreferrer">
+                <FontAwesomeIcon icon={faFacebook} />
               </a>
-              <a href="#" className="social-icon">
-                <Instagram size={18} />
-              </a>
-              <a href="#" className="social-icon">
-                <Youtube size={18} />
-              </a>
-              <a href="#" className="social-icon">
-                <Linkedin size={18} />
+              <a href="https://www.linkedin.com/company/vormirex/" className="social-icon" target="_blank" rel="noopener noreferrer">
+                <FontAwesomeIcon icon={faLinkedin} />
               </a>
             </div>
           </div>
@@ -105,7 +81,16 @@ const Footer = (props: Props) => {
                 <ul className="column-list">
                   {section.links.map((link, lIdx) => (
                     <li key={lIdx}>
-                      <a href={link.href} className="footer-link">
+                      <a
+                        href={link.href}
+                        className="footer-link"
+                        onClick={(e) => {
+                          if (link.isComingSoon) {
+                            e.preventDefault();
+                            setIsModalOpen(true);
+                          }
+                        }}
+                      >
                         {link.label}
                       </a>
                     </li>
@@ -123,7 +108,8 @@ const Footer = (props: Props) => {
         </div>
       </div>
 
-      {/* STYLES */}
+      <ComingSoonModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
       <style>{`
         .footer-container {
           background-color: #050a14;
@@ -143,10 +129,13 @@ const Footer = (props: Props) => {
           justify-content: space-between;
           gap: 40px;
           margin-bottom: 60px;
+          align-items: flex-start; /* Ensure alignment at top */
         }
 
         .brand-section {
-          max-width: 320px;
+          width: 100%;
+          max-width: 380px;
+          flex-shrink: 0;
         }
 
         .logo-wrapper {
@@ -210,22 +199,42 @@ const Footer = (props: Props) => {
           color: #fff;
         }
 
+        /* Group the columns together on the right */
         .links-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 40px;
-          flex: 1;
+          display: flex;
+          gap: 50px; /* Large space between Company and Get in touch */
+        }
+
+        .link-column {
+          min-width: 160px; 
+        }
+
+        @media (max-width: 900px) {
+           .footer-main {
+             gap: 60px;
+           }
+           .links-grid {
+             gap: 60px;
+           }
         }
 
         @media (max-width: 768px) {
           .links-grid {
-            grid-template-columns: repeat(2, 1fr);
+            flex-wrap: wrap;
+            gap: 40px;
+            width: 100%;
+            justify-content: flex-start;
           }
-        }
-
-        @media (max-width: 480px) {
-          .links-grid {
-            grid-template-columns: 1fr;
+          .footer-main {
+             flex-direction: column;
+             gap: 40px;
+          }
+          .brand-section {
+            max-width: 100%;
+          }
+          .link-column {
+            flex: 1;
+            min-width: 140px;
           }
         }
 
@@ -243,12 +252,15 @@ const Footer = (props: Props) => {
 
         .column-list li {
           margin-bottom: 12px;
+          display: flex;
+          align-items: center;
         }
 
         .footer-link {
           color: #64748b;
           font-size: 14px;
           text-decoration: none;
+          transition: color 0.2s;
         }
 
         .footer-link:hover {
@@ -264,6 +276,7 @@ const Footer = (props: Props) => {
         .copyright-text {
           font-size: 13px;
           color: #475569;
+          text-align: center;
         }
       `}</style>
     </footer>
