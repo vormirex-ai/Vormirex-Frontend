@@ -577,7 +577,7 @@ html {
   transition: transform 0.2s;
 }
 .sidebar-left .nav-section-header h3 {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.5px;
 }
