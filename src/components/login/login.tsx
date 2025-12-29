@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 
 const css = `
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   .login-page-root {
     min-height: 100vh;
     display: flex;
@@ -14,15 +13,12 @@ const css = `
     background-color: #0a0b0f;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
-
   .login-container {
     width: 100%;
     max-width: 400px;
     padding: 40px 24px;
     text-align: center;
   }
-
-  /* LOGO ALIGNMENT: Moves image to the left of the text, centered as a unit */
   .logo-section {
     display: flex;
     align-items: center;
@@ -30,30 +26,24 @@ const css = `
     gap: 15px;
     margin-bottom: 30px;
   }
-
   .logo {
     width: 60px;
     height: 60px;
     object-fit: contain;
   }
-
   .brand-details {
     text-align: left;
   }
-
   .brand-name {
     font-size: 24px;
     font-weight: 700;
     color: #ffffff;
     letter-spacing: 2px;
   }
-
   .tagline {
     color: #6b7280;
     font-size: 13px;
   }
-
-  /* TABS */
   .tabs {
     display: flex;
     background-color: #1a1d24;
@@ -61,7 +51,6 @@ const css = `
     padding: 4px;
     margin-bottom: 30px;
   }
-
   .tab {
     flex: 1;
     padding: 12px;
@@ -73,15 +62,10 @@ const css = `
     border-radius: 22px;
     transition: 0.3s;
   }
-
   .tab.active { background-color: #2a2d35; color: #ffffff; }
-
-  /* FORM */
   .form-group { margin-bottom: 20px; text-align: left; }
   .form-label { display: block; color: #9ca3af; font-size: 13px; margin-bottom: 8px; }
-
   .input-wrapper { position: relative; display: flex; align-items: center; }
-  
   .form-input {
     width: 100%;
     padding: 14px 16px;
@@ -91,9 +75,7 @@ const css = `
     color: #ffffff;
     font-size: 14px;
   }
-
   .form-input:focus { outline: none; border-color: #00d4d4; }
-
   .password-toggle {
     position: absolute;
     right: 12px;
@@ -103,15 +85,12 @@ const css = `
     cursor: pointer;
     font-size: 12px;
   }
-
   .forgot-password {
     text-align: right;
     margin-top: 8px;
     margin-bottom: 20px;
   }
-
   .forgot-password a { color: #00d4d4; font-size: 13px; text-decoration: none; }
-
   .login-btn {
     width: 100%;
     padding: 16px;
@@ -124,11 +103,9 @@ const css = `
     cursor: pointer;
     transition: 0.3s;
   }
-
   .divider { display: flex; align-items: center; margin: 25px 0; }
   .divider-line { flex: 1; height: 1px; background: #2a2d35; }
   .divider-text { padding: 0 10px; color: #4b5563; font-size: 11px; }
-
   .google-btn {
     width: 100%;
     padding: 14px;
@@ -142,8 +119,6 @@ const css = `
     justify-content: center;
     gap: 10px;
   }
-
-  /* MODAL */
   .modal-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -166,11 +141,24 @@ const css = `
   }
 `;
 
-const VormirexAuth: React.FC = () => {
+interface VormirexAuthProps {
+  defaultTab?: 'login' | 'signup';
+}
+
+const VormirexAuth: React.FC<VormirexAuthProps> = ({ defaultTab }) => {
   const [activeTab, setActiveTab] = useState<'login' | 'signup'>('login');
   const [showPassword, setShowPassword] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (defaultTab === 'signup' || location.pathname.includes('signup')) {
+      setActiveTab('signup');
+    } else {
+      setActiveTab('login');
+    }
+  }, [defaultTab, location.pathname]);
 
   const handleAuth = (e: React.FormEvent) => {
     e.preventDefault();
@@ -180,9 +168,7 @@ const VormirexAuth: React.FC = () => {
   return (
     <div className="login-page-root">
       <style>{css}</style>
-
       <div className="login-container">
-        {/* Logo Section - Image is now moved rightwards to be next to text */}
         <div className="logo-section">
           <img src={logo} alt="Logo" className="logo" />
           <div className="brand-details">
@@ -282,7 +268,7 @@ const VormirexAuth: React.FC = () => {
         </button>
       </div>
 
-      {/* Restore Forgot Password Modal */}
+      {/* Forgot Password Modal */}
       {isModalOpen && (
         <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
