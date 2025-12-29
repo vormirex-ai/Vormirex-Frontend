@@ -576,3 +576,26 @@ html {
   font-size: 12px;
   transition: transform 0.2s;
 }
+.sidebar-left .nav-section-header h3 {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+@media (max-width: 900px) {
+  .sidebar-left .nav-section-header h3 {
+    font-size: 13.5px;
+  }
+}
+@media (max-width: 600px) {
+  .sidebar-left .nav-section-header h3 {
+    font-size: 13px;
+  }
+}
+@media (max-width: 375px) {
+  .sidebar-left .nav-section-header h3 {
+    font-size: 12.5px;
+  }
+}
+.sidebar-left .section-toggle-icon {
+  font-size: 11px;
+}
