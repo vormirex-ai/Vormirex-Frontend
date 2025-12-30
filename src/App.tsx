@@ -29,7 +29,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* 🔥 Default route → Dashboard */}
+        {}
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
         {/* Landing Page (opens only on button click) */}
