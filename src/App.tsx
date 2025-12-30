@@ -14,8 +14,7 @@ import DashboardWrapper from './components/layout/DashboardWrapper';
 import DashboardPage from './pages/DashboardPage';
 import CourseDetails from './components/layout/CoursePage';
 import VormirexAuth from './components/login/login';
-import VormirexLanding from '../../Vormirex-Frontend/src/pages/LandingPage';
-
+import VormirexLanding from './components/layout/VormirexLanding';
 // Custom Features
 import BoosterPack from './CustomCourses/BoosterPack';
 import CodingMastery from './CustomCourses/CodingMastery';
