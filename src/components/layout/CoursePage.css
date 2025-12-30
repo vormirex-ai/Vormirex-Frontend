@@ -383,3 +383,191 @@
   min-width: 200px;
   max-width: 220px;
 }
+/* Add these new styles to the top or bottom of your existing CSS file */
+
+/* --- Styles for Course List/Catalog View --- */
+.course-list-page {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: #fff;
+  min-height: 100vh;
+  background-color: #0a0b14; /* Match landing page bg */
+}
+
+.course-list-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.course-list-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: #6aece1;
+}
+
+.course-list-header p {
+  font-size: 1.1rem;
+  color: #cbd5f5;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.course-card {
+  background: #0f1123;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(106, 236, 225, 0.2);
+}
+
+.course-card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.course-card-content {
+  padding: 25px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-card-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  color: #6aece1;
+}
+
+.course-card-tagline {
+  font-weight: 500;
+  color: #e5e7eb;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+.course-card-desc {
+  color: #cbd5f5;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  flex-grow: 1;
+  margin-bottom: 20px;
+}
+
+.course-card-btn {
+  background: transparent;
+  border: 1px solid #6aece1;
+  color: #6aece1;
+  padding: 10px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s, color 0.3s;
+  align-self: flex-start;
+}
+
+.course-card:hover .course-card-btn {
+  background-color: #6aece1;
+  color: #0a0b14;
+}
+
+/* --- YOUR EXISTING STYLES FOR COURSE DETAIL PAGE --- */
+/* ... (paste your original CoursePage.css content here) ... */
+.course-btn.main-cta {
+  background: #6aece1; /* Set to your specific color */
+  color: #000;
+  padding: 22px 60px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  /* Updated shadow to match the brand color */
+  box-shadow: 0 15px 35px rgba(106, 236, 225, 0.4);
+}
+
+.course-btn.main-cta:hover {
+  transform: translateY(-3px); /* Fixed: Should be negative to move up */
+  background: #ffffff;
+  color: #000;
+  box-shadow: 0 10px 25px #6aece1;
+}
+/* Ensure the active tab uses the brand color */
+.tab.active {
+  background: #6aece1; /* Your specific color */
+  color: #000; /* Black text for high contrast on the bright background */
+  box-shadow: 0 4px 15px rgba(106, 236, 225, 0.4); /* Glow effect */
+  border: none;
+}
+
+/* Optional: Slight hover effect for the inactive tab to show it's clickable */
+.tab:not(.active):hover {
+  color: #6aece1;
+  border: 1px solid rgba(106, 236, 225, 0.3);
+}
+.enroll-form-wrapper {
+  margin-top: 40px;
+  background: #161618;
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.enroll-form-wrapper h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #6aece1;
+}
+
+.enroll-form-wrapper form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.enroll-form-wrapper input {
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  background: #0a0a0b;
+  color: #fff;
+}
+
+.enroll-form-wrapper input[readonly] {
+  background: #1c1c1f;
+  color: #a0a0a5;
+}
+
+.enroll-form-wrapper button {
+  width: 100%;
+  padding: 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  background: #6aece1;
+  color: #000;
+  transition: all 0.3s;
+}
+
+.enroll-form-wrapper button:hover {
+  background: #fff;
+  box-shadow: 0 10px 25px #6aece1;
+}

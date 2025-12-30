@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Rocket,
   Brain,
@@ -13,8 +14,7 @@ import {
   ArrowRight,
 } from 'lucide-react';
 
-// --- Types ---
-
+/* --- Types --- */
 interface CourseCategory {
   id: number;
   title: string;
@@ -29,7 +29,7 @@ interface CourseGridProps {
   buttonText?: string;
 }
 
-// --- Default Data ---
+/* --- Default Data --- */
 const DEFAULT_CATEGORIES: CourseCategory[] = [
   {
     id: 1,
@@ -99,7 +99,8 @@ const CourseGrid: React.FC<CourseGridProps> = ({
   buttonText = 'Explore All Courses',
   categories = DEFAULT_CATEGORIES,
 }) => {
-  // Logic to split title for highlighting
+  const navigate = useNavigate();
+
   const titleWords = title.split(' ');
   const firstWord = titleWords[0];
   const restOfTitle = titleWords.slice(1).join(' ');
@@ -124,7 +125,7 @@ const CourseGrid: React.FC<CourseGridProps> = ({
             <div className="course-icon-wrapper">{category.icon}</div>
             <h3 className="course-card-title">{category.title}</h3>
             <p className="course-card-learners">{category.learners}</p>
-            <div className="course-dots" aria-hidden="true">
+            <div className="course-dots">
               <span className="course-dot active"></span>
               <span className="course-dot"></span>
               <span className="course-dot"></span>
@@ -134,17 +135,19 @@ const CourseGrid: React.FC<CourseGridProps> = ({
       </div>
 
       <div className="course-footer">
-        <button className="course-cta-button">
+        <button
+          className="course-cta-button"
+          onClick={() => navigate('/courses')}
+        >
           {buttonText} <ArrowRight size={18} />
         </button>
       </div>
 
       <style>{`
         .course-container {
-          background-color: #0B0E14; /* Matched previous Vormirex BG */
+          background-color: #0B0E14;
           color: #ffffff;
           padding: 80px 20px;
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
           min-height: 100vh;
           display: flex;
           flex-direction: column;
@@ -160,20 +163,15 @@ const CourseGrid: React.FC<CourseGridProps> = ({
           font-size: 42px;
           font-weight: 700;
           margin-bottom: 16px;
-          letter-spacing: -0.5px;
         }
 
-        /* UPDATED: Brand color */
-        .course-highlight {
-          color: #6aece1;
-        }
+        .course-highlight { color: #6aece1; }
 
         .course-subtitle {
           color: #94a3b8;
           font-size: 18px;
           max-width: 600px;
-          margin: 0 auto;
-          line-height: 1.6;
+          margin: auto;
         }
 
         .course-grid {
@@ -186,44 +184,38 @@ const CourseGrid: React.FC<CourseGridProps> = ({
         }
 
         .course-card {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: rgba(255,255,255,0.03);
+          border: 1px solid rgba(255,255,255,0.08);
           border-radius: 16px;
           padding: 32px 20px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          text-align: center;
           cursor: pointer;
-          outline: none;
+          transition: 0.3s;
         }
 
-        /* UPDATED: Hover effect with brand color and glow */
-        .course-card:hover, .course-card:focus {
-          background: rgba(255, 255, 255, 0.06);
+        .course-card:hover {
           transform: translateY(-5px);
           border-color: #6aece1;
-          box-shadow: 0 10px 30px -10px rgba(106, 236, 225, 0.15);
+          box-shadow: 0 10px 30px rgba(106,236,225,0.15);
         }
 
         .course-icon-wrapper {
-          background: rgba(255, 255, 255, 0.05);
           width: 48px;
           height: 48px;
+          margin: auto;
+          background: rgba(255,255,255,0.05);
           border-radius: 12px;
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-bottom: 20px;
-          /* UPDATED: Brand color */
           color: #6aece1;
+          margin-bottom: 20px;
         }
 
         .course-card-title {
           font-size: 16px;
           font-weight: 600;
           margin-bottom: 8px;
-          text-align: center;
         }
 
         .course-card-learners {
@@ -234,6 +226,7 @@ const CourseGrid: React.FC<CourseGridProps> = ({
 
         .course-dots {
           display: flex;
+          justify-content: center;
           gap: 6px;
         }
 
@@ -244,41 +237,24 @@ const CourseGrid: React.FC<CourseGridProps> = ({
           background: #334155;
         }
 
-        /* UPDATED: Active dot brand color */
-        .course-dot.active {
-          background: #6aece1;
-        }
-
-        .course-footer {
-          display: flex;
-          justify-content: center;
-        }
+        .course-dot.active { background: #6aece1; }
 
         .course-cta-button {
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          color: #ffffff;
           padding: 14px 32px;
           border-radius: 30px;
-          font-size: 16px;
-          font-weight: 500;
+          border: 1px solid rgba(255,255,255,0.1);
+          background: rgba(255,255,255,0.05);
+          color: white;
           display: flex;
           align-items: center;
           gap: 10px;
           cursor: pointer;
-          transition: all 0.2s ease;
+          transition: 0.2s;
         }
 
-        /* UPDATED: Button hover brand color */
         .course-cta-button:hover {
           background: #6aece1;
           color: #0B0E14;
-          border-color: #6aece1;
-        }
-
-        @media (max-width: 768px) {
-          .course-main-title { font-size: 32px; }
-          .course-container { padding: 40px 20px; }
         }
       `}</style>
     </div>

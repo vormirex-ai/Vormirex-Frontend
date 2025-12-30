@@ -18,7 +18,7 @@ interface Props {
 const DEFAULT_PLANS: PricingPlan[] = [
   {
     name: 'Free',
-    price: '$0',
+    price: '₹0',
     period: 'forever',
     description: 'Perfect for trying out',
     features: [
@@ -31,7 +31,7 @@ const DEFAULT_PLANS: PricingPlan[] = [
   },
   {
     name: 'Pro',
-    price: '$12',
+    price: '₹1499',
     period: '/month',
     description: 'Best for serious learners',
     features: [
@@ -45,7 +45,7 @@ const DEFAULT_PLANS: PricingPlan[] = [
   },
   {
     name: 'Team',
-    price: '$29',
+    price: '₹2500',
     period: '/month',
     description: 'For schools & groups',
     features: [

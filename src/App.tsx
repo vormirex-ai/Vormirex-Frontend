@@ -6,70 +6,53 @@ import {
   Navigate,
 } from 'react-router-dom';
 
-// Layouts
-import AppLayout from './components/layout/AppLayout';
+/* Layouts */
+import PublicLayout from './components/layout/PublicLayout';
 import DashboardWrapper from './components/layout/DashboardWrapper';
 
-// Pages
-import DashboardPage from './pages/DashboardPage';
-import CourseDetails from './components/layout/CoursePage';
-import VormirexAuth from './components/login/login';
+/* Pages */
 import LandingPage from './pages/LandingPage';
-// Custom Features
+import AboutSection from './components/layout/AboutSection';
+import PricingSections from './components/layout/PricingSections';
+import CoursePage from './components/layout/CoursePage';
 import BoosterPack from './CustomCourses/BoosterPack';
 import CodingMastery from './CustomCourses/CodingMastery';
-import ExamPrep from './CustomCourses/ExamPrep';
-import YourProgress from './CustomCourses/YourProgress';
-import SavedChats from './CustomCourses/SavedChats';
+import VormirexAuth from './components/login/login';
+import DashboardPage from './pages/DashboardPage';
 
-// Navbar
-import Navbar from './components/common/Navbar';
-
-function App() {
+const App: React.FC = () => {
   return (
     <Router>
       <Routes>
-        {/* ✅ DEFAULT → DASHBOARD */}
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        {/* PUBLIC PAGES (WITH NAVBAR) */}
+        <Route element={<PublicLayout />}>
+          <Route path="/landing" element={<LandingPage />} />
+          <Route path="/about" element={<AboutSection />} />
+          <Route path="/pricings" element={<PricingSections />} />
+          <Route path="/courses" element={<CoursePage />} />
+          <Route path="/course/:courseId" element={<CoursePage />} />
+          <Route path="/custom/booster-pack" element={<BoosterPack />} />
+          <Route path="/custom/coding-mastery" element={<CodingMastery />} />
+        </Route>
 
-        {/* 🌟 LANDING PAGE (manual open only) */}
-        <Route
-          path="/landing"
-          element={
-            <>
-              <Navbar />
-              <LandingPage />
-            </>
-          }
-        />
+        {/* DASHBOARD */}
+        <Route element={<DashboardWrapper />}>
+          <Route path="/dashboard" element={<DashboardPage />} />
+        </Route>
 
-        {/* Auth */}
+        {/* AUTH (NO NAVBAR) */}
         <Route path="/auth" element={<VormirexAuth />} />
         <Route
           path="/auth/signup"
           element={<VormirexAuth defaultTab="signup" />}
         />
 
-        {/* Dashboard */}
-        <Route element={<DashboardWrapper />}>
-          <Route path="/dashboard" element={<DashboardPage />} />
-        </Route>
-
-        {/* Other pages */}
-        <Route element={<AppLayout />}>
-          <Route path="/course/:courseId" element={<CourseDetails />} />
-          <Route path="/custom/booster-pack" element={<BoosterPack />} />
-          <Route path="/custom/coding-mastery" element={<CodingMastery />} />
-          <Route path="/custom/exam-prep" element={<ExamPrep />} />
-          <Route path="/custom/your-progress" element={<YourProgress />} />
-          <Route path="/custom/saved-chats" element={<SavedChats />} />
-        </Route>
-
-        {/* 404 */}
-        <Route path="*" element={<Navigate to="/" replace />} />
+        {/* REDIRECTS */}
+        <Route path="/" element={<Navigate to="/landing" replace />} />
+        <Route path="*" element={<Navigate to="/landing" replace />} />
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;
