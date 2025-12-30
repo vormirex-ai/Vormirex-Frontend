@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import logo from '../../assets/logo.png';
+import { loginUser, signupUser, forgotPassword } from '../../api/auth';
 
 const css = `
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -103,6 +104,10 @@ const css = `
     cursor: pointer;
     transition: 0.3s;
   }
+  .login-btn:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+  }
   .divider { display: flex; align-items: center; margin: 25px 0; }
   .divider-line { flex: 1; height: 1px; background: #2a2d35; }
   .divider-text { padding: 0 10px; color: #4b5563; font-size: 11px; }
@@ -139,6 +144,18 @@ const css = `
     position: absolute; top: 15px; right: 15px;
     background: none; border: none; color: white; cursor: pointer;
   }
+  .error-message {
+    color: #ff4d4d;
+    font-size: 13px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  .success-message {
+    color: #00d4d4;
+    font-size: 13px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
 `;
 
 interface VormirexAuthProps {
@@ -149,6 +166,18 @@ const VormirexAuth: React.FC<VormirexAuthProps> = ({ defaultTab }) => {
   const [activeTab, setActiveTab] = useState<'login' | 'signup'>('login');
   const [showPassword, setShowPassword] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  // Form States
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [resetEmail, setResetEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
+  // UI States
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -160,9 +189,57 @@ const VormirexAuth: React.FC<VormirexAuthProps> = ({ defaultTab }) => {
     }
   }, [defaultTab, location.pathname]);
 
-  const handleAuth = (e: React.FormEvent) => {
+  const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
-    navigate('/dashboard');
+    setError(null);
+    setSuccessMessage(null);
+    setLoading(true);
+
+    try {
+      if (activeTab === 'signup') {
+         const res = await signupUser(name, email, password);
+         console.log("hii");
+         if (res.success) {
+           setSuccessMessage('Account created! Please check your email to verify your account before logging in.');
+           setActiveTab('login');
+           // Clear form
+           setName('');
+           setPassword('');
+         }
+      } else {
+         const res = await loginUser(email, password);
+         if (res.success) {
+           // Store token
+           localStorage.setItem('accessToken', res.accessToken);
+           localStorage.setItem('user', JSON.stringify(res.user));
+           navigate('/dashboard');
+         }
+      }
+    } catch (err: any) {
+      setError(err.message || 'Authentication failed');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = () => {
+    // Redirect to backend Google OAuth endpoint
+    window.location.href = 'http://localhost/api/auth/google';
+  };
+
+  const handleForgotPasswordSubmit = async () => {
+      if (!resetEmail) return setError('Please enter your email.');
+      setLoading(true);
+      setError(null);
+      try {
+        const res = await forgotPassword(resetEmail);
+        alert(res.message); // Using alert here for simplicity in modal, or could use state
+        setIsModalOpen(false);
+      } catch (err: any) {
+        alert(err.message);
+      } finally {
+        setLoading(false);
+      }
   };
 
   return (
@@ -180,13 +257,13 @@ const VormirexAuth: React.FC<VormirexAuthProps> = ({ defaultTab }) => {
         <div className="tabs">
           <button
             className={`tab ${activeTab === 'login' ? 'active' : ''}`}
-            onClick={() => setActiveTab('login')}
+            onClick={() => { setActiveTab('login'); setError(null); setSuccessMessage(null); }}
           >
             Log In
           </button>
           <button
             className={`tab ${activeTab === 'signup' ? 'active' : ''}`}
-            onClick={() => setActiveTab('signup')}
+            onClick={() => { setActiveTab('signup'); setError(null); setSuccessMessage(null); }}
           >
             Sign Up
           </button>
@@ -200,6 +277,8 @@ const VormirexAuth: React.FC<VormirexAuthProps> = ({ defaultTab }) => {
                 type="text"
                 className="form-input"
                 placeholder="John Doe"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 required
               />
             </div>
@@ -211,6 +290,8 @@ const VormirexAuth: React.FC<VormirexAuthProps> = ({ defaultTab }) => {
               type="email"
               className="form-input"
               placeholder="name@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -222,6 +303,8 @@ const VormirexAuth: React.FC<VormirexAuthProps> = ({ defaultTab }) => {
                 type={showPassword ? 'text' : 'password'}
                 className="form-input"
                 placeholder="••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
               <button
@@ -248,8 +331,11 @@ const VormirexAuth: React.FC<VormirexAuthProps> = ({ defaultTab }) => {
             </div>
           )}
 
-          <button type="submit" className="login-btn">
-            {activeTab === 'login' ? 'Log In' : 'Create Account'}
+          {error && <div className="error-message">{error}</div>}
+          {successMessage && <div className="success-message">{successMessage}</div>}
+
+          <button type="submit" className="login-btn" disabled={loading}>
+            {loading ? 'Processing...' : (activeTab === 'login' ? 'Log In' : 'Create Account')}
           </button>
         </form>
 
@@ -262,7 +348,7 @@ const VormirexAuth: React.FC<VormirexAuthProps> = ({ defaultTab }) => {
         <button
           className="google-btn"
           type="button"
-          onClick={() => navigate('/dashboard')}
+          onClick={handleGoogleLogin}
         >
           Continue with Google
         </button>
@@ -295,16 +381,16 @@ const VormirexAuth: React.FC<VormirexAuthProps> = ({ defaultTab }) => {
                 type="email"
                 className="form-input"
                 placeholder="name@example.com"
+                value={resetEmail}
+                onChange={(e) => setResetEmail(e.target.value)}
               />
             </div>
             <button
               className="login-btn"
-              onClick={() => {
-                alert('Email sent!');
-                setIsModalOpen(false);
-              }}
+              onClick={handleForgotPasswordSubmit}
+              disabled={loading}
             >
-              Send Link
+              {loading ? 'Sending...' : 'Send Link'}
             </button>
           </div>
         </div>

@@ -22,6 +22,11 @@ import ExamPrep from './CustomCourses/ExamPrep';
 import YourProgress from './CustomCourses/YourProgress';
 import SavedChats from './CustomCourses/SavedChats';
 
+// Auth Components
+import VerifyEmail from './components/auth/VerifyEmail';
+import ResetPassword from './components/auth/ResetPassword';
+import OAuthSuccess from './components/auth/OAuthSuccess';
+
 // Navbar
 import Navbar from './components/common/Navbar';
 
@@ -49,6 +54,9 @@ function App() {
           path="/auth/signup"
           element={<VormirexAuth defaultTab="signup" />}
         />
+        <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/oauth-success" element={<OAuthSuccess />} />
 
         {/* Dashboard */}
         <Route element={<DashboardWrapper />}>
