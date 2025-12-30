@@ -1,24 +1,13 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
-import Navbar from '../common/Navbar';
-
-const AppLayout: React.FC = () => {
-  const handleSignIn = () => {
-    alert('Sign In clicked'); // Replace with real logic later
-  };
-
-  const handleStartFree = () => {
-    alert('Start Free clicked');
-  };
-
+const CourseLayout = () => {
   return (
-    <>
-      <Navbar onSignIn={handleSignIn} onStartFree={handleStartFree} />
-      <main>
-        <Outlet />
+    <div
+      style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}
+    >
+      <Navbar />
+      <main style={{ flex: 1 }}>
+        <Outlet /> {/* CoursePage renders ONLY ONCE */}
       </main>
-    </>
+      <Footer />
+    </div>
   );
 };
-
-export default AppLayout;

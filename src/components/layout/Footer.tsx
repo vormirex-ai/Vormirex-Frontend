@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import ComingSoonModal from '../common/ComingSoonModal';
-import logo from '../../assets/logo.png'; // ✅ update path if needed
+import logo from '../../assets/logo.png';
 
 interface FooterLink {
   label: string;
@@ -32,10 +33,10 @@ const Footer = (props: Props) => {
       {
         title: 'Company',
         links: [
-          { label: 'Features', href: '#features' },
-          { label: 'Courses', href: '#', isComingSoon: true },
-          { label: 'Pricing', href: '#pricing' },
-          { label: 'About Us', href: '#', isComingSoon: true },
+          { label: 'Features', href: '/landing#features' },
+          { label: 'Courses', href: '/courses' },
+          { label: 'Pricing', href: '/pricings' },
+          { label: 'About Us', href: '/about' },
         ],
       },
       {
@@ -62,18 +63,28 @@ const Footer = (props: Props) => {
             </div>
 
             <p className="brand-description">{description}</p>
-            {/* Kept social links as user mentioned logo and description part is good, usually these go together */}
+
             <div className="social-links">
-              <a href="https://www.facebook.com/profile.php?id=61584727210742" className="social-icon" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://www.facebook.com/profile.php?id=61584727210742"
+                className="social-icon"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <FontAwesomeIcon icon={faFacebook} />
               </a>
-              <a href="https://www.linkedin.com/company/vormirex/" className="social-icon" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://www.linkedin.com/company/vormirex/"
+                className="social-icon"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <FontAwesomeIcon icon={faLinkedin} />
               </a>
             </div>
           </div>
 
-          {/* LINKS */}
+          {/* LINKS GRID */}
           <div className="links-grid">
             {sections.map((section, idx) => (
               <div key={idx} className="link-column">
@@ -81,18 +92,31 @@ const Footer = (props: Props) => {
                 <ul className="column-list">
                   {section.links.map((link, lIdx) => (
                     <li key={lIdx}>
-                      <a
-                        href={link.href}
-                        className="footer-link"
-                        onClick={(e) => {
-                          if (link.isComingSoon) {
-                            e.preventDefault();
-                            setIsModalOpen(true);
-                          }
-                        }}
-                      >
-                        {link.label}
-                      </a>
+                      {link.href.startsWith('http') ||
+                      link.href.startsWith('mailto') ||
+                      link.href.startsWith('tel') ? (
+                        <a href={link.href} className="footer-link">
+                          {link.label}
+                        </a>
+                      ) : (
+                        <Link
+                          to={link.href}
+                          className={`footer-link ${
+                            link.isComingSoon ? 'coming-soon-disabled' : ''
+                          }`}
+                          onClick={(e) => {
+                            if (link.isComingSoon) {
+                              e.preventDefault();
+                              setIsModalOpen(true);
+                            }
+                          }}
+                        >
+                          {link.label}
+                          {link.isComingSoon && (
+                            <span className="soon-badge">Soon</span>
+                          )}
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -101,14 +125,17 @@ const Footer = (props: Props) => {
           </div>
         </div>
 
-        {/* BOTTOM */}
+        {/* BOTTOM SECTION */}
         <div className="footer-bottom">
           <div className="divider"></div>
           <p className="copyright-text">{copyright}</p>
         </div>
       </div>
 
-      <ComingSoonModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <ComingSoonModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
 
       <style>{`
         .footer-container {
@@ -116,6 +143,7 @@ const Footer = (props: Props) => {
           color: #94a3b8;
           padding: 80px 20px 40px;
           width: 100%;
+          border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .footer-content {
@@ -129,7 +157,7 @@ const Footer = (props: Props) => {
           justify-content: space-between;
           gap: 40px;
           margin-bottom: 60px;
-          align-items: flex-start; /* Ensure alignment at top */
+          align-items: flex-start;
         }
 
         .brand-section {
@@ -150,9 +178,10 @@ const Footer = (props: Props) => {
           position: absolute;
           width: 120px;
           height: 120px;
-          background: radial-gradient(circle, rgba(0,255,200,0.15), transparent 70%);
+          background: radial-gradient(circle, rgba(0,255,200,0.1), transparent 70%);
           top: -40px;
           left: -40px;
+          pointer-events: none;
         }
 
         .brand-logo {
@@ -163,7 +192,7 @@ const Footer = (props: Props) => {
         }
 
         .brand-name {
-          font-size: 20px;
+          font-size: 22px;
           font-weight: 800;
           color: #fff;
           letter-spacing: 1px;
@@ -183,93 +212,80 @@ const Footer = (props: Props) => {
         }
 
         .social-icon {
-          width: 36px;
-          height: 36px;
+          width: 40px;
+          height: 40px;
           display: flex;
           align-items: center;
           justify-content: center;
           background: rgba(30,41,59,0.5);
-          border-radius: 8px;
+          border: 1px solid rgba(255,255,255,0.05);
+          border-radius: 10px;
           color: #94a3b8;
-          transition: 0.3s;
+          transition: all 0.3s ease;
         }
 
         .social-icon:hover {
-          background: rgba(30,41,59,0.9);
-          color: #fff;
+          background: #00ffc822;
+          color: #00ffc8;
+          border-color: #00ffc8;
+          transform: translateY(-3px);
         }
 
-        /* Group the columns together on the right */
         .links-grid {
           display: flex;
-          gap: 50px; /* Large space between Company and Get in touch */
+          gap: 60px;
         }
 
         .link-column {
           min-width: 160px; 
         }
 
-        @media (max-width: 900px) {
-           .footer-main {
-             gap: 60px;
-           }
-           .links-grid {
-             gap: 60px;
-           }
-        }
-
-        @media (max-width: 768px) {
-          .links-grid {
-            flex-wrap: wrap;
-            gap: 40px;
-            width: 100%;
-            justify-content: flex-start;
-          }
-          .footer-main {
-             flex-direction: column;
-             gap: 40px;
-          }
-          .brand-section {
-            max-width: 100%;
-          }
-          .link-column {
-            flex: 1;
-            min-width: 140px;
-          }
-        }
-
         .column-title {
           color: #fff;
           font-size: 16px;
           font-weight: 600;
-          margin-bottom: 20px;
+          margin-bottom: 24px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
         }
 
         .column-list {
           list-style: none;
           padding: 0;
+          margin: 0;
         }
 
         .column-list li {
-          margin-bottom: 12px;
-          display: flex;
-          align-items: center;
+          margin-bottom: 14px;
         }
 
         .footer-link {
           color: #64748b;
-          font-size: 14px;
+          font-size: 15px;
           text-decoration: none;
-          transition: color 0.2s;
+          transition: all 0.2s ease;
+          display: flex;
+          align-items: center;
+          gap: 8px;
         }
 
         .footer-link:hover {
-          color: #fff;
+          color: #00ffc8;
+          padding-left: 5px;
+        }
+
+        .soon-badge {
+          font-size: 10px;
+          background: #1e293b;
+          color: #00ffc8;
+          padding: 2px 6px;
+          border-radius: 4px;
+          text-transform: uppercase;
         }
 
         .divider {
           height: 1px;
-          background: linear-gradient(90deg, transparent, #1e293b, transparent);
+          background: linear-gradient(90deg, transparent, rgba(30,41,59,0.8), transparent);
           margin-bottom: 30px;
         }
 
@@ -277,6 +293,26 @@ const Footer = (props: Props) => {
           font-size: 13px;
           color: #475569;
           text-align: center;
+        }
+
+        @media (max-width: 768px) {
+          .links-grid {
+            flex-direction: column;
+            gap: 40px;
+          }
+          .footer-main {
+            flex-direction: column;
+          }
+          .brand-section {
+            max-width: 100%;
+            text-align: center;
+          }
+          .logo-wrapper, .social-links {
+            justify-content: center;
+          }
+          .footer-link:hover {
+            padding-left: 0;
+          }
         }
       `}</style>
     </footer>

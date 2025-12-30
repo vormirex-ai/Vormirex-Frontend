@@ -4,80 +4,127 @@ import {
   Routes,
   Route,
   Navigate,
+  Outlet,
 } from 'react-router-dom';
 
-// Layouts
-import AppLayout from './components/layout/AppLayout';
-import DashboardWrapper from './components/layout/DashboardWrapper';
+/* =======================
+   COMMON LAYOUT COMPONENTS
+======================= */
+import Navbar from './components/common/Navbar';
+import Footer from './components/layout/Footer';
 
-// Pages
-import DashboardPage from './pages/DashboardPage';
-import CourseDetails from './components/layout/CoursePage';
-import VormirexAuth from './components/login/login';
+/* =======================
+   PUBLIC PAGES
+======================= */
 import LandingPage from './pages/LandingPage';
-// Custom Features
+import AboutPage from './components/layout/AboutSection';
+import PricingsPage from './components/layout/PricingSections';
+
+/* =======================
+   AUTH & DASHBOARD
+======================= */
+import VormirexAuth from './components/login/login';
+import DashboardWrapper from './components/layout/DashboardWrapper';
+import DashboardPage from './pages/DashboardPage';
+
+/* =======================
+   COURSES
+======================= */
+import CoursePage from './components/layout/CoursePage';
+
+/* =======================
+   CUSTOM COURSES
+======================= */
 import BoosterPack from './CustomCourses/BoosterPack';
 import CodingMastery from './CustomCourses/CodingMastery';
-import ExamPrep from './CustomCourses/ExamPrep';
-import YourProgress from './CustomCourses/YourProgress';
-import SavedChats from './CustomCourses/SavedChats';
 
-// Auth Components
-import VerifyEmail from './components/auth/VerifyEmail';
-import ResetPassword from './components/auth/ResetPassword';
-import OAuthSuccess from './components/auth/OAuthSuccess';
+/* ============================================================
+   PUBLIC LAYOUT (Navbar + Footer)
+============================================================ */
+const PublicLayout = ({ children }: { children: React.ReactNode }) => (
+  <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <Navbar />
+    <main style={{ flex: 1 }}>{children}</main>
+    <Footer />
+  </div>
+);
 
-// Navbar
-import Navbar from './components/common/Navbar';
+/* ============================================================
+   COURSE LAYOUT (Navbar + Outlet + Footer) ✅ FIXED
+============================================================ */
+const CourseLayout = () => (
+  <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <Navbar />
+    <main style={{ flex: 1 }}>
+      <Outlet /> {/* CoursePage renders ONLY ONCE */}
+    </main>
+    <Footer />
+  </div>
+);
 
-function App() {
+/* ============================================================
+   MAIN APP
+============================================================ */
+const App: React.FC = () => {
   return (
     <Router>
       <Routes>
-        {/* ✅ DEFAULT → DASHBOARD */}
+        {/* DEFAULT */}
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
-        {/* 🌟 LANDING PAGE (manual open only) */}
+        {/* ================= PUBLIC ROUTES ================= */}
         <Route
           path="/landing"
           element={
-            <>
-              <Navbar />
+            <PublicLayout>
               <LandingPage />
-            </>
+            </PublicLayout>
           }
         />
 
-        {/* Auth */}
+        <Route
+          path="/about"
+          element={
+            <PublicLayout>
+              <AboutPage />
+            </PublicLayout>
+          }
+        />
+
+        <Route
+          path="/pricings"
+          element={
+            <PublicLayout>
+              <PricingsPage />
+            </PublicLayout>
+          }
+        />
+
+        {/* ================= AUTH ================= */}
         <Route path="/auth" element={<VormirexAuth />} />
         <Route
           path="/auth/signup"
           element={<VormirexAuth defaultTab="signup" />}
         />
-        <Route path="/verify-email" element={<VerifyEmail />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/oauth-success" element={<OAuthSuccess />} />
 
-        {/* Dashboard */}
+        {/* ================= DASHBOARD ================= */}
         <Route element={<DashboardWrapper />}>
           <Route path="/dashboard" element={<DashboardPage />} />
         </Route>
 
-        {/* Other pages */}
-        <Route element={<AppLayout />}>
-          <Route path="/course/:courseId" element={<CourseDetails />} />
+        {/* ================= COURSES ================= */}
+        <Route element={<CourseLayout />}>
+          <Route path="/courses" element={<CoursePage />} />
+          <Route path="/course/:courseId" element={<CoursePage />} />
           <Route path="/custom/booster-pack" element={<BoosterPack />} />
           <Route path="/custom/coding-mastery" element={<CodingMastery />} />
-          <Route path="/custom/exam-prep" element={<ExamPrep />} />
-          <Route path="/custom/your-progress" element={<YourProgress />} />
-          <Route path="/custom/saved-chats" element={<SavedChats />} />
         </Route>
 
-        {/* 404 */}
-        <Route path="*" element={<Navigate to="/" replace />} />
+        {/* ================= FALLBACK ================= */}
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;
