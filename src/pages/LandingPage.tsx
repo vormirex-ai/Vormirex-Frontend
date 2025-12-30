@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from '../components/common/Navbar'; // Adjust path if needed
 import VormirexLanding from '../components/layout/VormirexLanding';
 import SoundFamiliar from '../components/layout/SoundFamiliar';
 import Whatisvormirex from '../components/layout/Whatisvormirex';
@@ -14,7 +13,6 @@ import Footer from '../components/layout/Footer';
 const LandingPage = () => {
   return (
     <div className="app-wrapper">
-      <Navbar />
       <VormirexLanding />
       <SoundFamiliar />
       <section id="about">
