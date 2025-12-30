@@ -14,7 +14,7 @@ import DashboardWrapper from './components/layout/DashboardWrapper';
 import DashboardPage from './pages/DashboardPage';
 import CourseDetails from './components/layout/CoursePage';
 import VormirexAuth from './components/login/login';
-import VormirexLanding from '../../Vormirex-Frontend/src/pages/LandingPage';
+import LandingPage from './pages/LandingPage';
 // Custom Features
 import BoosterPack from './CustomCourses/BoosterPack';
 import CodingMastery from './CustomCourses/CodingMastery';
@@ -29,16 +29,16 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* 🔥 Default route → Dashboard */}
+        {/* ✅ DEFAULT → DASHBOARD */}
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
-        {/* Landing Page (opens only on button click) */}
+        {/* 🌟 LANDING PAGE (manual open only) */}
         <Route
           path="/landing"
           element={
             <>
               <Navbar />
-              <VormirexLanding />
+              <LandingPage />
             </>
           }
         />
@@ -66,28 +66,7 @@ function App() {
         </Route>
 
         {/* 404 */}
-        <Route
-          path="*"
-          element={
-            <div
-              style={{
-                padding: '100px',
-                textAlign: 'center',
-                color: '#fff',
-                minHeight: '100vh',
-                background: '#0a0b14',
-              }}
-            >
-              <h1>404 - Page Not Found</h1>
-              <a
-                href="/dashboard"
-                style={{ color: '#6aece1', fontSize: '1.2rem' }}
-              >
-                ← Back to Dashboard
-              </a>
-            </div>
-          }
-        />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   );
