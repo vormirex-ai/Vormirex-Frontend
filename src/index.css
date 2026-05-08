@@ -1,0 +1,66 @@
+@plugin "tailwindcss-animate";
+@custom-variant dark (&:is(.dark *));
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@custom-variant dark (&:is(.dark *));
+
+@layer base {
+:root {
+    --background: 220 20% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 243 100% 67%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 196 100% 55%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 215 16% 46%;
+
+    --accent: 280 100% 70%;
+    --accent-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 243 100% 67%;
+    --radius: 0.5rem;
+  }
+
+.dark {
+  --background: 228 84% 5%;
+  --foreground: 210 40% 98%;
+
+  --card: 228 60% 8%;
+  --card-foreground: 210 40% 98%;
+
+  --popover: 228 60% 8%;
+  --popover-foreground: 210 40% 98%;
+
+  --primary: 243 100% 67%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 196 100% 55%;
+  --secondary-foreground: 0 0% 100%;
+
+  --muted: 225 32% 17%;
+  --muted-foreground: 215 20% 65%;
+
+  --accent: 280 100% 70%;
+  --accent-foreground: 0 0% 100%;
+
+  --border: 225 32% 18%;
+  --input: 225 32% 18%;
+  --ring: 243 100% 67%;
+  --radius: 0.5rem;
+}
+
+}
