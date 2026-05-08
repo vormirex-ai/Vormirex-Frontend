@@ -5,10 +5,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
-import { FcGoogle } from "react-icons/fc";
 import { FaRocket, FaUser } from "react-icons/fa";
 import logo from "../../assets/logo.png";
 import { AuthenticateSignup } from "@/services/auth";
+import { toast } from "sonner";
+import GoogleLoginButton from "@/components/auth/googleLoginButton";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -61,29 +62,31 @@ const SignUp = () => {
         password,
       };
 
-      // API Call
-      const response = await AuthenticateSignup(name, email, password);
-
-      // Console Print
+      const response = await AuthenticateSignup(payload);
       console.log("API Response =>", response);
       console.log("Payload =>", payload);
 
-      if (response.success) {
-        alert("Signup Successful");
-
+      if (response?.success) {
+        toast.success("Signup Successful ✅");
         setName("");
         setEmail("");
         setPassword("");
+        setErrors({});
 
-        navigate("/auth/login");
+        navigate("/login");
+      } else {
+        toast.error(response?.message || "Signup failed ❌");
       }
+
     } catch (error: any) {
-      console.log("Signup Error =>", error);
+      toast.error(
+        error?.response?.data?.message ||
+        "Something went wrong. Please try again."
+      );
     } finally {
       setLoading(false);
     }
   };
-
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-[#020817] relative overflow-hidden px-4">
@@ -107,13 +110,7 @@ const SignUp = () => {
 
         <CardContent className="grid gap-6">
 
-          <Button
-            variant="outline"
-            className="w-full bg-white/5 border-white/10 hover:bg-white/10 text-white gap-2 py-6"
-          >
-            <FcGoogle className="w-5 h-5" />
-            Continue with Google
-          </Button>
+          <GoogleLoginButton />
 
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
@@ -135,7 +132,7 @@ const SignUp = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Enter your full name"
-                  className="bg-white/5 border-white/10 pl-10 py-6 focus-visible:ring-blue-500/50"
+                  className="bg-white/5 border-white/10 pl-10 py-6 "
                 />
               </div>
               {errors.name && (
@@ -154,7 +151,7 @@ const SignUp = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="user@example.com"
-                  className="bg-white/5 border-white/10 pl-10 py-6 focus-visible:ring-blue-500/50"
+                  className="bg-white/5 border-white/10 pl-10 py-6 "
                 />
               </div>
               {errors.email && (
@@ -178,7 +175,7 @@ const SignUp = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   type={showPassword ? "text" : "password"}
                   placeholder="••••••••"
-                  className="bg-white/5 border-white/10 pl-10 pr-10 py-6 focus-visible:ring-blue-500/50"
+                  className="bg-white/5 border-white/10 pl-10 pr-10 py-6"
                 />
 
                 <button

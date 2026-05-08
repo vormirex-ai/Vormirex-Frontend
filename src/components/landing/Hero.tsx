@@ -7,12 +7,17 @@ import StatsSection from "./hero-section/HeroStats";
 const Hero = () => {
   return (
     <section className="relative pt-10 pb-20 px-4 text-center overflow-hidden">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_rgba(79,70,229,0.15)_0%,_transparent_70%)] pointer-events-none" />
-      {/* <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_rgba(34,197,94,0.15)_0%,_transparent_70%)] pointer-events-none" /> */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[#0A0B14] pointer-events-none" />
 
       <div className="max-w-4xl mx-auto relative z-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/50 border border-slate-800 text-xs text-blue-400 mb-8">
-          <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+        <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full 
+bg-[#142128] backdrop-blur-md 
+border border-[#1f3b5b] 
+shadow-[0_0_20px_rgba(106,236,225,0.08)] 
+text-xs text-primary mb-8">
+
+          <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shadow-[0_0_10px_#22c55e]" />
+
           Powered by Advanced AI • 50K+ Students Learning
         </div>
 
@@ -34,10 +39,10 @@ const Hero = () => {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button className="py-6 font-bold px-8" >
-            <FaRocket /> Start Learning Free
+            <FaRocket /> &nbsp; Start Learning Free
           </Button>
-          <Button size="lg" variant="outline" className="border-slate-700 bg-slate-900/50 px-8 py-6  text-white">
-            <Play className="w-4 h-4 mr-2 fill-current text-blue-500" /> Watch Demo
+          <Button variant="secondary" className="border-slate-700 bg-slate-900/50 px-8 py-6  text-white">
+            <Play className="w-4 h-4 mr-2 fill-current text-primary" /> Watch Demo
           </Button>
 
 

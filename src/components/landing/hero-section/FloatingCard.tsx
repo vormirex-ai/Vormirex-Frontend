@@ -34,13 +34,13 @@ export default function CardSection() {
 
 
           <FloatingCard delay={0}>
-            <Card className="w-32 bg-cyan-950/20 backdrop-blur-lg border border-cyan-500/30 text-white shadow-[0_0_20px_rgba(6,182,212,0.15)] relative z-10">
+            <Card className="w-32 bg-[#16262D] backdrop-blur-lg border border-cyan-500/30 text-white shadow-[0_0_20px_rgba(6,182,212,0.15)] relative z-10">
               <CardContent className="p-4 flex flex-col items-center text-center">
                 <div className="text-yellow-400 text-3xl mb-2 drop-shadow-[0_0_8px_rgba(250,204,21,0.4)]">📐</div>
                 <h3 className="font-bold text-sm">Mathematics</h3>
                 <p className="text-[10px] text-gray-400">156 lessons</p>
                 <div className="w-full h-1 bg-gray-800/50 rounded mt-3 overflow-hidden">
-                  <div className="w-2/3 h-full bg-cyan-500 shadow-[0_0_8px_#06b6d4]" />
+                  <div className="w-2/3 h-full bg-primary shadow-[0_0_8px_#06b6d4]" />
                 </div>
               </CardContent>
             </Card>
@@ -50,13 +50,13 @@ export default function CardSection() {
 
 
           <FloatingCard delay={1}>
-            <Card className="w-32 bg-slate-900/20 backdrop-blur-lg border border-blue-500/30 text-white shadow-[0_0_20px_rgba(59,130,246,0.15)] absolute -bottom-36 left-12 z-20">
+            <Card className="w-32 bg-[#16262D] backdrop-blur-lg border border-cyan-500/30 text-white shadow-[0_0_20px_rgba(6,182,212,0.15)] absolute -bottom-36 left-12 z-20">
               <CardContent className="p-4 flex flex-col items-center text-center">
                 <div className="text-white text-3xl mb-2 drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]">🔬</div>
                 <h3 className="font-bold text-sm">Science</h3>
                 <p className="text-[10px] text-gray-400">178 lessons</p>
                 <div className="w-full h-1 bg-gray-800/50 rounded mt-3 overflow-hidden">
-                  <div className="w-1/2 h-full bg-blue-400 shadow-[0_0_8px_#60a5fa]" />
+                  <div className="w-1/2 h-full bg-primary shadow-[0_0_8px_#60a5fa]" />
                 </div>
               </CardContent>
             </Card>
@@ -66,7 +66,8 @@ export default function CardSection() {
 
         {/* CENTER CARD */}
         <div className="relative">
-          <Card className="w-[400px] bg-[#0d1117]/80 backdrop-blur-sm border border-[#13203C] text-white shadow-[0_0_40px_rgba(19,32,60,0.6)] relative">
+          <Card className="w-[400px] bg-[#0F182A] backdrop-blur-sm border border-[#13203C] text-white
+          shadow-[0_0_60px_rgba(106,236,225,0.25)] relative">
 
 
             {/* Glow Layer */}
@@ -88,8 +89,8 @@ export default function CardSection() {
                   <div
                     key={msg.id}
                     className={`p-3 text-sm max-w-[80%] ${msg.sender === "user"
-                      ? "ml-auto bg-blue-600/20 border border-blue-500/20 rounded-xl rounded-br-none"
-                      : "mr-auto bg-gradient-to-r from-blue-600 to-purple-600 border border-white/5 rounded-xl rounded-bl-none"
+                      ? "ml-auto bg-[#182D3C] border border-blue-500/20 rounded-xl rounded-br-none"
+                      : "mr-auto text-slateText bg-primary border border-white/5 rounded-xl rounded-bl-none"
                       }`}
                   >
                     {msg.text}
@@ -119,13 +120,13 @@ export default function CardSection() {
 
         <div className="flex items-center">
           <FloatingCard delay={0.5}>
-            <Card className="w-32 bg-purple-950/20 backdrop-blur-lg border border-purple-500/30 text-white shadow-[0_0_20px_rgba(168,85,247,0.15)]">
+            <Card className="w-32 bg-[#16262D] backdrop-blur-lg border border-cyan-500/30 text-white shadow-[0_0_20px_rgba(6,182,212,0.15)]">
               <CardContent className="p-4 flex flex-col items-center text-center">
                 <div className="text-white text-3xl mb-2 drop-shadow-[0_0_8px_rgba(168,85,247,0.4)]">💻</div>
                 <h3 className="font-bold text-sm">Coding</h3>
                 <p className="text-[10px] text-gray-400">203 lessons</p>
                 <div className="w-full h-1 bg-gray-800/50 rounded mt-3 overflow-hidden">
-                  <div className="w-3/4 h-full bg-purple-500 shadow-[0_0_8px_#a855f7]" />
+                  <div className="w-3/4 h-full bg-primary shadow-[0_0_8px_#a855f7]" />
                 </div>
               </CardContent>
             </Card>

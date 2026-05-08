@@ -9,12 +9,15 @@ import { store, persistor } from "./store/store";
 import { useTheme } from "./components/theme/theme-provider";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { BrowserRouter } from "react-router-dom";
+import { Toaster } from "sonner";
+
 
 function Root() {
   const { theme } = useTheme();
 
   return (
     <>
+      <Toaster richColors position="top-right" />
       <App />
     </>
   );

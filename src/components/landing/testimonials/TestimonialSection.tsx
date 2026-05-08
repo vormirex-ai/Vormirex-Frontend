@@ -27,25 +27,27 @@ const testimonials = [
 export default function TestimonialSection() {
   return (
 
-    <section className="py-24 px-4 relative max-w-7xl mx-auto">
+    <section className="py-20 px-4 relative bg-[#0C0D16]">
+      <div className="max-w-[18rem] md:max-w-[65rem] m-auto">
 
-      <div className="text-center mb-16">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center px-3 py-1 rounded-full  text-[10px] 
+        text-xs text-primary bg-[#142128] backdrop-blur-md 
+border border-[#1f3b5b]  font-bold uppercase tracking-widest mb-4">
+            💬 Testimonials
+          </div>
 
-        <div className="z-10 mb-6 px-4 py-1 w-40 m-auto rounded-full border border-white/10 bg-white/5 backdrop-blur-sm flex items-center gap-2">
-          <span className="text-xs text-blue-400">💬</span>
-          <span className="text-xs font-medium text-gray-300">Testimonials</span>
+          <h2 className="z-10 text-4xl md:text-5xl font-bold text-center mb-16 text-white tracking-tight">
+            Loved by <span className="text-transparent bg-clip-text bg-primary">Students Worldwide</span>
+          </h2>
+
         </div>
 
-        <h2 className="z-10 text-4xl md:text-5xl font-bold text-center mb-16 text-white tracking-tight">
-          Loved by <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Students Worldwide</span>
-        </h2>
-
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {testimonials.map((item, index) => (
-          <TestimonialCard key={index} {...item} />
-        ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {testimonials.map((item, index) => (
+            <TestimonialCard key={index} {...item} />
+          ))}
+        </div>
       </div>
     </section>
   );

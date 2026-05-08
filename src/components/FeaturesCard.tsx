@@ -6,39 +6,79 @@ interface FeatureCardProps {
   description: string;
   icon: string;
   iconBg: string;
+  baseColor: string;
 }
 
-export const FeatureCard = ({ title, description, icon, iconBg }: FeatureCardProps) => {
+export const FeatureCard = ({
+  title,
+  description,
+  icon,
+  iconBg,
+  baseColor,
+}: FeatureCardProps) => {
   return (
     <motion.div
       whileHover={{
         y: -10,
-        scale: 1.02,
-        transition: { duration: 0.3, ease: "easeOut" }
+        scale: 1.03,
+        transition: { duration: 0.3, ease: "easeOut" },
       }}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
     >
-      <Card className="group relative h-full bg-[#0d1117]/30 backdrop-blur-xl border border-white/10 hover:border-blue-500/50 transition-all duration-500 overflow-hidden cursor-pointer 
-        shadow-[0_0_15px_rgba(59,130,246,0.1)] 
-        hover:shadow-[0_0_30px_rgba(59,130,246,0.25)]">
+      <Card
+        className="
+    group relative h-full overflow-hidden cursor-pointer
+    bg-[#0D1323] backdrop-blur-xl
+    border transition-all duration-500
 
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-transparent to-purple-600/5 opacity-40 group-hover:opacity-100 transition-opacity duration-500" />
+    shadow-[0_0_15px_rgba(106,236,225,0.10)]
+    hover:shadow-[0_0_35px_rgba(79,209,197,0.30)]
+    hover:border-[#4fd1c5]/60
+  "
+        style={{
+          borderColor: baseColor,
+        }}
+      >
+        {/* Background Glow */}
+        <div
+          className="
+            absolute inset-0 opacity-30
+            group-hover:opacity-100 transition-opacity duration-500
+          "
+        />
 
         <CardContent className="p-8 flex flex-col items-center text-center relative z-10">
 
+          {/* Icon */}
           <motion.div
             whileHover={{ rotate: [0, -10, 10, 0] }}
             transition={{ duration: 0.5 }}
-            className={`w-16 h-16 ${iconBg} rounded-2xl flex items-center justify-center text-3xl mb-6 border border-white/10 
-              shadow-[0_0_10px_rgba(255,255,255,0.05)]
-              group-hover:shadow-blue-500/20 group-hover:border-blue-500/40 transition-all duration-300`}
+            className={`
+              w-16 h-16 ${iconBg}
+              rounded-2xl flex items-center justify-center text-3xl mb-6
+
+              border border-[#6aece1]/20
+              shadow-[0_0_12px_rgba(106,236,225,0.15)]
+
+              group-hover:border-[#4fd1c5]/60
+              group-hover:shadow-[0_0_25px_rgba(79,209,197,0.35)]
+
+              transition-all duration-300
+            `}
           >
             {icon}
           </motion.div>
 
-          <h3 className="text-xl font-bold text-white mb-3 tracking-tight group-hover:text-blue-400 transition-colors">
+          {/* Title */}
+          <h3
+            className="
+              text-xl font-bold text-white mb-3 tracking-tight
+              group-hover:text-[#6aece1]
+              transition-colors
+            "
+          >
             {title}
           </h3>
 
@@ -47,9 +87,20 @@ export const FeatureCard = ({ title, description, icon, iconBg }: FeatureCardPro
           </p>
 
 
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full transition-all duration-500" />
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full">
+            <div
+              className="
+                h-[2px] w-0 mx-auto
+                bg-gradient-to-r from-[#6aece1] via-[#4fd1c5] to-[#6aece1]
+                group-hover:w-full
+                transition-all duration-500
+                shadow-[0_0_10px_rgba(106,236,225,0.4)]
+              "
+            />
+          </div>
+
         </CardContent>
       </Card>
-    </motion.div>
+    </motion.div >
   );
 };

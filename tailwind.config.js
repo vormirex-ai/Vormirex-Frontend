@@ -40,7 +40,8 @@ module.exports = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        textColor: "#545D6D",
+        textColor: "#8e8e93",
+        slateText: "#0a0b14",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -75,6 +76,7 @@ module.exports = {
           },
         },
       },
+
       animation: {
         "gradient-x": "gradient 8s ease infinite",
       },

@@ -1,6 +1,5 @@
-import { motion } from 'framer-motion';
-import { Star } from 'lucide-react';
-// Shadcn UI components ko import krna zaroori hai
+import { motion } from "framer-motion";
+import { Star } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
 interface TestimonialProps {
@@ -11,53 +10,91 @@ interface TestimonialProps {
   avatarColor: string;
 }
 
-const TestimonialCard = ({ name, role, content, initials, avatarColor }: TestimonialProps) => {
+const TestimonialCard = ({
+  name,
+  role,
+  content,
+  initials,
+  avatarColor,
+}: TestimonialProps) => {
   return (
     <motion.div
       whileHover={{
         y: -10,
         scale: 1.02,
-        transition: { duration: 0.3, ease: "easeOut" }
+        transition: { duration: 0.3, ease: "easeOut" },
       }}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       className="h-full"
     >
-      <Card className="group relative h-full bg-[#0d1117]/40 backdrop-blur-xl border border-white/10 hover:border-blue-500/50 transition-all duration-500 overflow-hidden cursor-pointer 
-        shadow-[0_0_15px_rgba(59,130,246,0.05)] 
-        hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] rounded-2xl">
+      <Card
+        className="
+          group relative h-full overflow-hidden cursor-pointer
+          bg-[#0E1424] backdrop-blur-xl
+          border border-white/10
+          transition-all duration-500
 
-        {/* Padding ke liye CardContent use kiya hai */}
+          shadow-[0_0_15px_rgba(106,236,225,0.08)]
+          hover:shadow-[0_0_40px_rgba(106,236,225,0.35)]
+          hover:border-[#6aece1]/60
+
+          rounded-2xl
+        "
+      >
         <CardContent className="p-6 flex flex-col gap-5 h-full">
 
           {/* Stars */}
           <div className="flex gap-1">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} size={14} className="fill-orange-400 text-orange-400" />
+              <Star
+                key={i}
+                size={14}
+                className="fill-[#6aece1] text-[#6aece1]"
+              />
             ))}
           </div>
 
-          {/* Testimonial Text */}
+          {/* Content */}
           <p className="text-gray-300 text-[15px] leading-relaxed italic flex-grow">
             "{content}"
           </p>
 
-          {/* User Profile Info */}
+          {/* User */}
           <div className="flex items-center gap-3 pt-2">
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg ${avatarColor}`}>
+            <div
+              className={`
+                w-10 h-10 rounded-full flex items-center justify-center
+                text-white text-sm font-bold shadow-lg
+                border border-white/10
+                group-hover:border-[#6aece1]/60
+                group-hover:shadow-[0_0_20px_rgba(106,236,225,0.4)]
+                transition-all duration-300
+                ${avatarColor}
+              `}
+            >
               {initials}
             </div>
+
             <div className="flex flex-col">
-              <h4 className="text-white font-semibold text-sm leading-none">{name}</h4>
+              <h4 className="text-white font-semibold text-sm leading-none group-hover:text-[#6aece1] transition-colors">
+                {name}
+              </h4>
               <p className="text-gray-500 text-xs mt-1">{role}</p>
             </div>
           </div>
-
         </CardContent>
 
-        {/* Optional: Card bottom highlight effect like in the screenshot */}
-        <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        {/* Bottom Glow Line */}
+        <div
+          className="
+            absolute bottom-0 left-0 w-full h-[2px]
+            bg-gradient-to-r from-transparent via-[#6aece1] to-transparent
+            opacity-0 group-hover:opacity-100
+            transition-opacity duration-500
+          "
+        />
       </Card>
     </motion.div>
   );

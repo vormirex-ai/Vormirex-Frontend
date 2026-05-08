@@ -12,7 +12,7 @@ const GoogleLoginButton = () => {
   return (
     <Button
       type="button"
-      variant="outline"
+      variant="secondary"
       onClick={handleGoogleLogin}
       className="w-full bg-white/5 border-white/10 hover:bg-white/10 text-white gap-2 py-6"
     >

@@ -12,8 +12,57 @@ import { Mail, KeyRound } from "lucide-react";
 import { RiSendPlaneFill } from "react-icons/ri";
 import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { toast } from "sonner";
+import { ForgetPassword } from "@/services/auth";
 
 const ForgotPassword = () => {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<any>({});
+
+  const validate = () => {
+    let newErrors: any = {};
+
+    if (!email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (
+      !/^[a-zA-Z0-9][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/.test(email)
+    ) {
+      newErrors.email = "Enter a valid email";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleForgotPassword = async () => {
+    setErrors("");
+
+    if (!validate()) return;
+
+    try {
+      setLoading(true);
+
+      const response = await ForgetPassword({ email });
+      console.log("Forgot Password Response:", response);
+
+      if (response?.success) {
+        toast.success("Reset link sent to email 📩");
+        setEmail("");
+      } else {
+        setErrors(response?.message);
+        toast.error(response?.message || "Something went wrong ❌");
+      }
+    } catch (error: any) {
+      toast.error(
+        error?.response?.data?.message || "Something went wrong ❌"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-[#020817] px-4">
 
@@ -43,10 +92,8 @@ const ForgotPassword = () => {
 
         </CardHeader>
 
-        {/* CONTENT */}
         <CardContent className="space-y-5">
 
-          {/* Email Field */}
           <div className="space-y-2">
             <Label htmlFor="email" className="text-gray-400">
               Email address
@@ -56,15 +103,23 @@ const ForgotPassword = () => {
               <Mail className="absolute left-3 top-4 h-4 w-4 text-gray-500" />
               <Input
                 id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="user@example.com"
-                className="bg-white/5 border-white/10 pl-10 py-6 focus-visible:ring-blue-500/50"
+                className="bg-white/5 border-white/10 pl-10 py-6"
               />
+
+              {errors.email && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.email}
+                </p>
+              )}
             </div>
           </div>
 
-          <Button className="py-6 text-lg w-full">
+          <Button onClick={handleForgotPassword} className="py-6 text-lg w-full">
             <RiSendPlaneFill className="mr-2 h-4 w-4" />
-            Send Reset Link
+            {loading ? "Sending..." : "Send Reset Link"}
           </Button>
 
           {/* Footer link */}

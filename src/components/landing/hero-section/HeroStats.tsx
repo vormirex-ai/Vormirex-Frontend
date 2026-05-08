@@ -12,7 +12,7 @@ const StatsSection = () => {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center mt-14">
         {statsData.map((item, index) => (
           <div key={index}>
-            <h2 className="text-2xl  font-bold bg-gradient-to-r from-[#6366f1] via-[#a855f7] to-[#ec4899] bg-clip-text text-transparent">
+            <h2 className="text-2xl  font-bold bg-primary bg-clip-text text-transparent">
               {item.value}
             </h2>
 
