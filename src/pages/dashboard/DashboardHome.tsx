@@ -1,11 +1,9 @@
-import React from 'react'
-
 const DashboardHome = () => {
   return (
     <div>
-      hjdfhiojl
+      <h1 className="text-3xl font-bold">Dashboard Home</h1>
     </div>
-  )
-}
+  );
+};
 
-export default DashboardHome
+export default DashboardHome;

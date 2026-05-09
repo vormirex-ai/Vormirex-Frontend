@@ -30,3 +30,16 @@ export const ForgetPassword = async (data: { email: string }) => {
     return error.response.data;
   }
 };
+
+export const ResetPassword = async (data: {
+  token: string;
+  password: string;
+}) => {
+  try {
+    const response = await axiosInstance.post("/auth/reset-password", data);
+    return response.data;
+  } catch (error: any) {
+    console.error("Error while resetting password:", error.response);
+    return error.response.data;
+  }
+};

@@ -9,9 +9,7 @@ import UserMenu from "./userMenu";
 const Navbar = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-
   const { user } = useSelector((state: any) => state.auth);
-
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
