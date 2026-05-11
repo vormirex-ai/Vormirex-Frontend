@@ -4,6 +4,7 @@ import logo from "../../assets/logo.png";
 import { MoreVertical } from "lucide-react";
 import { motion } from "framer-motion";
 
+
 const Sidebar = () => {
   return (
     <aside className="w-64 h-screen fixed left-0 top-0 bg-[#070B18] border-r border-white/5 flex flex-col z-50">
@@ -11,13 +12,13 @@ const Sidebar = () => {
       {/* Logo */}
       <div className="h-16 px-6 flex items-center gap-3 border-b border-white/5">
         <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-          <img src={logo} className="w-6 h-6" />
+          <img alt="logo" src={logo} className="w-6 h-6" />
         </div>
         <span className="text-white font-bold">AI Tutor</span>
       </div>
 
       {/* Nav */}
-      <div className="flex-1 overflow-y-auto py-6 px-3 space-y-8">
+    <div className="flex-1 overflow-y-auto hide-scrollbar py-6 px-3 space-y-8">
 
         {navGroups.map((group) => (
           <div key={group.groupLabel}>
@@ -32,7 +33,7 @@ const Sidebar = () => {
                   key={item.path}
                   to={item.path}
                   className={({ isActive }) =>
-                    `relative flex items-center gap-3 px-4 py-2.5 rounded-xl transition ${isActive
+                    `relative flex items-center gap-3 p-[18px] rounded-xl transition ${isActive
                       ? "bg-indigo-600/20 text-white"
                       : "text-slate-400 hover:text-white hover:bg-white/5"
                     }`
@@ -52,7 +53,7 @@ const Sidebar = () => {
                       {isActive && (
                         <motion.div
                           layoutId="active"
-                          className="absolute right-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-indigo-500 rounded-l-full"
+                          className="absolute right-0  -translate-y-1/2 w-1 h-6 bg-indigo-500 rounded-l-full"
                         />
                       )}
                     </>
@@ -77,9 +78,8 @@ const Sidebar = () => {
             <p className="text-slate-500 text-xs">Pro Plan</p>
           </div>
 
-          <button>
             <MoreVertical size={16} className="text-slate-500" />
-          </button>
+        
         </div>
       </div>
 

@@ -1,12 +1,70 @@
-const ProgressBar = ({ step }: any) => {
+"use client";
+import { motion } from "framer-motion";
+
+const ProgressBar = ({ step }: { step: number }) => {
   return (
-    <div className="w-full h-3 bg-white/10 rounded-full overflow-hidden">
-      <div
-        className="h-full bg-gradient-to-r from-sky-400 to-blue-500 transition-all duration-500"
-        style={{
-          width: `${(step / 4) * 100}%`,
-        }}
-      />
+    <div className="flex items-center justify-between gap-2 max-w-2xl mx-auto px-4">
+      {[1, 2, 3, 4].map((item, index) => {
+
+        const isCompleted = step > item;
+        const isActive = step === item;
+
+        return (
+          <div key={item} className="flex items-center flex-1 last:flex-none">
+
+            <motion.div
+              initial={false}
+              animate={{
+                backgroundColor: isCompleted
+                  ? "rgba(20, 88, 55, 0.2)"
+                  : isActive
+                  ? "rgba(20, 88, 55, 0.1)"
+                  : "rgba(255, 255, 255, 0.05)",
+
+                borderColor: isCompleted || isActive
+                  ? "#145837"
+                  : "rgba(255, 255, 255, 0.1)",
+
+                color: isCompleted
+                  ? "#145837"
+                  : isActive
+                  ? "#6aecff"
+                  : "#8e8e93",
+
+                boxShadow: isActive
+                  ? "0 0 25px rgba(106, 236, 225, 0.5)"
+                  : "0 0 0px rgba(0, 0, 0, 0)",
+              }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border text-sm font-bold"
+            >
+              {isCompleted ? (
+                <motion.span
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                >
+                  ✓
+                </motion.span>
+              ) : (
+                <span>{item}</span>
+              )}
+            </motion.div>
+
+            {index !== 3 && (
+              <div className="h-[2px] flex-1 bg-white/10 mx-2 overflow-hidden">
+                <motion.div
+                  initial={{ width: "0%" }}
+                  animate={{
+                    width: step > item ? "100%" : "0%",
+                  }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="h-full bg-[#145837]"
+                />
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 };

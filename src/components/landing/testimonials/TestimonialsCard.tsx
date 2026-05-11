@@ -26,15 +26,16 @@ const TestimonialCard = ({
       }}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="h-full"
+      viewport={{ once: true, amount: 0.2 }}
+      className="min-h-[220px]"
     >
       <Card
         className="
-          group relative h-full overflow-hidden cursor-pointer
+          group relative min-h-[220px] overflow-hidden cursor-pointer
           bg-[#0E1424] backdrop-blur-xl
           border border-white/10
           transition-all duration-500
+          transform-gpu will-change-transform
 
           shadow-[0_0_15px_rgba(106,236,225,0.08)]
           hover:shadow-[0_0_40px_rgba(106,236,225,0.35)]
@@ -86,7 +87,7 @@ const TestimonialCard = ({
           </div>
         </CardContent>
 
-        {/* Bottom Glow Line */}
+        {/* Bottom Glow */}
         <div
           className="
             absolute bottom-0 left-0 w-full h-[2px]

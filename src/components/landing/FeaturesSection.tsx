@@ -4,7 +4,7 @@ import { featuresData } from "../data/featuresData";
 const FeaturesSection = () => {
   return (
     <section className="py-24 px-4 relative bg-[#0A0B14] ">
-      <div className="max-w-[18rem] md:max-w-[65rem] mx-auto">
+      <div className="max-w-[18rem] sm:max-w-[40rem] md:max-w-[65rem] mx-auto">
         <div className="text-center mb-16">
           <div className="inline-flex items-center px-3 py-1 rounded-full  text-[10px] 
         text-xs text-primary bg-[#142128] backdrop-blur-md 
@@ -19,7 +19,7 @@ border border-[#1f3b5b]  font-bold uppercase tracking-widest mb-4">
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {featuresData.map((feature, index) => (
             <FeatureCard
               key={index}

@@ -8,95 +8,148 @@ import UserMenu from "./userMenu";
 
 const Navbar = () => {
   const navigate = useNavigate();
+
   const [isOpen, setIsOpen] = useState(false);
+
   const { user } = useSelector((state: any) => state.auth);
+
   const [scrolled, setScrolled] = useState(false);
+
+  const [activeSection, setActiveSection] = useState("hero");
+
+  const navItems = [
+    { label: "Features", id: "features" },
+    { label: "Testimonials", id: "testimonials" },
+    { label: "Pricing", id: "pricing" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
+
+      let currentSection = "";
+
+      navItems.forEach((item) => {
+        const section = document.getElementById(item.id);
+
+        if (section) {
+          const rect = section.getBoundingClientRect();
+
+          // Fixed navbar ke according section detect karega
+          if (rect.top <= 120 && rect.bottom >= 120) {
+            currentSection = item.id;
+          }
+        }
+      });
+
+      setActiveSection(currentSection);
     };
 
+    handleScroll();
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
+
+  const scrollToSection = (id: string) => {
+    const section = document.getElementById(id);
+
+    if (section) {
+      section.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  };
 
   return (
     <nav
       className={`
-    fixed top-0 left-0 w-full z-50
-    transition-all duration-300
-
-    ${scrolled
-          ? "bg-[#040812]/60 backdrop-blur-xl border-b border-white/20 shadow-lg"
-          : "bg-transparent"
+        fixed top-0 left-0 w-full z-50
+        transition-all duration-300
+        ${
+          scrolled
+            ? "bg-[#040812]/60 backdrop-blur-xl border-b border-white/20 shadow-lg"
+            : "bg-transparent"
         }
-  `}
+      `}
     >
-
       <div className="mx-auto px-4 sm:px-6 lg:px-10">
         <div className="flex justify-between items-center h-16">
 
+          {/* LOGO */}
           <div
             className="flex items-center gap-2 cursor-pointer"
-            onClick={() => navigate("/")}
+            onClick={() => {
+              navigate("/");
+              scrollToSection("hero");
+            }}
           >
-            <img src={logo} className="w-8 h-8" />
+            <img src={logo} className="w-8 h-8" alt="logo" />
+
             <span className="text-white font-bold text-xl">
               VORMIREX
             </span>
           </div>
 
-          {/* ================= DESKTOP ================= */}
+          {/* DESKTOP NAV */}
           <div className="hidden md:flex items-center space-x-8">
 
-            {["Features", "Testimonials", "Pricing"].map((item) => (
-              <a
-                key={item}
-                href="#"
-                className="
-      relative text-slate-300 text-sm
-      hover:text-[#6aece1]
-      transition-colors duration-300
-      group
-    "
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className={`
+                  relative text-sm transition-all duration-300 group pb-1
+                  ${
+                    activeSection === item.id
+                      ? "text-[#6aece1]"
+                      : "text-slate-300 hover:text-[#6aece1]"
+                  }
+                `}
               >
-                {item}
+                {item.label}
 
-                {/* underline */}
                 <span
-                  className="
-        absolute left-0 -bottom-1 h-[2px] w-0
-        bg-[#6aece1]
-        group-hover:w-full
-        transition-all duration-300
-      "
+                  className={`
+                    absolute left-0 bottom-0 h-[2px]
+                    bg-[#6aece1]
+                    transition-all duration-300
+                    ${
+                      activeSection === item.id
+                        ? "w-full"
+                        : "w-0 group-hover:w-full"
+                    }
+                  `}
                 />
-              </a>
+              </button>
             ))}
+
             {user && (
               <button
                 onClick={() => navigate("/dashboard")}
                 className="
-      relative text-sm text-slate-300
-      hover:text-[#6aece1]
-      transition-colors duration-300
-      group
-    "
+                  relative text-sm text-slate-300
+                  hover:text-[#6aece1]
+                  transition-all duration-300
+                  group pb-1
+                "
               >
                 Dashboard
 
-                {/* underline */}
                 <span
                   className="
-        absolute left-0 -bottom-1 h-[2px] w-0
-        bg-[#6aece1]
-        group-hover:w-full
-        transition-all duration-300
-      "
+                    absolute left-0 bottom-0 h-[2px] w-0
+                    bg-[#6aece1]
+                    group-hover:w-full
+                    transition-all duration-300
+                  "
                 />
               </button>
             )}
+
             {user ? (
               <UserMenu />
             ) : (
@@ -116,7 +169,7 @@ const Navbar = () => {
 
           </div>
 
-          {/* ================= MOBILE ================= */}
+          {/* MOBILE */}
           <div className="md:hidden flex items-center gap-3">
 
             {user && <UserMenu />}
@@ -133,20 +186,28 @@ const Navbar = () => {
         </div>
       </div>
 
-
+      {/* MOBILE MENU */}
       {isOpen && (
         <div className="md:hidden bg-[#03060F] border-t border-slate-800 px-4 py-4 space-y-4">
 
-          {["Features", "Testimonials", "Pricing"].map((item) => (
-            <a
-              key={item}
-              href="#"
-              className="block text-slate-300"
-              onClick={() => setIsOpen(false)}
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => {
+                scrollToSection(item.id);
+                setIsOpen(false);
+              }}
+              className={`
+                block w-full text-left transition-all duration-300
+                ${
+                  activeSection === item.id
+                    ? "text-[#6aece1]"
+                    : "text-slate-300 hover:text-[#6aece1]"
+                }
+              `}
             >
-              {item}
-
-            </a>
+              {item.label}
+            </button>
           ))}
 
           {user && (
@@ -155,7 +216,10 @@ const Navbar = () => {
                 navigate("/dashboard");
                 setIsOpen(false);
               }}
-              className="flex items-center gap-2 text-slate-300 hover:text-white w-full"
+              className="
+                flex items-center gap-2
+                text-slate-300 hover:text-white w-full
+              "
             >
               📊 Dashboard
             </button>
@@ -182,7 +246,6 @@ const Navbar = () => {
 
         </div>
       )}
-
     </nav>
   );
 };

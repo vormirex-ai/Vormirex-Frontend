@@ -1,33 +1,43 @@
+import { Button } from "@/components/ui/button";
+import { FaArrowLeftLong } from "react-icons/fa6";
+
 const NavigationButtons = ({
   step,
   prevStep,
   nextStep,
   handleSubmit,
+  canProceed,
 }: any) => {
   return (
-    <div className="flex items-center justify-between mt-10">
-      <button
-        onClick={prevStep}
-        disabled={step === 1}
-        className="px-6 py-3 rounded-xl bg-white/5 border border-white/10"
-      >
-        Back
-      </button>
+    <div className="mt-10 flex items-center gap-4">
+
+      {step > 1 && (
+        <Button
+          onClick={prevStep}
+          variant="secondary"
+          className="flex items-center gap-2 py-6 rounded-xl"
+        >
+          <FaArrowLeftLong />
+          Back
+        </Button>
+      )}
 
       {step < 4 ? (
-        <button
+        <Button
           onClick={nextStep}
-          className="px-8 py-3 rounded-xl bg-sky-500"
+          disabled={!canProceed}
+          className="flex-1 py-6 disabled:opacity-50 disabled:cursor-not-allowed rounded-xl"
         >
-          Continue
-        </button>
+          Continue →
+        </Button>
       ) : (
-        <button
+        <Button
           onClick={handleSubmit}
-          className="px-8 py-3 rounded-xl bg-green-500"
+          disabled={!canProceed}
+          className="flex-1 py-6 disabled:opacity-50 disabled:cursor-not-allowed rounded-xl"
         >
           Finish Setup
-        </button>
+        </Button>
       )}
     </div>
   );

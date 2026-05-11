@@ -1,38 +1,27 @@
 import { subjects } from "@/components/data/onboardingData";
+import SelectableCard from "./onboardingCard";
 
-const StepSubjects = ({
-  formData,
-  toggleSubject,
-}: any) => {
+const StepSubjects = ({ formData, toggleSubject }: any) => {
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-2">
-        Select Subjects
+      <h2 className="text-3xl font-bold text-white">
+        Select subjects 📚
       </h2>
 
-      <p className="text-gray-400 mb-8">
-        Pick subjects you want to learn.
+      <p className="mt-3 text-gray-400">
+        Pick subjects you want to master. You can change these later.
       </p>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {subjects.map((subject) => {
-          const selected =
-            formData.subjects.includes(subject);
-
-          return (
-            <button
-              key={subject}
-              onClick={() => toggleSubject(subject)}
-              className={`p-5 rounded-2xl border transition-all
-              ${selected
-                  ? "bg-sky-500/10 border-sky-400"
-                  : "bg-white/5 border-white/10"
-                }`}
-            >
-              {subject}
-            </button>
-          );
-        })}
+      <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3">
+        {subjects.map((subject) => (
+          <SelectableCard
+            key={subject.title}
+            title={subject.title}
+            icon={subject.icon}
+            selected={formData.subjects.includes(subject.title)}
+            onClick={() => toggleSubject(subject.title)}
+          />
+        ))}
       </div>
     </div>
   );

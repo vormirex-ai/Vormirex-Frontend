@@ -1,8 +1,9 @@
 import { useLocation } from "react-router-dom";
 import { navGroups } from "../data/dasboard-navItems";
 import { Search, Bell, Moon, Terminal, Menu } from "lucide-react";
+import { ThemeToggle } from "../theme/theme-toggle";
+import { Button } from "../ui/button";
 
-// flatten all nav items
 const allNavItems = navGroups.flatMap((group) => group.items);
 
 const DashboardNavbar = () => {
@@ -17,9 +18,9 @@ const DashboardNavbar = () => {
 
       {/* Left */}
       <div className="flex items-center gap-4">
-        <button className="p-2 hover:bg-white/5 rounded-lg md:hidden">
+        <Button variant="secondary" className="h-8 w-5">
           <Menu size={20} className="text-slate-400" />
-        </button>
+        </Button>
 
         <div>
           <h2 className="text-white text-lg font-bold">
@@ -46,22 +47,19 @@ const DashboardNavbar = () => {
           />
         </div>
 
-        <div className="flex items-center gap-2 border-l border-white/10 pl-4">
+        <div className="flex items-center gap-2 pl-4">
 
-          <button className="p-2 text-slate-400 hover:text-white">
+          <Button variant="secondary">
             <Bell size={18} />
-          </button>
+          </Button>
 
-          <button className="p-2 text-slate-400 hover:text-white">
-            <Moon size={18} />
-          </button>
-
-          <button className="p-2 text-slate-400 hover:text-white">
+      <ThemeToggle/>
+          <Button variant="secondary">
             <Terminal size={18} />
-          </button>
+          </Button>
         </div>
 
-        <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white text-[10px] font-bold">
+        <div className="w-9 h-9 rounded-full bg-indigo-600 flex items-center justify-center text-white text-[10px] font-bold">
           AJ
         </div>
       </div>

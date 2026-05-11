@@ -1,15 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import {
+  resetOnboarding,
+  setStep,
+  updateFormData,
+} from "@/store/slice/onboardingSlice";
+
 import StepGoal from "@/components/auth/onbording/StepGoal";
 import StepSubjects from "@/components/auth/onbording/StepSubjects";
 import StepStudyTime from "@/components/auth/onbording/StepStudyTime";
 import StepLevel from "@/components/auth/onbording/StepLevel";
+
 import ProgressBar from "@/components/auth/onbording/ProgressBar";
 import NavigationButtons from "@/components/auth/onbording/NavigationButtons";
-import { resetOnboarding, setStep, updateFormData } from "@/store/slice/onboardingSlice";
 
 const OnboardingPage = () => {
-
   const dispatch = useDispatch();
 
   const { step, formData } = useSelector(
@@ -17,13 +22,9 @@ const OnboardingPage = () => {
   );
 
   const toggleSubject = (subject: string) => {
-
-    const updatedSubjects =
-      formData.subjects.includes(subject)
-        ? formData.subjects.filter(
-          (s: string) => s !== subject
-        )
-        : [...formData.subjects, subject];
+    const updatedSubjects = formData.subjects.includes(subject)
+      ? formData.subjects.filter((s: string) => s !== subject)
+      : [...formData.subjects, subject];
 
     dispatch(
       updateFormData({
@@ -45,76 +46,70 @@ const OnboardingPage = () => {
   };
 
   const handleSubmit = () => {
-
-    console.log(formData);
-
+    // console.log(formData);
     dispatch(resetOnboarding());
   };
 
+  const canProceed = () => {
+    if (step === 1) return !!formData.level;
+    if (step === 2) return formData.subjects.length > 0;
+    if (step === 3) return !!formData.goal;
+    if (step === 4) return !!formData.studyTime;
+    return false;
+  };
+
   return (
-    <div className="min-h-screen bg-[#020817] flex items-center justify-center p-4 text-white">
+    <div className="bg-[#030712] flex justify-center my-7">
+      <div className="absolute top-[-120px] left-[-120px] h-[350px] w-[350px] rounded-full bg-primary/20 blur-[140px]" />
+      <div className="absolute bottom-[-120px] right-[-120px] h-[350px] w-[350px] rounded-full bg-violet-500/20 blur-[140px]" />
 
-      <div className="w-full max-w-3xl bg-[#0c1425]/80 border border-white/10 rounded-3xl p-8 shadow-[0_0_50px_rgba(56,189,248,0.1)]">
+      <div className="relative w-full max-w-2xl rounded-[32px] border border-white/10 bg-[#070f1d]/90 backdrop-blur-xl px-6 py-8 md:px-12 md:py-10 shadow-[0_0_80px_rgba(0,0,0,0.6)]">
 
-        <div className="mb-8">
+        <ProgressBar step={step} />
 
-          <div className="flex justify-between items-center mb-4">
+        <div className="mt-10">
+          {step === 1 && (
+            <StepLevel
+              formData={formData}
+              updateFormData={(data: any) =>
+                dispatch(updateFormData(data))
+              }
+            />
+          )}
 
-            <h1 className="text-3xl font-bold">
-              Welcome to VORMIREX
-            </h1>
+          {step === 2 && (
+            <StepSubjects
+              formData={formData}
+              toggleSubject={toggleSubject}
+            />
+          )}
 
-            <span className="text-sm text-gray-400">
-              Step {step}/4
-            </span>
+          {step === 3 && (
+            <StepGoal
+              formData={formData}
+              updateFormData={(data: any) =>
+                dispatch(updateFormData(data))
+              }
+            />
+          )}
 
-          </div>
-
-          <ProgressBar step={step} />
-
+          {step === 4 && (
+            <StepStudyTime
+              formData={formData}
+              updateFormData={(data: any) =>
+                dispatch(updateFormData(data))
+              }
+            />
+          )}
         </div>
-
-        {step === 1 && (
-          <StepGoal
-            formData={formData}
-            updateFormData={(data: any) =>
-              dispatch(updateFormData(data))
-            }
-          />
-        )}
-
-        {step === 2 && (
-          <StepSubjects
-            formData={formData}
-            toggleSubject={toggleSubject}
-          />
-        )}
-
-        {step === 3 && (
-          <StepStudyTime
-            formData={formData}
-            updateFormData={(data: any) =>
-              dispatch(updateFormData(data))
-            }
-          />
-        )}
-
-        {step === 4 && (
-          <StepLevel
-            formData={formData}
-            updateFormData={(data: any) =>
-              dispatch(updateFormData(data))
-            }
-          />
-        )}
 
         <NavigationButtons
           step={step}
           prevStep={prevStep}
           nextStep={nextStep}
           handleSubmit={handleSubmit}
+          canProceed={canProceed()}
         />
-
       </div>
     </div>
   );
