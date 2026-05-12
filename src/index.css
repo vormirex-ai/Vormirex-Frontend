@@ -36,7 +36,7 @@
   }
 
 .dark {
-  --background: 228 84% 5%;
+  --background: 222 64% 3%;
   --foreground: 210 40% 98%;
 
   --card: 228 60% 8%;
@@ -67,7 +67,7 @@
 html {
   scroll-behavior: smooth;
 }
-/* Hide scrollbar */
+
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -75,4 +75,17 @@ html {
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  @apply bg-background text-foreground;
+}
+
+.dark body {
+  @apply bg-[#030712] text-white;
 }

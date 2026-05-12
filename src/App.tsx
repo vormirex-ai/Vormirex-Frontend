@@ -1,38 +1,6 @@
-// import { Routes, Route } from "react-router-dom";
-// import LandingLayout from "./components/layouts/LandingLayout";
-// import Login from "./pages/auth/login";
-// import SignUp from "./pages/auth/sign-up";
-// import ForgotPassword from "./pages/auth/forgot-password";
-// import DashboardHome from "./pages/dashboard/DashboardHome";
-// import ResetPasswordPage from "./pages/auth/reset-password";
-// import Onboarding from "./pages/auth/onboarding";
-
-
-// function App() {
-
-//   return (
-
-//     <Routes>
-//       <Route path="/" element={<LandingLayout />} />
-//       <Route path="/login" element={<Login />} />
-//       <Route path="/sign-up" element={<SignUp />} />
-//       <Route path="/forgot-password" element={<ForgotPassword />} />
-//       <Route path="/reset-password" element={<ResetPasswordPage />} />
-//       <Route path="/onboarding" element={<Onboarding />} />
-
-
-//       {/* =================== DASHBOARD ====================== */}
-//       <Route path="/dashboard" element={<DashboardHome />} />
-//     </Routes>
-//   )
-// }
-
-// export default App
-
 import { Routes, Route } from "react-router-dom";
 import LandingLayout from "./components/layouts/LandingLayout";
 import AuthLayout from "./components/layouts/AuthLayout";
-
 import Login from "./pages/auth/login";
 import SignUp from "./pages/auth/sign-up";
 import ForgotPassword from "./pages/auth/forgot-password";
@@ -41,6 +9,11 @@ import Onboarding from "./pages/auth/onboarding";
 import DashboardHome from "./pages/dashboard/DashboardHome";
 import DashboardLayout from "./components/layouts/DashboardLayout";
 import AiChat from "./pages/dashboard/AiChat";
+import Profile from "./pages/account/profile";
+import Subjects from "./pages/dashboard/subjects";
+import VideoLearning from "./pages/dashboard/video-learning";
+import PublicRoute from "./route/PublicRoute";
+import ProtectedRoute from "./route/ProtectedRoute";
 
 function App() {
   return (
@@ -48,20 +21,34 @@ function App() {
       <Route path="/" element={<LandingLayout />} />
 
       {/* Auth Routes */}
-      <Route element={<AuthLayout />}>
-        <Route path="/login" element={<Login />} />
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password" element={<ResetPasswordPage />} />
-        <Route path="/onboarding" element={<Onboarding />} />
+      <Route element={<PublicRoute />}>
+        <Route element={<AuthLayout />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route path="/onboarding" element={<Onboarding />} />
+        </Route>
       </Route>
 
       {/* Dashboard */}
-      {/* <Route path="/dashboard" element={<DashboardHome />} /> */}
-      <Route path="/dashboard" element={<DashboardLayout />}>
-        <Route index element={<DashboardHome />} />
-        <Route path="ai-chat" element={<AiChat />} />
+      <Route element={<ProtectedRoute />}>
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route index element={<DashboardHome />} />
+          <Route path="subjects" element={<Subjects />} />
+          <Route path="video-learning" element={<VideoLearning />} />
+          <Route path="ai-chat" element={<AiChat />} />
+        </Route>
       </Route>
+
+      {/* account */}
+      <Route element={<ProtectedRoute />}>
+        <Route path="/account/profile" element={<DashboardLayout />}>
+          <Route index element={<Profile />} />
+        </Route>
+      </Route>
+
+
     </Routes>
   );
 }

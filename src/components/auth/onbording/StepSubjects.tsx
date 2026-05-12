@@ -1,16 +1,21 @@
 import { subjects } from "@/components/data/onboardingData";
 import SelectableCard from "./onboardingCard";
 
-const StepSubjects = ({ formData, toggleSubject }: any) => {
+const StepSubjects = ({ formData, updateFormData }: any) => {
+
+  const toggleSubject = (subject: string) => {
+    const updated = formData.subjects.includes(subject)
+      ? formData.subjects.filter((s: string) => s !== subject)
+      : [...formData.subjects, subject];
+
+    updateFormData({ subjects: updated });
+  };
+
   return (
     <div>
-      <h2 className="text-3xl font-bold text-white">
+      <h2 className="text-2xl font-bold text-white">
         Select subjects 📚
       </h2>
-
-      <p className="mt-3 text-gray-400">
-        Pick subjects you want to master. You can change these later.
-      </p>
 
       <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3">
         {subjects.map((subject) => (

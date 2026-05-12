@@ -22,13 +22,18 @@ import logo from "../../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import GoogleLoginButton from "@/components/auth/googleLoginButton";
 import { AuthenticateLogin } from "@/services/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCredentials } from "@/store/slice/authSlice";
 import { toast } from "sonner";
+import { RootState } from "@/store/store";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const onboardingCompleted = useSelector(
+    (state: RootState) => state.onboarding.completed
+  );
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -74,7 +79,7 @@ const Login = () => {
         email,
         password,
       });
-      console.log("Login Response:", response);
+      // console.log("Login Response:", response);
 
       if (response?.success) {
 
@@ -85,7 +90,12 @@ const Login = () => {
           })
         );
         toast.success("Login Successful ✅");
-        navigate("/dashboard");
+        // navigate("/dashboard");
+        if (onboardingCompleted) {
+          navigate("/dashboard");
+        } else {
+          navigate("/onboarding");
+        }
 
       } else {
 
@@ -107,7 +117,7 @@ const Login = () => {
     }
   };
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-[#020817] relative overflow-hidden px-4">
+    <div className="min-h-screen w-full flex items-center justify-center  relative overflow-hidden px-4">
 
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-500/10 blur-[120px] rounded-full" />
 
@@ -253,7 +263,8 @@ const Login = () => {
           >
             <LogIn className="mr-2 h-5 w-5 font-bold" />
 
-            {loading ? "Loading..." : "Sign In"}
+            {/* {loading ? "Loading..." : "Sign In"} */}
+            Sign In
           </Button>
 
           <p className="text-sm text-gray-400 text-center">

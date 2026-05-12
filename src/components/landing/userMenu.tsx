@@ -1,28 +1,40 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+
 import { setCredentials } from "@/store/slice/authSlice";
+import { LogoutUser } from "@/services/auth";
 
 const UserMenu = () => {
   const [open, setOpen] = useState(false);
+
   const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
   const { user } = useSelector((state: any) => state.auth);
 
-  const handleLogout = () => {
-    dispatch(
-      setCredentials({
-        user: null,
-        token: null,
-      })
-    );
+  const handleLogout = async () => {
+    try {
 
-    localStorage.removeItem("accessToken");
+      await LogoutUser();
 
-    setOpen(false);
+      dispatch(
+        setCredentials({
+          user: null,
+          token: null,
+        })
+      );
 
-    navigate("/");
+      localStorage.removeItem("accessToken");
+
+      setOpen(false);
+
+      navigate("/");
+
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   };
 
   if (!user) return null;
@@ -55,6 +67,7 @@ const UserMenu = () => {
               d="M19 9l-7 7-7-7"
             />
           </svg>
+
         </div>
 
         {open && (

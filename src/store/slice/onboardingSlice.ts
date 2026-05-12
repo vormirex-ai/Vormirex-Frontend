@@ -8,13 +8,12 @@ export interface OnboardingFormData {
 }
 
 interface OnboardingState {
-  step: number;
+  completed: boolean;
   formData: OnboardingFormData;
 }
 
 const initialState: OnboardingState = {
-  step: 1,
-
+  completed: false,
   formData: {
     goal: "",
     subjects: [],
@@ -25,29 +24,21 @@ const initialState: OnboardingState = {
 
 const onboardingSlice = createSlice({
   name: "onboarding",
-
   initialState,
-
   reducers: {
-    setStep: (state, action: PayloadAction<number>) => {
-      state.step = action.payload;
+    setOnboardingCompleted: (state, action: PayloadAction<boolean>) => {
+      state.completed = action.payload;
     },
 
-    updateFormData: (
-      state,
-      action: PayloadAction<Partial<OnboardingFormData>>,
-    ) => {
-      state.formData = {
-        ...state.formData,
-        ...action.payload,
-      };
+    saveOnboardingData: (state, action: PayloadAction<OnboardingFormData>) => {
+      state.formData = action.payload;
     },
 
     resetOnboarding: () => initialState,
   },
 });
 
-export const { setStep, updateFormData, resetOnboarding } =
+export const { setOnboardingCompleted, saveOnboardingData, resetOnboarding } =
   onboardingSlice.actions;
 
 export default onboardingSlice.reducer;

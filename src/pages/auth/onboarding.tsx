@@ -1,53 +1,66 @@
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/store";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { toast } from "sonner";
 import {
-  resetOnboarding,
-  setStep,
-  updateFormData,
+  setOnboardingCompleted,
+  saveOnboardingData,
 } from "@/store/slice/onboardingSlice";
-
 import StepGoal from "@/components/auth/onbording/StepGoal";
 import StepSubjects from "@/components/auth/onbording/StepSubjects";
 import StepStudyTime from "@/components/auth/onbording/StepStudyTime";
 import StepLevel from "@/components/auth/onbording/StepLevel";
-
 import ProgressBar from "@/components/auth/onbording/ProgressBar";
 import NavigationButtons from "@/components/auth/onbording/NavigationButtons";
+import OnboardingFinish from "@/components/auth/onbording/OnboardingFinish";
+
+const initialFormData = {
+  goal: "",
+  subjects: [],
+  studyTime: "",
+  level: "",
+};
 
 const OnboardingPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const { step, formData } = useSelector(
-    (state: RootState) => state.onboarding
-  );
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState(initialFormData);
 
-  const toggleSubject = (subject: string) => {
-    const updatedSubjects = formData.subjects.includes(subject)
-      ? formData.subjects.filter((s: string) => s !== subject)
-      : [...formData.subjects, subject];
 
-    dispatch(
-      updateFormData({
-        subjects: updatedSubjects,
-      })
-    );
+  useEffect(() => {
+    const urlStep = Number(searchParams.get("step"));
+    if (urlStep >= 1 && urlStep <= 5) {
+      setStep(urlStep);
+    }
+  }, []);
+
+  const updateFormData = (data: any) => {
+    setFormData((prev) => ({
+      ...prev,
+      ...data,
+    }));
   };
+
 
   const nextStep = () => {
-    if (step < 4) {
-      dispatch(setStep(step + 1));
+    if (step < 5) {
+      const newStep = step + 1;
+      setStep(newStep);
+      setSearchParams({ step: String(newStep) });
     }
   };
+
 
   const prevStep = () => {
     if (step > 1) {
-      dispatch(setStep(step - 1));
-    }
-  };
+      const newStep = step - 1;
+      setStep(newStep);
 
-  const handleSubmit = () => {
-    // console.log(formData);
-    dispatch(resetOnboarding());
+      setSearchParams({ step: String(newStep) });
+    }
   };
 
   const canProceed = () => {
@@ -55,52 +68,63 @@ const OnboardingPage = () => {
     if (step === 2) return formData.subjects.length > 0;
     if (step === 3) return !!formData.goal;
     if (step === 4) return !!formData.studyTime;
+    if (step === 5) return true;
     return false;
   };
 
-  return (
-    <div className="bg-[#030712] flex justify-center my-7">
-      <div className="absolute top-[-120px] left-[-120px] h-[350px] w-[350px] rounded-full bg-primary/20 blur-[140px]" />
-      <div className="absolute bottom-[-120px] right-[-120px] h-[350px] w-[350px] rounded-full bg-violet-500/20 blur-[140px]" />
+  const handleSubmit = () => {
+    dispatch(saveOnboardingData(formData));
+    dispatch(setOnboardingCompleted(true));
 
-      <div className="relative w-full max-w-2xl rounded-[32px] border border-white/10 bg-[#070f1d]/90 backdrop-blur-xl px-6 py-8 md:px-12 md:py-10 shadow-[0_0_80px_rgba(0,0,0,0.6)]">
+    toast.success("Onboarding Completed ✅");
+
+    setSearchParams({});
+    navigate("/dashboard");
+  };
+
+  return (
+    <div className="flex justify-center my-7">
+      <div className="relative w-full max-w-2xl bg-[#0A0F1F] rounded-[32px] p-8 border border-white/10 shadow-[0_0_25px_rgba(34,211,238,0.12)]">
 
         <ProgressBar step={step} />
 
-        <div className="mt-10">
+        <div className="mt-6 flex-1">
+
           {step === 1 && (
             <StepLevel
               formData={formData}
-              updateFormData={(data: any) =>
-                dispatch(updateFormData(data))
-              }
+              updateFormData={updateFormData}
             />
           )}
 
           {step === 2 && (
             <StepSubjects
               formData={formData}
-              toggleSubject={toggleSubject}
+              updateFormData={updateFormData}
             />
           )}
 
           {step === 3 && (
             <StepGoal
               formData={formData}
-              updateFormData={(data: any) =>
-                dispatch(updateFormData(data))
-              }
+              updateFormData={updateFormData}
             />
           )}
 
           {step === 4 && (
             <StepStudyTime
               formData={formData}
-              updateFormData={(data: any) =>
-                dispatch(updateFormData(data))
-              }
+              updateFormData={updateFormData}
             />
           )}
+
+          {step === 5 && (
+            <OnboardingFinish
+              formData={formData}
+              updateFormData={updateFormData}
+            />
+          )}
+
         </div>
 
         <NavigationButtons
@@ -110,6 +134,7 @@ const OnboardingPage = () => {
           handleSubmit={handleSubmit}
           canProceed={canProceed()}
         />
+
       </div>
     </div>
   );

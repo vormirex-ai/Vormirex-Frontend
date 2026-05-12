@@ -4,7 +4,7 @@ import DashboardNavbar from "../dashboard/Navbar";
 
 const DashboardLayout = () => {
   return (
-    <div className="min-h-screen bg-[#020617] text-white">
+    <div className="min-h-screen bg-background text-foreground">
       <Sidebar />
       <DashboardNavbar />
 

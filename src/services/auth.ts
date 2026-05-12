@@ -43,3 +43,15 @@ export const ResetPassword = async (data: {
     return error.response.data;
   }
 };
+
+export const LogoutUser = async () => {
+  try {
+    const response = await axiosInstance.post("/auth/logout");
+
+    return response.data;
+  } catch (error: any) {
+    console.error("Error while logging out:", error.response);
+
+    return error.response.data;
+  }
+};

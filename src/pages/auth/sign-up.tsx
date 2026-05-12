@@ -63,8 +63,6 @@ const SignUp = () => {
       };
 
       const response = await AuthenticateSignup(payload);
-      console.log("API Response =>", response);
-      console.log("Payload =>", payload);
 
       if (response?.success) {
         toast.success("Signup Successful ✅");
@@ -73,6 +71,7 @@ const SignUp = () => {
         setPassword("");
         setErrors({});
 
+        // navigate("/onboarding");
         navigate("/login");
       } else {
         toast.error(response?.message || "Signup failed ❌");
@@ -89,7 +88,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-[#020817] relative overflow-hidden px-4">
+    <div className="min-h-screen w-full flex items-center justify-center  relative overflow-hidden px-4">
 
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-500/10 blur-[120px] rounded-full" />
 

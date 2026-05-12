@@ -14,15 +14,15 @@ const NavigationButtons = ({
       {step > 1 && (
         <Button
           onClick={prevStep}
-          variant="secondary"
-          className="flex items-center gap-2 py-6 rounded-xl"
+          variant="outline"
+          className="flex items-center gap-2 py-6 rounded-xl "
         >
           <FaArrowLeftLong />
           Back
         </Button>
       )}
 
-      {step < 4 ? (
+      {step < 5 ? (
         <Button
           onClick={nextStep}
           disabled={!canProceed}

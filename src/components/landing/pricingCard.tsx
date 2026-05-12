@@ -8,12 +8,9 @@ export default function CollegePricingSection() {
   return (
     <section className="relative min-h-screen overflow-hidden bg-[#0A0B14] px-6 py-24 text-white">
 
-      {/* Background */}
-      {/* <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(106,236,225,0.12),transparent_40%),radial-gradient(circle_at_top_right,rgba(168,85,247,0.15),transparent_30%)]" /> */}
 
       <div className="relative z-10 mx-auto max-w-[18rem] md:max-w-5xl">
 
-        {/* Heading */}
         <h2 className="mb-16 text-center text-5xl font-bold md:text-6xl">
           Choose Your{" "}
           <span className="bg-gradient-to-r from-[#6aece1] to-[#4fd1c5] bg-clip-text text-transparent">
@@ -30,7 +27,7 @@ export default function CollegePricingSection() {
               className={`
     relative overflow-visible rounded-3xl backdrop-blur-xl
     bg-[#0D1323]
-    border transition-all duration-500
+    border transition-all duration-500 py-2
     ${plan.featured
                   ? "scale-105 border-[#6aece1]/50 shadow-[0_0_40px_rgba(106,236,225,0.25)]"
                   : "border-white/10"
@@ -52,10 +49,10 @@ export default function CollegePricingSection() {
                 </div>
               )}
 
-              <CardContent className="relative z-10 p-8">
+              <CardContent className="relative z-10  p-6 md:p-8">
 
                 {/* Plan Name */}
-                <p className="mb-8 text-center text-sm font-semibold tracking-widest text-slate-400">
+                <p className="mb-5 md:mb-8 text-center text-sm font-semibold tracking-widest text-slate-400">
                   {plan.name}
                 </p>
 
@@ -63,7 +60,7 @@ export default function CollegePricingSection() {
                 <div className="mb-3 text-center">
                   <span
                     className={`
-                      text-3xl md:text-5xl font-bold
+                      text-2xl md:text-5xl font-bold
                       ${plan.featured
                         ? "text-[#6aece1]"
                         : "text-white"
@@ -81,12 +78,12 @@ export default function CollegePricingSection() {
                 </div>
 
                 {/* Subtext */}
-                <p className="mb-8 text-center text-slate-500">
+                <p className="mb-5 md:mb-8 text-center text-slate-500">
                   {plan.subtext}
                 </p>
 
                 {/* Features */}
-                <ul className="mb-10 space-y-4">
+                <ul className="mb-6 md:mb-10 space-y-2 md:space-y-4">
                   {plan.features.map((feature: string, i: number) => (
                     <li
                       key={i}

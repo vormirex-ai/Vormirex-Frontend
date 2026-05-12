@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import { store } from "@/store/store";
+
 const API_ROOT = import.meta.env.VITE_API_URL || "http://localhost/api";
 
 export const axiosInstance = axios.create({
@@ -11,7 +13,7 @@ export const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use((config) => {
-  const token = localStorage.getItem("accessToken");
+  const token = store.getState().auth.token;
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;

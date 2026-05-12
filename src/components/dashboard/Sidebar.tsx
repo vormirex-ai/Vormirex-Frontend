@@ -1,29 +1,24 @@
 import { NavLink } from "react-router-dom";
-import { navGroups } from "../data/dasboard-navItems";
+import { navGroups } from "../data/sidebar-Items";
 import logo from "../../assets/logo.png";
 import { MoreVertical } from "lucide-react";
 import { motion } from "framer-motion";
 
-
 const Sidebar = () => {
   return (
-    <aside className="w-64 h-screen fixed left-0 top-0 bg-[#070B18] border-r border-white/5 flex flex-col z-50">
+    <aside className="w-64 h-screen fixed left-0 top-0 flex flex-col border-r border-border z-50">
 
-      {/* Logo */}
-      <div className="h-16 px-6 flex items-center gap-3 border-b border-white/5">
-        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-          <img alt="logo" src={logo} className="w-6 h-6" />
+      <div className="h-16 px-6 flex items-center gap-3 border-b border-border">
+        <div className="w-9 h-9 rounded-xl flex items-center justify-center">
+          <img alt="logo" src={logo} className="w-5 h-5" />
         </div>
-        <span className="text-white font-bold">AI Tutor</span>
+        <span className="font-bold text-foreground">Vormirex</span>
       </div>
 
-      {/* Nav */}
-    <div className="flex-1 overflow-y-auto hide-scrollbar py-6 px-3 space-y-8">
-
+      <div className="flex-1 overflow-y-auto hide-scrollbar py-6 px-3 space-y-8">
         {navGroups.map((group) => (
           <div key={group.groupLabel}>
-
-            <h3 className="px-4 text-[11px] text-slate-500 uppercase tracking-widest mb-2">
+            <h3 className="px-4 text-[11px] text-muted-foreground uppercase tracking-widest mb-2">
               {group.groupLabel}
             </h3>
 
@@ -32,20 +27,22 @@ const Sidebar = () => {
                 <NavLink
                   key={item.path}
                   to={item.path}
+                  end
                   className={({ isActive }) =>
-                    `relative flex items-center gap-3 p-[18px] rounded-xl transition ${isActive
-                      ? "bg-indigo-600/20 text-white"
-                      : "text-slate-400 hover:text-white hover:bg-white/5"
+                    `relative flex items-center gap-3 p-4 rounded-xl transition-all
+    ${isActive
+                      ? "bg-primary/15"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
                     }`
                   }
                 >
                   {({ isActive }) => (
                     <>
                       <item.icon size={18} />
-                      <span className="text-sm">{item.title}</span>
+                      <span className="text-sm font-medium">{item.title}</span>
 
                       {item.isNew && (
-                        <span className="ml-auto text-[10px] bg-indigo-600 px-2 py-0.5 rounded-full">
+                        <span className="ml-auto text-[10px] bg-primary text-primary-foreground px-2 py-0.5 rounded-full">
                           New
                         </span>
                       )}
@@ -53,7 +50,7 @@ const Sidebar = () => {
                       {isActive && (
                         <motion.div
                           layoutId="active"
-                          className="absolute right-0  -translate-y-1/2 w-1 h-6 bg-indigo-500 rounded-l-full"
+                          className="absolute right-0 -translate-y-1/2 w-1 h-6 bg-primary rounded-l-full"
                         />
                       )}
                     </>
@@ -61,28 +58,25 @@ const Sidebar = () => {
                 </NavLink>
               ))}
             </div>
-
           </div>
         ))}
       </div>
 
-      {/* Footer */}
-      <div className="p-4 border-t border-white/5">
+
+      <div className="p-4 border-t border-border">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold">
+          <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold">
             AJ
           </div>
 
           <div className="flex-1">
-            <h4 className="text-white text-sm">Alex Johnson</h4>
-            <p className="text-slate-500 text-xs">Pro Plan</p>
+            <h4 className="text-sm font-medium text-foreground">Alex Johnson</h4>
+            <p className="text-xs text-muted-foreground">Pro Plan ✨</p>
           </div>
 
-            <MoreVertical size={16} className="text-slate-500" />
-        
+          <MoreVertical size={16} className="text-muted-foreground" />
         </div>
       </div>
-
     </aside>
   );
 };
