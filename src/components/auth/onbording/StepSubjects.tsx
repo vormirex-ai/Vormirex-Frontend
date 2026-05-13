@@ -1,7 +1,22 @@
 import { subjects } from "@/components/data/onboardingData";
 import SelectableCard from "./onboardingCard";
+import { useEffect } from "react";
+import { getAllCourses } from "@/services/couses";
 
 const StepSubjects = ({ formData, updateFormData }: any) => {
+
+  // useEffect(() => {
+  //   const fetchAllCourse = async () => {
+  //     try {
+  //       const response = await getAllCourses();
+  //       console.log("API Response:", response);
+  //     } catch (error) {
+  //       console.log("Error:", error);
+  //     }
+  //   };
+
+  //   fetchAllCourse();
+  // }, []);
 
   const toggleSubject = (subject: string) => {
     const updated = formData.subjects.includes(subject)

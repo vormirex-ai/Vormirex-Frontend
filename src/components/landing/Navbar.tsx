@@ -8,13 +8,9 @@ import UserMenu from "./userMenu";
 
 const Navbar = () => {
   const navigate = useNavigate();
-
   const [isOpen, setIsOpen] = useState(false);
-
   const { user } = useSelector((state: any) => state.auth);
-
   const [scrolled, setScrolled] = useState(false);
-
   const [activeSection, setActiveSection] = useState("hero");
 
   const navItems = [
@@ -28,14 +24,11 @@ const Navbar = () => {
       setScrolled(window.scrollY > 10);
 
       let currentSection = "";
-
       navItems.forEach((item) => {
         const section = document.getElementById(item.id);
 
         if (section) {
           const rect = section.getBoundingClientRect();
-
-          // Fixed navbar ke according section detect karega
           if (rect.top <= 120 && rect.bottom >= 120) {
             currentSection = item.id;
           }
@@ -44,11 +37,8 @@ const Navbar = () => {
 
       setActiveSection(currentSection);
     };
-
     handleScroll();
-
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -69,17 +59,15 @@ const Navbar = () => {
       className={`
         fixed top-0 left-0 w-full z-50
         transition-all duration-300
-        ${
-          scrolled
-            ? "bg-[#040812]/60 backdrop-blur-xl border-b border-white/20 shadow-lg"
-            : "bg-transparent"
+        ${scrolled
+          ? "bg-[#040812]/60 backdrop-blur-xl border-b border-white/20 shadow-lg"
+          : "bg-transparent"
         }
       `}
     >
       <div className="mx-auto px-4 sm:px-6 lg:px-10">
         <div className="flex justify-between items-center h-16">
 
-          {/* LOGO */}
           <div
             className="flex items-center gap-2 cursor-pointer"
             onClick={() => {
@@ -103,10 +91,9 @@ const Navbar = () => {
                 onClick={() => scrollToSection(item.id)}
                 className={`
                   relative text-sm transition-all duration-300 group pb-1
-                  ${
-                    activeSection === item.id
-                      ? "text-[#6aece1]"
-                      : "text-slate-300 hover:text-[#6aece1]"
+                  ${activeSection === item.id
+                    ? "text-[#6aece1]"
+                    : "text-slate-300 hover:text-[#6aece1]"
                   }
                 `}
               >
@@ -117,10 +104,9 @@ const Navbar = () => {
                     absolute left-0 bottom-0 h-[2px]
                     bg-[#6aece1]
                     transition-all duration-300
-                    ${
-                      activeSection === item.id
-                        ? "w-full"
-                        : "w-0 group-hover:w-full"
+                    ${activeSection === item.id
+                      ? "w-full"
+                      : "w-0 group-hover:w-full"
                     }
                   `}
                 />
@@ -199,10 +185,9 @@ const Navbar = () => {
               }}
               className={`
                 block w-full text-left transition-all duration-300
-                ${
-                  activeSection === item.id
-                    ? "text-[#6aece1]"
-                    : "text-slate-300 hover:text-[#6aece1]"
+                ${activeSection === item.id
+                  ? "text-[#6aece1]"
+                  : "text-slate-300 hover:text-[#6aece1]"
                 }
               `}
             >

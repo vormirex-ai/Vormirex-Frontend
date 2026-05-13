@@ -11,8 +11,8 @@
     --background: 220 20% 98%;
     --foreground: 222 47% 11%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card: 200 60% 97%;
+      --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
@@ -33,14 +33,19 @@
     --input: 220 13% 91%;
     --ring: 243 100% 67%;
     --radius: 0.5rem;
+
+
   }
 
 .dark {
   --background: 222 64% 3%;
   --foreground: 210 40% 98%;
 
-  --card: 228 60% 8%;
-  --card-foreground: 210 40% 98%;
+  /* --card: 228 60% 8%;
+  --card-foreground: 210 40% 98%; */
+    /* DARK MODE CARD = #051522 */
+      --card: 206.9, 74.36%, 7.65%;
+      --card-foreground: 210 40% 98%;
 
   --popover: 228 60% 8%;
   --popover-foreground: 210 40% 98%;
@@ -88,4 +93,15 @@ body {
 
 .dark body {
   @apply bg-[#030712] text-white;
+}
+:root {
+  --tooltip-bg: #ffffff;
+  --tooltip-border: rgba(0, 0, 0, 0.08);
+  --tooltip-text: #0f172a;
+}
+
+.dark {
+  --tooltip-bg: #071c2f;
+  --tooltip-border: rgba(34, 211, 238, 0.15);
+  --tooltip-text: #ffffff;
 }

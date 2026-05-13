@@ -24,7 +24,7 @@ text-xs text-primary mb-8"
         <h1 className=" text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
           Learning That Feels Like <br />
           <span className="relative font-bold">
-            <span className="animate-gradient-x bg-primary bg-clip-text text-transparent">
+            <span className="animate-gradient-x bg-primary-gradient bg-clip-text text-transparent">
               Playing
             </span>
           </span>

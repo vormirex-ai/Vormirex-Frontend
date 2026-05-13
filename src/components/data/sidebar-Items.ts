@@ -18,6 +18,7 @@ import {
   Settings,
   Home,
   LucideIcon,
+  HelpCircle,
 } from "lucide-react";
 
 export interface NavItem {
@@ -39,16 +40,11 @@ export const navGroups: NavGroup[] = [
       { title: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
       { title: "Subjects", path: "/dashboard/subjects", icon: BookOpen },
       {
-        title: "Video Learning",
+        title: "Video Library",
         path: "/dashboard/video-learning",
         icon: Video,
         isNew: true,
       },
-    ],
-  },
-  {
-    groupLabel: "AI TOOLS",
-    items: [
       { title: "AI Chat", path: "/dashboard/ai-chat", icon: MessageCircle },
       { title: "Roadmap", path: "/dashboard/roadmap", icon: Map },
       { title: "Quiz", path: "/dashboard/quiz", icon: Trophy },
@@ -67,10 +63,31 @@ export const navGroups: NavGroup[] = [
       { title: "Daily Challenge", path: "/dashboard/challenge", icon: Zap },
     ],
   },
+  // {
+  //   groupLabel: "AI TOOLS",
+  //   items: [
+  //     { title: "AI Chat", path: "/dashboard/ai-chat", icon: MessageCircle },
+  //     { title: "Roadmap", path: "/dashboard/roadmap", icon: Map },
+  //     { title: "Quiz", path: "/dashboard/quiz", icon: Trophy },
+  //     {
+  //       title: "Focus Timer",
+  //       path: "/dashboard/focus-timer",
+  //       icon: Timer,
+  //       isNew: true,
+  //     },
+  //     {
+  //       title: "Flashcards",
+  //       path: "/dashboard/flashcards",
+  //       icon: Library,
+  //       isNew: true,
+  //     },
+  //     { title: "Daily Challenge", path: "/dashboard/challenge", icon: Zap },
+  //   ],
+  // },
   {
     groupLabel: "ANALYTICS",
     items: [
-      { title: "AI Insights", path: "/dashboard/insights", icon: BarChart3 },
+      { title: "Insights", path: "/dashboard/insights", icon: BarChart3 },
       { title: "Leaderboard", path: "/dashboard/leaderboard", icon: Medal },
       { title: "Study Planner", path: "/dashboard/planner", icon: Calendar },
       { title: "Notes", path: "/dashboard/notes", icon: PenLine },
@@ -83,6 +100,7 @@ export const navGroups: NavGroup[] = [
     items: [
       { title: "Profile", path: "/account/profile", icon: User },
       { title: "Settings", path: "/dashboard/settings", icon: Settings },
+      { title: "Help", path: "/", icon: HelpCircle },
       { title: "Home", path: "/", icon: Home },
     ],
   },

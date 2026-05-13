@@ -1,0 +1,11 @@
+#051522  -  dark mode card color 
+#0D1B28
+
+ #63E7DC   #56DCD2  #46D3C9  #26BDB3 #26BDB3 - right button 
+
+ #61E6DB  , #55DDD2 , #42D0C6 , #32C6BB , #167C7B  top right #26BDB3    - bar chart
+
+
+
+
+ 

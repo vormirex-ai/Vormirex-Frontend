@@ -67,13 +67,13 @@ const DashboardNavbar = () => {
 
         <ThemeToggle />
 
-        <Button variant="secondary" size="icon">
+        {/* <Button variant="secondary" size="icon">
           <Terminal size={18} />
-        </Button>
+        </Button> */}
 
         <div
           onClick={() => navigate("/account/profile")}
-          className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-sm font-bold cursor-pointer hover:opacity-80 transition"
+          className="w-9 h-9 rounded-full bg-primary-gradient flex items-center justify-center text-primary-foreground text-sm font-bold cursor-pointer hover:opacity-80 transition"
         >
           {firstLetter}
         </div>

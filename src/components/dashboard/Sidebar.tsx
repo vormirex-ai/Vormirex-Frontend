@@ -31,8 +31,8 @@ const Sidebar = () => {
                   className={({ isActive }) =>
                     `relative flex items-center gap-3 p-4 rounded-xl transition-all
     ${isActive
-                      ? "bg-primary/15"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                      ? "bg-primary-gradient text-primary-foreground"
+                      : "text-foreground hover:text-foreground hover:bg-muted"
                     }`
                   }
                 >
@@ -42,7 +42,7 @@ const Sidebar = () => {
                       <span className="text-sm font-medium">{item.title}</span>
 
                       {item.isNew && (
-                        <span className="ml-auto text-[10px] bg-primary text-primary-foreground px-2 py-0.5 rounded-full">
+                        <span className="ml-auto text-[10px] bg-primary-gradient text-primary-foreground px-2 py-0.5 rounded-full">
                           New
                         </span>
                       )}
@@ -50,7 +50,7 @@ const Sidebar = () => {
                       {isActive && (
                         <motion.div
                           layoutId="active"
-                          className="absolute right-0 -translate-y-1/2 w-1 h-6 bg-primary rounded-l-full"
+                          className="absolute right-0 -translate-y-1/2 w-1 h-6 bg-primary-gradient rounded-l-full"
                         />
                       )}
                     </>

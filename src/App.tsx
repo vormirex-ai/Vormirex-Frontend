@@ -10,10 +10,10 @@ import DashboardHome from "./pages/dashboard/DashboardHome";
 import DashboardLayout from "./components/layouts/DashboardLayout";
 import AiChat from "./pages/dashboard/AiChat";
 import Profile from "./pages/account/profile";
-import Subjects from "./pages/dashboard/subjects";
 import VideoLearning from "./pages/dashboard/video-learning";
 import PublicRoute from "./route/PublicRoute";
 import ProtectedRoute from "./route/ProtectedRoute";
+import SubjectPage from "./pages/dashboard/subjects";
 
 function App() {
   return (
@@ -21,25 +21,25 @@ function App() {
       <Route path="/" element={<LandingLayout />} />
 
       {/* Auth Routes */}
-      <Route element={<PublicRoute />}>
-        <Route element={<AuthLayout />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPasswordPage />} />
-          <Route path="/onboarding" element={<Onboarding />} />
-        </Route>
+      {/* <Route element={<PublicRoute />}> */}
+      <Route element={<AuthLayout />}>
+        <Route path="/login" element={<Login />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
+        <Route path="/onboarding" element={<Onboarding />} />
       </Route>
+      {/* </Route> */}
 
       {/* Dashboard */}
-      <Route element={<ProtectedRoute />}>
-        <Route path="/dashboard" element={<DashboardLayout />}>
-          <Route index element={<DashboardHome />} />
-          <Route path="subjects" element={<Subjects />} />
-          <Route path="video-learning" element={<VideoLearning />} />
-          <Route path="ai-chat" element={<AiChat />} />
-        </Route>
+      {/* <Route element={<ProtectedRoute />}> */}
+      <Route path="/dashboard" element={<DashboardLayout />}>
+        <Route index element={<DashboardHome />} />
+        <Route path="subjects" element={<SubjectPage />} />
+        <Route path="video-learning" element={<VideoLearning />} />
+        <Route path="ai-chat" element={<AiChat />} />
       </Route>
+      {/* </Route> */}
 
       {/* account */}
       <Route element={<ProtectedRoute />}>
