@@ -1,95 +1,59 @@
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
+import { containerStagger, fadeUpItem } from "@/lib/motion";
+import { RoadmapHeader } from "@/components/dashboard/roadmap/roadmap-header";
+import { RoadmapProgressCard } from "@/components/dashboard/roadmap/roadmap-progress-card";
+import { RoadmapTimeline } from "@/components/dashboard/roadmap/roadmap-timeline";
+import { RoadmapTipCard } from "@/components/dashboard/roadmap/roadmap-tip-card";
+import { RoadmapChatCard } from "@/components/dashboard/roadmap/roadmap-chat-card";
 
-import { AIRecommendations } from "@/components/dashboard/dashboard-home/ai-recommondation";
-import { ContinueLearning } from "@/components/dashboard/dashboard-home/continue-leraning";
-import { RecentActivity } from "@/components/dashboard/dashboard-home/recent-activity";
-import { StatsGrid } from "@/components/dashboard/dashboard-home/stats-grid";
-import { SubjectProgress } from "@/components/dashboard/dashboard-home/subject-progress";
-import { WeeklyActivity } from "@/components/dashboard/dashboard-home/weekly-activity";
-import WelcomeBanner from "@/components/dashboard/dashboard-home/welcome-banner";
-
-
-
-const container: Variants = {
-  hidden: {},
-
-  show: {
-    transition: {
-      staggerChildren: 0.12,
-    },
-  },
-};
-
-const item: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 30,
-    scale: 0.98,
-  },
-
-  show: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-
-    transition: {
-      duration: 0.5,
-      ease: "easeOut" as const,
-    },
-  },
-};
-
-
-const DashboardHome = () => {
+export default function RoadmapPage() {
   return (
     <motion.div
-      variants={container}
+      variants={containerStagger(0.12)}
       initial="hidden"
       animate="show"
-      className="min-h-screen p-6 text-white"
+      className="min-h-screen p-4 lg:p-10"
     >
-      <div className="mx-auto space-y-6">
-        <motion.div variants={item}>
-          <WelcomeBanner />
+      <div >
+        <motion.div variants={fadeUpItem}>
+          <RoadmapHeader />
+        </motion.div>
+        <motion.div variants={fadeUpItem}>
+          <RoadmapProgressCard />
         </motion.div>
 
-        <motion.div variants={item}>
-          <StatsGrid />
-        </motion.div>
+        <motion.div variants={fadeUpItem}>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-          <motion.div
-            variants={item}
-            className="lg:col-span-2"
-          >
-            <WeeklyActivity />
-          </motion.div>
+            <RoadmapTimeline />
+            <div className="space-y-6">
+              <h3 className="font-bold text-xl">
+                🤖 AI STUDY TIPS
+              </h3>
 
-          <motion.div variants={item}>
-            <SubjectProgress />
-          </motion.div>
-        </div>
+              <RoadmapTipCard
+                icon="💡"
+                title="Integration by Parts Tip"
+                description="Remember LIATE rule: always pick your 'u' term following Logarithm → Inverse trig → Algebraic → Trigonometric → Exponential order."
+              />
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-          <motion.div
-            variants={item}
-            className="lg:col-span-2"
-          >
-            <ContinueLearning />
-          </motion.div>
+              <RoadmapTipCard
+                icon="⚡"
+                title="Study Strategy"
+                description="Based on your pattern, you learn best in focused 45-minute sessions."
+              />
 
-          <motion.div variants={item}>
-            <AIRecommendations />
-          </motion.div>
-        </div>
+              <RoadmapTipCard
+                icon="🏆"
+                title="This Week's Goal"
+                description="Complete 3 lessons + 1 quiz to unlock the Integration Master badge."
+              />
 
-
-        <motion.div variants={item}>
-          <RecentActivity />
+              <RoadmapChatCard />
+            </div>
+          </div>
         </motion.div>
       </div>
     </motion.div>
   );
-};
-
-export default DashboardHome;
+}

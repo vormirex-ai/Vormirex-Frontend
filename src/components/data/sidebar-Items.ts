@@ -47,7 +47,7 @@ export const navGroups: NavGroup[] = [
       },
       { title: "AI Chat", path: "/dashboard/ai-chat", icon: MessageCircle },
       { title: "Roadmap", path: "/dashboard/roadmap", icon: Map },
-      { title: "Quiz", path: "/dashboard/quiz", icon: Trophy },
+      { title: "Quiz", path: "/practice/quiz", icon: Trophy },
       {
         title: "Focus Timer",
         path: "/dashboard/focus-timer",
@@ -63,27 +63,7 @@ export const navGroups: NavGroup[] = [
       { title: "Daily Challenge", path: "/dashboard/challenge", icon: Zap },
     ],
   },
-  // {
-  //   groupLabel: "AI TOOLS",
-  //   items: [
-  //     { title: "AI Chat", path: "/dashboard/ai-chat", icon: MessageCircle },
-  //     { title: "Roadmap", path: "/dashboard/roadmap", icon: Map },
-  //     { title: "Quiz", path: "/dashboard/quiz", icon: Trophy },
-  //     {
-  //       title: "Focus Timer",
-  //       path: "/dashboard/focus-timer",
-  //       icon: Timer,
-  //       isNew: true,
-  //     },
-  //     {
-  //       title: "Flashcards",
-  //       path: "/dashboard/flashcards",
-  //       icon: Library,
-  //       isNew: true,
-  //     },
-  //     { title: "Daily Challenge", path: "/dashboard/challenge", icon: Zap },
-  //   ],
-  // },
+
   {
     groupLabel: "ANALYTICS",
     items: [

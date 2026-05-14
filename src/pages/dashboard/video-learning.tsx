@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { containerStagger, fadeUpItem } from "@/lib/motion";
+
 import { LessonHeader } from "@/components/dashboard/video-leraning/lession-header";
 import { VideoPlayer } from "@/components/dashboard/video-leraning/video-player";
 import { ActionButtons } from "@/components/dashboard/video-leraning/action-buttons";
@@ -12,17 +13,20 @@ export default function VideoLearning() {
       variants={containerStagger(0.12)}
       initial="hidden"
       animate="show"
-      className="min-h-screen p-8 flex gap-8"
+      className="min-h-screen   p-4 lg:p-10"
     >
-      <div className="flex-1 flex flex-col space-y-6">
+      <div className="flex flex-col gap-6 lg:gap-8">
+
         <motion.div variants={fadeUpItem}>
           <LessonHeader />
         </motion.div>
 
-        <div className="flex gap-6">
-          <div>
+        <div className="flex flex-col xl:flex-row gap-6 lg:gap-8">
+
+          <div className="flex-1 flex flex-col space-y-5 lg:space-y-6 min-w-0">
+
             <motion.div variants={fadeUpItem}>
-              <div className="relative rounded-2xl overflow-hidden border border-cyan-500/10 ">
+              <div className="relative rounded-2xl overflow-hidden border border-cyan-500/10 w-full">
                 <VideoPlayer />
               </div>
             </motion.div>
@@ -32,14 +36,17 @@ export default function VideoLearning() {
             </motion.div>
 
             <motion.div variants={fadeUpItem}>
-              <div className="bg-card rounded-xl p-6 border border-cyan-500/10  h-64 overflow-hidden  shadow-2xl transition-all duration-300 hover:shadow-[0_0_25px_rgba(34,211,238,0.25)] hover:border-cyan-400/5">
+              <div className="bg-card rounded-xl p-4 sm:p-5 lg:p-6 border border-cyan-500/10 min-h-[260px] max-h-[400px] overflow-y-auto shadow-2xl transition-all duration-300 hover:shadow-[0_0_25px_rgba(34,211,238,0.25)] hover:border-cyan-400/5">
                 <TranscriptSection />
               </div>
             </motion.div>
           </div>
 
-          <motion.div variants={fadeUpItem}>
-            <aside className="shrink-0">
+          <motion.div
+            variants={fadeUpItem}
+            className="w-full xl:w-[360px] shrink-0"
+          >
+            <aside className="w-full">
               <AIChatSidebar />
             </aside>
           </motion.div>

@@ -105,3 +105,34 @@ body {
   --tooltip-border: rgba(34, 211, 238, 0.15);
   --tooltip-text: #ffffff;
 }
+
+
+/* Custom Thin Gradient Scrollbar */
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg,
+      #63E7DC 0%,
+      #56DCD2 35%,
+      #46D3C9 70%,
+      #26BDB3 100%);
+
+  border-radius: 999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  opacity: 0.9;
+}
+
+/* Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #46D3C9 transparent;
+}

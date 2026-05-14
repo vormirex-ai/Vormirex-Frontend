@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 
 export function AIChatSidebar() {
   return (
-    <div className="w-[400px] h-[85vh] border border-cyan-500/10 bg-card rounded-xl flex flex-col border border-cyan-500/10 shadow-2xl transition-all duration-300 hover:shadow-[0_0_25px_rgba(34,211,238,0.25)] hover:border-cyan-400/5">
+    <div className="w-full lg:w-[400px] h-[85vh] border border-cyan-500/10 bg-card rounded-xl flex flex-col shadow-2xl transition-all duration-300 hover:shadow-[0_0_25px_rgba(34,211,238,0.25)] hover:border-cyan-400/5">
 
       <div className="p-4 border-b border-slate-800 flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -23,13 +23,13 @@ export function AIChatSidebar() {
       <div className="flex-1 p-4 overflow-y-auto">
         <div className="flex gap-3 items-start">
           <div className="bg-slate-800 p-2 rounded-full"><Bot size={16} className="text-blue-400" /></div>
-          <div className="bg-slate-800/50 p-4 rounded-2xl text-sm text-slate-200 border border-slate-700">
+          <div className="bg-slate-800/50 p-4 rounded-2xl text-xs md:text-sm text-slate-200 border border-slate-700">
             👋 Hi! I'm watching this lesson with you. Ask me anything...
           </div>
         </div>
       </div>
 
-      {/* Input */}
+
       <div className="p-4 border-t border-slate-800 bg-slate-900/30">
         <div className="relative">
           <Input className="bg-slate-950 border-slate-700 text-white pr-10" placeholder="Ask about this topic..." />

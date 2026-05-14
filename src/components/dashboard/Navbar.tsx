@@ -3,16 +3,34 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 
 import { navGroups } from "../data/sidebar-Items";
-import { Search, Bell, Terminal, Menu } from "lucide-react";
+import {
+  Search,
+  Bell,
+  Menu,
+  X,
+} from "lucide-react";
+
 import { ThemeToggle } from "../theme/theme-toggle";
 import { Button } from "../ui/button";
+import CommandMenu from "./command-menu";
 
 const allNavItems = navGroups.flatMap((group) => group.items);
 
-const DashboardNavbar = () => {
+interface NavbarProps {
+  sidebarOpen: boolean;
+  setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const DashboardNavbar = ({
+  sidebarOpen,
+  setSidebarOpen,
+}: NavbarProps) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { user } = useSelector((state: RootState) => state.auth);
+
+  const { user } = useSelector(
+    (state: RootState) => state.auth
+  );
 
   const currentPage = allNavItems.find(
     (item) => item.path === location.pathname
@@ -24,36 +42,46 @@ const DashboardNavbar = () => {
     "A";
 
   return (
-    <header className="h-16 fixed top-0 left-64 right-0 bg-background/90 backdrop-blur-xl border-b border-border px-6 flex items-center justify-between z-40">
+    <header className="h-16 fixed top-0 left-0 lg:left-64 right-0 bg-background/90 backdrop-blur-xl border-b border-border px-4 lg:px-6 flex items-center justify-between z-40">
 
       <div className="flex items-center gap-4">
-        <Button variant="secondary" size="icon">
-          <Menu size={18} />
+
+        {/* Mobile Toggle */}
+        <Button
+          variant="secondary"
+          size="icon"
+          className="lg:hidden"
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+        >
+          {sidebarOpen ? (
+            <X size={18} />
+          ) : (
+            <Menu size={18} />
+          )}
         </Button>
 
-        <div>
+        <div className="hidden sm:block">
           <h2 className="text-lg font-bold text-foreground">
             {currentPage?.title || "Dashboard"}
           </h2>
+
           <p className="text-xs text-muted-foreground">
-            AI Tutor / {currentPage?.title || "Dashboard"}
+            Vormirex / {currentPage?.title || "Dashboard"}
           </p>
         </div>
       </div>
 
-
       <div className="flex items-center gap-4">
-
         <div className="hidden lg:flex items-center gap-2 bg-orange-500/10 text-orange-500 px-3 py-1.5 rounded-full border border-orange-500/20 text-xs font-bold">
           🔥 12 day streak
         </div>
-
 
         <div className="relative hidden md:block">
           <Search
             size={16}
             className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
           />
+
           <input
             placeholder="Search anything..."
             className="bg-card border border-border text-foreground text-sm pl-10 pr-4 py-2 rounded-xl w-64 outline-none"
@@ -64,12 +92,9 @@ const DashboardNavbar = () => {
           <Bell size={18} />
         </Button>
 
-
         <ThemeToggle />
 
-        {/* <Button variant="secondary" size="icon">
-          <Terminal size={18} />
-        </Button> */}
+        <CommandMenu />
 
         <div
           onClick={() => navigate("/account/profile")}

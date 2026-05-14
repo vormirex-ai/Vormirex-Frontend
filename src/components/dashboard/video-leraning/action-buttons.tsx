@@ -9,7 +9,7 @@ const actions = [
 
 export function ActionButtons() {
   return (
-    <div className="grid grid-cols-4 gap-4 my-4 border border-cyan-500/10 shadow-2xl transition-all duration-300 hover:shadow-[0_0_25px_rgba(34,211,238,0.25)] hover:border-cyan-400/5">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-4 border border-cyan-500/10 shadow-2xl transition-all duration-300 hover:shadow-[0_0_25px_rgba(34,211,238,0.25)] hover:border-cyan-400/5">
       {actions.map((item) => (
         <Button
           key={item.label}

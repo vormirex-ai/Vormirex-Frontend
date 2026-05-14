@@ -8,12 +8,14 @@ import ResetPasswordPage from "./pages/auth/reset-password";
 import Onboarding from "./pages/auth/onboarding";
 import DashboardHome from "./pages/dashboard/DashboardHome";
 import DashboardLayout from "./components/layouts/DashboardLayout";
-import AiChat from "./pages/dashboard/AiChat";
 import Profile from "./pages/account/profile";
 import VideoLearning from "./pages/dashboard/video-learning";
 import PublicRoute from "./route/PublicRoute";
 import ProtectedRoute from "./route/ProtectedRoute";
 import SubjectPage from "./pages/dashboard/subjects";
+import AIChatPage from "./pages/dashboard/AiChat";
+import RoadmapPage from "./pages/dashboard/learning-roadmap";
+import QuizPage from "./pages/practice/quiz";
 
 function App() {
   return (
@@ -37,9 +39,15 @@ function App() {
         <Route index element={<DashboardHome />} />
         <Route path="subjects" element={<SubjectPage />} />
         <Route path="video-learning" element={<VideoLearning />} />
-        <Route path="ai-chat" element={<AiChat />} />
+        <Route path="ai-chat" element={<AIChatPage />} />
+        <Route path="roadmap" element={<RoadmapPage />} />
       </Route>
       {/* </Route> */}
+
+
+      <Route path="/practice" element={<DashboardLayout />}>
+        <Route path="quiz" element={<QuizPage />} />
+      </Route>
 
       {/* account */}
       <Route element={<ProtectedRoute />}>
