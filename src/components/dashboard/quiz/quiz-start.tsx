@@ -40,7 +40,7 @@ export default function QuizStart({
           </span>
         </div>
 
-        <div className="bg-card dark:bg-[#1c1412] border border-orange-950 rounded-xl p-3 sm:p-4 flex flex-col items-center justify-center">
+        <div className="bg-card dark:bg-[#1c1412] border border-orange-950/40 rounded-xl p-3 sm:p-4 flex flex-col items-center justify-center">
           <span className="text-xl sm:text-2xl font-bold">
             10 min
           </span>
@@ -50,7 +50,7 @@ export default function QuizStart({
           </span>
         </div>
 
-        <div className="bg-card dark:bg-[#141026] border border-purple-950 rounded-xl p-3 sm:p-4 flex flex-col items-center justify-center">
+        <div className="bg-card dark:bg-[#141026] border border-purple-950/40 rounded-xl p-3 sm:p-4 flex flex-col items-center justify-center">
           <span className="text-xl sm:text-2xl font-bold">
             +200
           </span>

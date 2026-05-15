@@ -90,9 +90,9 @@ const SignUp = () => {
   return (
     <div className="min-h-screen w-full flex items-center justify-center  relative overflow-hidden px-4">
 
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-500/10 blur-[120px] rounded-full" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/10 blur-[120px] rounded-full" />
 
-      <Card className="w-full max-w-md bg-[#0c1425]/80 backdrop-blur-xl border border-sky-400/20 text-white shadow-[0_0_40px_rgba(56,189,248,0.15)] z-10 p-2 md:p-6">
+      <Card className="w-full max-w-md bg-card backdrop-blur-xl border border-cyan-500/10 text-white shadow-[0_0_40px_rgba(56,189,248,0.15)] z-10 p-2 md:p-6">
         <CardHeader className="space-y-1 flex flex-col items-center">
           <div className="flex items-center gap-2 cursor-pointer my-5">
             <img src={logo} alt="Logo" className="w-6 h-6" />

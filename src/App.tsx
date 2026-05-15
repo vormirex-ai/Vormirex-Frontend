@@ -16,6 +16,7 @@ import SubjectPage from "./pages/dashboard/subjects";
 import AIChatPage from "./pages/dashboard/AiChat";
 import RoadmapPage from "./pages/dashboard/learning-roadmap";
 import QuizPage from "./pages/practice/quiz";
+import FlashcardPage from "./pages/practice/flash-cards";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
 
       <Route path="/practice" element={<DashboardLayout />}>
         <Route path="quiz" element={<QuizPage />} />
+        <Route path="flash-cards" element={<FlashcardPage />} />
       </Route>
 
       {/* account */}

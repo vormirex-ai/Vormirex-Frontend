@@ -56,7 +56,7 @@ export const navGroups: NavGroup[] = [
       },
       {
         title: "Flashcards",
-        path: "/dashboard/flashcards",
+        path: "/practice/flash-cards",
         icon: Library,
         isNew: true,
       },

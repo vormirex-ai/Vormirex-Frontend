@@ -1,5 +1,5 @@
 import { stats } from "@/components/data/dashboard";
-import { StatCard } from "./stats-cards";
+import { StatCard } from "./dashboard-stats-cards";
 
 export function StatsGrid() {
   return (

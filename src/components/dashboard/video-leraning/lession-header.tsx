@@ -9,20 +9,20 @@ export function LessonHeader() {
         <div className="flex items-start sm:items-center gap-3 mb-2">
 
           <div className="w-6 h-6 shrink-0 bg-orange-500 rounded flex items-center justify-center">
-            <span className="text-white text-xs font-bold">L</span>
+            <span className="text-xs font-bold">L</span>
           </div>
 
-          <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-white leading-snug break-words">
+          <h1 className="text-lg sm:text-xl lg:text-2xl font-bold leading-snug break-words">
             Calculus: Integration Techniques
           </h1>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm text-slate-400">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm text-textColor">
           <span>Chapter 5 • Lesson 3</span>
           <span>• 45 min</span>
           <Badge
             variant="secondary"
-            className="bg-blue-900/30 text-blue-400 hover:bg-blue-900/30 border-none"
+            className="bg-primary-gradient text-black  border-none rounded-md"
           >
             In Progress
           </Badge>
@@ -32,7 +32,7 @@ export function LessonHeader() {
 
         <Button
           variant="secondary"
-          className="flex-1 sm:flex-none bg-slate-800 text-white hover:bg-slate-700"
+          className="flex-1 sm:flex-none "
         >
           <Bookmark className="w-4 h-4 mr-2" />
           Save
@@ -40,7 +40,7 @@ export function LessonHeader() {
 
         <Button
           variant="secondary"
-          className="flex-1 sm:flex-none bg-slate-800 text-white hover:bg-slate-700"
+          className="flex-1 sm:flex-none "
         >
           <Share2 className="w-4 h-4 mr-2" />
           Share

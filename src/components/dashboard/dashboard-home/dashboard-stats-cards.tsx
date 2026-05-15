@@ -1,15 +1,15 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { motion, animate } from "framer-motion";
 import { useEffect, useState } from "react";
+import { motion, animate } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
 
 type Props = {
   title: string;
-  value: string;
-  suffix: string;
-  badge: string;
-  icon: any;
-  iconBg: string;
-  iconColor: string;
+  value: any;
+  suffix?: string;
+  badge?: string;
+  icon?: any;
+  iconBg?: string;
+  iconColor?: string;
 };
 
 export function StatCard({

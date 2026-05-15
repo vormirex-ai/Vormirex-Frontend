@@ -67,7 +67,6 @@ export default function QuizCard({
         </button>
       </div>
 
-      {/* Progress */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between w-full text-xs sm:text-sm font-medium text-gray-400 px-1">
 
         <div className="flex items-center gap-3 sm:gap-4 w-full sm:max-w-xs">
@@ -77,7 +76,7 @@ export default function QuizCard({
 
           <Progress
             value={progressValue}
-            className="h-2 bg-[#161c2c] [&>div]:bg-gradient-to-r [&>div]:from-cyan-500 [&>div]:to-purple-500"
+            className="h-2 bg-[#191f31] [&>div]:bg-primary-gradient"
           />
         </div>
 
