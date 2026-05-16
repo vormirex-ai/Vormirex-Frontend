@@ -50,7 +50,7 @@ export default function AIChatPage() {
       initial="hidden"
       animate="show"
     >
-      <div className="h-[calc(100vh-80px)] flex flex-col max-w-5xl mx-auto p-4 lg:p-10 overflow-hidden">
+      <div className="h-[calc(100vh-80px)] flex flex-col max-w-5xl mx-auto p-1 lg:p-10 overflow-hidden">
 
         <motion.div variants={fadeUpItem}>
           <div className="shrink-0">
@@ -58,7 +58,7 @@ export default function AIChatPage() {
           </div>
         </motion.div>
 
-        <div className="flex-1 overflow-y-auto py-6 pr-2 custom-scrollbar">
+        <div className="flex-1 overflow-y-auto py-6 pr-2 custom-scrollbar ">
           <motion.div variants={fadeUpItem}>
             {messages.map((message, index) => (
               <ChatMessage
@@ -81,7 +81,7 @@ export default function AIChatPage() {
             <ChatInput
               onSend={handleSendMessage}
               placeholder="Ask your AI Tutor anything..."
-              showSuggestions
+              showSuggestions={messages.length <= 1}
             >
               <ChatSuggestions
                 onSuggestionClick={handleSendMessage}

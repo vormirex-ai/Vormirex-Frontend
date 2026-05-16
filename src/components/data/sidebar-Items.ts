@@ -49,8 +49,13 @@ export const navGroups: NavGroup[] = [
       { title: "Roadmap", path: "/dashboard/roadmap", icon: Map },
       { title: "Quiz", path: "/practice/quiz", icon: Trophy },
       {
+        title: "Daily Challenge",
+        path: "/practice/daily-challenges",
+        icon: Zap,
+      },
+      {
         title: "Focus Timer",
-        path: "/dashboard/focus-timer",
+        path: "/productivity/timer",
         icon: Timer,
         isNew: true,
       },
@@ -60,7 +65,6 @@ export const navGroups: NavGroup[] = [
         icon: Library,
         isNew: true,
       },
-      { title: "Daily Challenge", path: "/dashboard/challenge", icon: Zap },
     ],
   },
 

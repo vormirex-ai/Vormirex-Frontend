@@ -17,6 +17,8 @@ import AIChatPage from "./pages/dashboard/AiChat";
 import RoadmapPage from "./pages/dashboard/learning-roadmap";
 import QuizPage from "./pages/practice/quiz";
 import FlashcardPage from "./pages/practice/flash-cards";
+import DailyChallengePage from "./pages/practice/daily-challenge";
+import { PromodoroTimer } from "./pages/productivity/timer";
 
 function App() {
   return (
@@ -49,6 +51,12 @@ function App() {
       <Route path="/practice" element={<DashboardLayout />}>
         <Route path="quiz" element={<QuizPage />} />
         <Route path="flash-cards" element={<FlashcardPage />} />
+        <Route path="daily-challenges" element={<DailyChallengePage />} />
+      </Route>
+
+
+      <Route path="/productivity" element={<DashboardLayout />}>
+        <Route path="timer" element={<PromodoroTimer />} />
       </Route>
 
       {/* account */}

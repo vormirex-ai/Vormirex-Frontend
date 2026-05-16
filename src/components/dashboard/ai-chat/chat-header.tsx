@@ -13,9 +13,10 @@ export function ChatHeader() {
             size={22}
           />
 
-          <h1 className="text-lg sm:text-xl md:text-3xl font-bold truncate">
+          <h1 className="text-2xl md:text-4xl  font-bold truncate">
             AI Chat
           </h1>
+
         </div>
 
         <p className="text-xs sm:text-sm text-slate-500 mt-1 leading-relaxed">

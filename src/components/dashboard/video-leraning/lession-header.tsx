@@ -12,7 +12,7 @@ export function LessonHeader() {
             <span className="text-xs font-bold">L</span>
           </div>
 
-          <h1 className="text-lg sm:text-xl lg:text-2xl font-bold leading-snug break-words">
+          <h1 className="text-2xl md:text-4xl  font-bold leading-snug break-words">
             Calculus: Integration Techniques
           </h1>
         </div>

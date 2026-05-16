@@ -1,12 +1,11 @@
 import { useMemo } from "react";
-import { motion } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
-
+import { motion } from "framer-motion";
 import { fadeUpItem } from "@/lib/motion";
 import { StatCard } from "@/components/dashboard/dashboard-home/dashboard-stats-cards";
 import { DeckCategoryCard } from "@/components/dashboard/flash-card/deck-category-card";
 import { FlashcardStage } from "@/components/dashboard/flash-card/flashcard-stage";
-import { FlashCardHeader } from "@/components/dashboard/flash-card/flashCard-header";
+import { FlashCardHeader } from "@/components/dashboard/flash-card/flashcard-header";
 import { FlashCardResult } from "@/components/dashboard/flash-card/flashcard-result";
 
 import {
@@ -46,7 +45,7 @@ export default function FlashcardPage() {
   const progress =
     ((currentIndex + 1) / flashcards.length) * 100;
 
-  // ✅ NAVIGATION HELPERS
+
   const goToStep = (newStep: number, index = 0, deck = selectedDeck) => {
     setSearchParams({
       step: String(newStep),
@@ -64,7 +63,7 @@ export default function FlashcardPage() {
   };
 
   return (
-    <div className="min-h-screen p-4 lg:p-10">
+    <div className="min-h-screen p-1 lg:p-10">
       <div className="mx-auto space-y-10">
 
         {/* ================= STEP 1 ================= */}
@@ -115,11 +114,12 @@ export default function FlashcardPage() {
             </motion.div>
 
             <motion.div variants={fadeUpItem}>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-
+              <div
+                className=" grid  grid-cols-1  sm:grid-cols-2  lg:grid-cols-3  xl:grid-cols-4  gap-4 sm:gap-5 md:gap-6"
+              >
                 <div
                   onClick={() => goToStep(2, 0, "Mathematics")}
-                  className="cursor-pointer"
+                  className="cursor-pointer w-full"
                 >
                   <DeckCategoryCard
                     title="Mathematics"
@@ -132,7 +132,7 @@ export default function FlashcardPage() {
 
                 <div
                   onClick={() => goToStep(2, 0, "Python")}
-                  className="cursor-pointer"
+                  className="cursor-pointer w-full"
                 >
                   <DeckCategoryCard
                     title="Python"
@@ -142,7 +142,6 @@ export default function FlashcardPage() {
                     colorClass="bg-pink-500"
                   />
                 </div>
-
               </div>
             </motion.div>
           </>
@@ -159,22 +158,21 @@ export default function FlashcardPage() {
           >
             <div className="space-y-8">
 
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <Button
                   onClick={() => goToStep(1, 0)}
-                  className="text-sm border-none rounded-lg"
+                  className="text-sm border-none rounded-lg w-full sm:w-auto"
                   variant="secondary"
                 >
                   ← Back to Decks
                 </Button>
 
-                <div className="flex items-center gap-4">
-
-                  <p className="text-sm text-muted-foreground">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
+                  <p className="text-xs sm:text-sm text-muted-foreground text-center sm:text-left whitespace-nowrap">
                     Card {currentIndex + 1} of {flashcards.length}
                   </p>
 
-                  <div className="w-[160px] h-2 bg-muted rounded-full overflow-hidden">
+                  <div className="w-full sm:w-[160px] h-2 bg-muted rounded-full overflow-hidden">
                     <motion.div
                       animate={{ width: `${progress}%` }}
                       className="h-full bg-primary"

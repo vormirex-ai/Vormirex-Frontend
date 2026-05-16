@@ -12,7 +12,7 @@ export default function RoadmapPage() {
       variants={containerStagger(0.12)}
       initial="hidden"
       animate="show"
-      className="min-h-screen p-4 lg:p-10"
+      className="min-h-screen p-1 lg:p-10"
     >
       <div >
         <motion.div variants={fadeUpItem}>

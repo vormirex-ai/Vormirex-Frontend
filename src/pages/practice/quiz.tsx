@@ -52,7 +52,7 @@ export default function QuizPage() {
   };
 
   return (
-    <div className="mt-20 flex flex-col items-center justify-center p-4 lg:p-10 antialiased">
+    <div className="mt-20 flex flex-col items-center justify-center p-1 lg:p-10 antialiased">
 
       <AnimatePresence mode="wait">
 

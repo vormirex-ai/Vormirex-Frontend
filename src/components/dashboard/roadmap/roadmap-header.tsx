@@ -11,7 +11,7 @@ export function RoadmapHeader() {
             className="text-cyan-400 shrink-0 mt-1 sm:mt-0"
             size={22}
           />
-          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold leading-snug">
+          <h1 className="text-2xl md:text-4xl  font-bold leading-snug">
             Learning Roadmap
           </h1>
         </div>

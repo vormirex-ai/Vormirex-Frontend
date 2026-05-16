@@ -15,7 +15,7 @@ const subjectsData = [
 
 export default function SubjectPage() {
   return (
-    <div className="min-h-screen  p-4 lg:p-10">
+    <div className="min-h-screen  p-1 lg:p-10">
       <div className=" mx-auto space-y-10">
 
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>

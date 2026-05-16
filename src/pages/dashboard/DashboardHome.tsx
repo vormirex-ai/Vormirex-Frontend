@@ -15,7 +15,7 @@ const DashboardHome = () => {
       variants={containerStagger(0.12)}
       initial="hidden"
       animate="show"
-      className="min-h-screen p-4 lg:p-10 text-white"
+      className="min-h-screen p-1 lg:p-10 text-white"
     >
       <div className="mx-auto space-y-6">
         <motion.div variants={fadeUpItem}>

@@ -21,8 +21,12 @@ export function StatCard({
   iconBg,
   iconColor,
 }: Props) {
-  const numericValue = Number(value.toString().replace(/,/g, ""));
 
+
+  const numericValue = parseInt(
+    value.toString().replace(/,/g, ""),
+    10
+  );
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -51,7 +55,6 @@ export function StatCard({
         />
         <CardContent className="p-5">
           <div className="flex items-start justify-between">
-            {/* Icon */}
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
@@ -65,13 +68,14 @@ export function StatCard({
               <Icon className={`h-5 w-5 ${iconColor}`} />
             </motion.div>
 
-            {/* Badge */}
-            <div className="flex h-7 items-center rounded-lg bg-emerald-500/10 px-3 text-xs font-medium text-emerald-400">
-              ↗ {badge}
-            </div>
+            {badge && (
+              <div className="flex h-7 items-center rounded-lg bg-emerald-500/10 px-3 text-xs font-medium text-emerald-400">
+                ↗ {badge}
+              </div>
+            )}
           </div>
 
-          {/* Content */}
+
           <div className="mt-6">
             <p className="text-sm text-slate-400">{title}</p>
 

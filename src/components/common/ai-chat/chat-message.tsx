@@ -24,13 +24,13 @@ export function ChatMessage({
         }`}
     >
       {isAI && (
-        <div className="w-8 h-8 sm:w-9 sm:h-9 shrink-0 rounded-full bg-primary-gradient flex items-center justify-center border border-cyan-500/10 overflow-hidden">
-          <img src={logo} alt="AI" className="w-4 h-4" />
+        <div className="w-6 h-6 sm:w-9 sm:h-9 shrink-0 rounded-full bg-primary-gradient flex items-center justify-center border border-cyan-500/10 overflow-hidden">
+          <img src={logo} alt="AI" className="h-3 w-3 md:w-4 md:h-4" />
         </div>
       )}
 
       <div
-        className={`px-4 py-3 border w-fit max-w-[75%] break-words text-xs md:text-base ${isAI
+        className={`p-3 border w-fit max-w-[75%] break-words text-xs md:text-base ${isAI
           ? `bg-[#27545A] text-white rounded-2xl rounded-tl-none border-cyan-500/10 ${aiClassName}`
           : `bg-primary-gradient text-black rounded-2xl rounded-tr-none border-indigo-500/20 ${userClassName}`
           }`}
@@ -39,8 +39,8 @@ export function ChatMessage({
       </div>
 
       {!isAI && (
-        <div className="w-8 h-8 sm:w-9 sm:h-9 shrink-0 rounded-full bg-primary-gradient flex items-center justify-center border border-cyan-500/10">
-          <User size={16} className="text-black sm:w-5 sm:h-5" />
+        <div className="w-6 h-6 sm:w-9 sm:h-9 shrink-0 rounded-full bg-primary-gradient flex items-center justify-center border border-cyan-500/10">
+          <User size={16} className="text-black h-3 w-3 md:w-4 md:h-4" />
         </div>
       )}
     </div>

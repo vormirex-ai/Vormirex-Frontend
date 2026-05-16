@@ -2,18 +2,22 @@ import { Button } from "@/components/ui/button";
 
 export const FlashCardHeader = () => {
   return (
-    <div className="space-y-6 flex justify-between">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <h1 className="sm:text-xl  text-3xl font-bold  flex items-center gap-2">
-            🎴 Flashcards
-          </h1>
-          <p className="text-textColor mt-1">AI-generated flashcards with spaced repetition.</p>
-        </div>
+    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6">
+
+      <div className="space-y-1">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold flex items-center gap-2 flex-wrap">
+          <span>🎴</span>
+          <span>Flashcards</span>
+        </h1>
+
+        <p className="text-sm sm:text-base text-textColor max-w-xl leading-relaxed">
+          AI-generated flashcards with spaced repetition.
+        </p>
       </div>
 
-
-      <Button>AI Generate Cards</Button>
+      <Button className="w-full sm:w-auto h-11 px-5 rounded-xl shrink-0">
+        AI Generate Cards
+      </Button>
     </div>
   );
 };
