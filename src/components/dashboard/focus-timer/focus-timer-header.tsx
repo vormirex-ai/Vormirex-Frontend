@@ -6,9 +6,10 @@ const FocusTimerHeader = () => {
       <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
 
         <div className="max-w-2xl">
-          <h1 className="flex items-center gap-2 text-3xl font-bold sm:text-4xl lg:text-5xl">
-            <span>⏱</span>
-            <span>Focus Timer</span>
+
+          <h1 className=" text-2xl md:text-4xl  font-bold  flex items-center gap-2">
+
+            ⏱ Focus Timer
           </h1>
 
           <p className="mt-2 text-sm leading-relaxed text-textColor sm:text-base">

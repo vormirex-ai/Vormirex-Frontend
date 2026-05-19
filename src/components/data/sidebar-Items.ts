@@ -71,11 +71,19 @@ export const navGroups: NavGroup[] = [
   {
     groupLabel: "ANALYTICS",
     items: [
-      { title: "Insights", path: "/dashboard/insights", icon: BarChart3 },
-      { title: "Leaderboard", path: "/dashboard/leaderboard", icon: Medal },
-      { title: "Study Planner", path: "/dashboard/planner", icon: Calendar },
-      { title: "Notes", path: "/dashboard/notes", icon: PenLine },
-      { title: "Course Detail", path: "/dashboard/course", icon: FileText },
+      { title: "Insights", path: "/analytics/Insights", icon: BarChart3 },
+      { title: "Leaderboard", path: "/analytics/leaderboard", icon: Medal },
+      {
+        title: "Study Planner",
+        path: "/productivity/study-planner",
+        icon: Calendar,
+      },
+      { title: "Notes", path: "/productivity/notes", icon: PenLine },
+      {
+        title: "Course Detail",
+        path: "/dashboard/course-details",
+        icon: FileText,
+      },
       { title: "Interview Bot", path: "/dashboard/interview", icon: Mic2 },
     ],
   },
