@@ -136,3 +136,9 @@ body {
   scrollbar-width: thin;
   scrollbar-color: #46D3C9 transparent;
 }
+
+@layer components {
+  .custom-surface {
+    @apply border border-cyan-500/10 bg-card;
+  }
+}

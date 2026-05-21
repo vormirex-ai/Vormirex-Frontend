@@ -35,7 +35,7 @@ export default function VideoLearning() {
             </motion.div>
 
             <motion.div variants={fadeUpItem}>
-              <div className="bg-card rounded-xl p-4 sm:p-5 lg:p-6 border border-cyan-500/10 min-h-[260px] max-h-[400px]  shadow-2xl transition-all duration-300 hover:shadow-[0_0_25px_rgba(34,211,238,0.25)] hover:border-cyan-400/5 h-[500px] overflow-y-auto custom-scrollbar">
+              <div className="custom-surface rounded-xl p-4 sm:p-5 lg:p-6  min-h-[260px] max-h-[400px]  shadow-2xl transition-all duration-300 hover:shadow-[0_0_25px_rgba(34,211,238,0.25)] hover:border-cyan-400/5 h-[500px] overflow-y-auto custom-scrollbar">
                 <TranscriptSection />
               </div>
             </motion.div>

@@ -2,7 +2,7 @@ import { Send } from "lucide-react";
 
 export function RoadmapChatCard() {
   return (
-    <div className="rounded-2xl sm:rounded-3xl border border-cyan-500/10 bg-card p-4 sm:p-6">
+    <div className="rounded-2xl sm:rounded-3xl custom-surface p-4 sm:p-6">
 
       <div className="flex items-start sm:items-center gap-3 mb-4 sm:mb-5">
         <div className="w-8 h-8 sm:w-10 sm:h-10 shrink-0 rounded-full bg-primary-gradient flex items-center justify-center text-sm sm:text-base">

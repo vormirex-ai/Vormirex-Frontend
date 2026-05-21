@@ -23,15 +23,21 @@ export function LeaderboardList({
 
     return (
       <div
-        className={`flex items-center justify-between p-3 sm:p-4 rounded-xl transition-all duration-200
+        className={`flex items-center justify-between p-3 sm:p-4 rounded-xl  cursor-pointer transition-all duration-200
   ${row.isUser
-            ? "bg-[#dff4f7] dark:bg-[#154249]"
-            : "hover:bg-slate-100 dark:hover:bg-slate-900/20"
+            ? "bg-[#dff4f7] dark:bg-[#154249] border border-primary"
+            : `
+    hover:border 
+    hover:border-primary 
+    hover:bg-[#eefbfd]
+    
+    hover:dark:bg-[#154249]/40
+  `
           }`}
       >
 
         <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
-          {/* Rank styling */}
+
           <div className="w-6 flex justify-center text-center">
             {isSpecialRank ? (
               <span className="inline-flex items-center justify-center font-bold text-xs sm:text-sm w-6 h-6 rounded ">
@@ -83,7 +89,7 @@ export function LeaderboardList({
 
   return (
     <div className="flex flex-col gap-4 w-full">
-      <div className="bg-card border border-cyan-500/10 rounded-2xl p-2 sm:p-3 flex flex-col gap-1 shadow-2xl backdrop-blur-md">
+      <div className="custom-surface rounded-2xl p-2 sm:p-3 flex flex-col gap-1 shadow-2xl backdrop-blur-md">
         {listData.map((row) => (
           <LeaderboardRow key={row.rank} row={row} />
         ))}
@@ -92,7 +98,7 @@ export function LeaderboardList({
       {currentUser && (
         <div className="mt-2 flex flex-col gap-2">
           <p className="text-xs uppercase font-bold tracking-wider text-blue-400/80 px-2">Your Rank</p>
-          <div className="bg-card border border-cyan-500/10 rounded-2xl p-2 sm:p-3 shadow-xl ring-1 ring-blue-500/10">
+          <div className="custom-surface rounded-2xl p-2 sm:p-3 shadow-xl ring-1 ring-blue-500/10">
             <LeaderboardRow row={currentUser} />
           </div>
         </div>

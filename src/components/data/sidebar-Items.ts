@@ -84,7 +84,7 @@ export const navGroups: NavGroup[] = [
         path: "/dashboard/course-details",
         icon: FileText,
       },
-      { title: "Interview Bot", path: "/dashboard/interview", icon: Mic2 },
+      { title: "Interview Bot", path: "/practice/interview-bot", icon: Mic2 },
     ],
   },
   {

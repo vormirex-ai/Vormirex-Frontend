@@ -19,7 +19,7 @@ const LeaderBoardHeader = () => {
 
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
 
-          <div className="inline-flex items-center p-1 rounded-xl bg-card border border-cyan-500/10 backdrop-blur-sm self-start sm:self-center">
+          <div className="inline-flex items-center p-1 rounded-xl custom-surface backdrop-blur-sm self-start sm:self-center">
             {(["weekly", "monthly", "all-time"] as const).map((tab) => (
               <button
                 key={tab}

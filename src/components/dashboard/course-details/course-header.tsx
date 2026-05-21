@@ -1,7 +1,6 @@
-import React from 'react';
 import { Play, BookOpen, Clock, Target, Trophy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
+import { CustomProgress } from '@/components/common/custom-progress';
 
 interface CourseHeaderProps {
   title: string;
@@ -17,7 +16,7 @@ interface CourseHeaderProps {
 
 export function CourseHeader({ title, progress, description, stats }: CourseHeaderProps) {
   return (
-    <div className="relative overflow-hidden bg-card border border-cyan-500/10 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 shadow-md">
+    <div className="relative overflow-hidden custom-surface rounded-2xl p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 shadow-md">
       <div className="space-y-4 max-w-2xl">
         <div className="flex items-center gap-3">
 
@@ -68,15 +67,11 @@ export function CourseHeader({ title, progress, description, stats }: CourseHead
         </Button>
       </div>
 
-      <div className="absolute bottom-4 left-2 right-0 h-1.5 bg-slate-900">
-        <Progress
-          value={progress}
-          className="
-    h-2 bg-slate-900
-    [&>div]:bg-primary-gradient
-  "
-        />
-      </div>
+      <CustomProgress
+        value={progress}
+        className=" absolute bottom-4 left-2 right-0 h-2 "
+        indicatorClassName="bg-primary-gradient"
+      />
     </div>
   );
 }

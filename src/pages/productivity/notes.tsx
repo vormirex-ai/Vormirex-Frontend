@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { containerStagger } from "@/lib/motion";
+import { containerStagger, fadeUpItem } from "@/lib/motion";
 import { NoteHeader } from "@/components/dashboard/notes/note-header";
 import {
   NoteCard,
@@ -109,35 +109,39 @@ const NotesPage = () => {
       className="min-h-screen p-1 lg:p-10"
     >
       <div className="mx-auto space-y-10">
-        <NoteHeader
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-        />
+        <motion.div variants={fadeUpItem}>
+          <NoteHeader
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+          />
+        </motion.div>
 
-        {filteredNotes.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {filteredNotes.map((note) => (
-              <NoteCard
-                key={note.id}
-                note={note}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-20 rounded-2xl border border-dashed border-slate-300 dark:border-slate-800 bg-slate-100/40 dark:bg-[#0d121f]/30">
-            <BookOpen className="w-10 h-10 text-slate-500 mx-auto mb-3" />
+        <motion.div variants={fadeUpItem}>
+          {filteredNotes.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              {filteredNotes.map((note) => (
+                <NoteCard
+                  key={note.id}
+                  note={note}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-20 rounded-2xl border border-dashed border-slate-300 dark:border-slate-800 bg-slate-100/40 dark:bg-[#0d121f]/30">
+              <BookOpen className="w-10 h-10 text-slate-500 mx-auto mb-3" />
 
-            <h3 className="font-medium text-slate-700 dark:text-slate-200">
-              No resources found
-            </h3>
+              <h3 className="font-medium text-slate-700 dark:text-slate-200">
+                No resources found
+              </h3>
 
-            <p className="text-sm text-slate-500 mt-1">
-              Try adjusting your filters or search criteria.
-            </p>
-          </div>
-        )}
+              <p className="text-sm text-slate-500 mt-1">
+                Try adjusting your filters or search criteria.
+              </p>
+            </div>
+          )}
+        </motion.div>
       </div>
     </motion.div>
   );

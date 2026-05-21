@@ -1,7 +1,7 @@
 import { subjects } from "@/components/data/onboardingData";
 import SelectableCard from "./onboardingCard";
 import { useEffect } from "react";
-import { getAllCourses } from "@/services/couses";
+import { getAllCourses } from "@/services/courses";
 
 const StepSubjects = ({ formData, updateFormData }: any) => {
 

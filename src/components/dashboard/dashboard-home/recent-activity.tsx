@@ -9,7 +9,7 @@ import { activities } from "@/components/data/dashboard";
 
 export function RecentActivity() {
   return (
-    <Card className="border border-cyan-500/10 bg-card">
+    <Card>
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
           <CardTitle className="text-lg font-semibold ">

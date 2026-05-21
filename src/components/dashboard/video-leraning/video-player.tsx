@@ -42,7 +42,7 @@ export function VideoPlayer() {
   };
 
   return (
-    <div className="bg-card rounded-2xl overflow-hidden border border-cyan-500/10 shadow-2xl transition-all duration-300 hover:shadow-[0_0_25px_rgba(34,211,238,0.25)] hover:border-cyan-400/50">
+    <div className="custom-surface rounded-2xl overflow-hidden shadow-2xl transition-all duration-300 hover:shadow-[0_0_25px_rgba(34,211,238,0.25)] hover:border-cyan-400/50">
 
       <div className="aspect-video relative flex items-center justify-center bg-card overflow-hidden">
 

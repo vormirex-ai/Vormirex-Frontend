@@ -17,7 +17,7 @@ export interface Chapter {
 
 export function CourseChapterCard({ chapter }: { chapter: Chapter }) {
   return (
-    <div className="bg-card border border-cyan-500/10 rounded-2xl p-5 flex flex-col justify-between transition-all duration-200 hover:border-primary">
+    <div className=" custom-surface rounded-2xl p-5 flex flex-col justify-between transition-all duration-200 hover:border-primary">
       <div>
 
         <div className="flex items-center justify-between mb-4">

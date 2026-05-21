@@ -15,13 +15,13 @@ const buttonVariants = cva(
           "bg-card border border-border text-foreground font-semibold rounded-2xl hover:bg-muted transition-all duration-300 shadow-sm",
 
         outline:
-          "border-border bg-background hover:bg-muted hover:text-foreground",
+          "border-border bg-background hover:bg-muted hover:text-foreground border border-primary",
 
         ghost:
           "hover:bg-muted hover:text-foreground",
 
         destructive:
-          "bg-destructive/10 text-destructive hover:bg-destructive/20",
+          "bg-red-500 text-white hover:bg-red-600 shadow-lg shadow-red-500/20 rounded-2xl",
 
         link:
           "text-primary underline-offset-4 hover:underline",

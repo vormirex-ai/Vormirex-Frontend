@@ -40,7 +40,7 @@ export function ChatInput({ onSend }: ChatInputProps) {
             }
           }}
           placeholder="Ask your AI Tutor anything..."
-          className="w-full bg-card border border-cyan-500/10 rounded-2xl p-5 pr-32 text-slate-200 focus:outline-none focus:border-cyan-500/30 transition-all shadow-2xl"
+          className="w-full custom-surface rounded-2xl p-5 pr-32 text-slate-200 focus:outline-none focus:border-cyan-500/30 transition-all shadow-2xl"
         />
 
         <Button

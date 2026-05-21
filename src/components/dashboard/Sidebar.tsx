@@ -55,7 +55,7 @@ const Sidebar = ({
             to="/"
             className="flex items-center gap-2 px-3 py-2 w-fit"
           >
-            <img alt="logo" src={logo} className="w-5 h-5" />
+            <img alt="logo" src={logo} className="w-5 h-5 bg-black dark:bg-transparent" />
 
             <span className="font-bold text-foreground">
               Vormirex

@@ -1,10 +1,10 @@
+import { CustomProgress } from "@/components/common/custom-progress";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 
 type Item = {
   title: string;
@@ -26,7 +26,7 @@ const ProgressListCard = ({
   items,
 }: Props) => {
   return (
-    <Card className="border border-cyan-500/10 bg-card">
+    <Card className="custom-surface">
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle>{title}</CardTitle>
 
@@ -49,9 +49,9 @@ const ProgressListCard = ({
               </span>
             </div>
 
-            <Progress
+            <CustomProgress
               value={item.value}
-              className="h-2 bg-slate-800"
+              className="h-2"
               indicatorClassName={item.color}
             />
           </div>

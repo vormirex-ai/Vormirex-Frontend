@@ -26,7 +26,7 @@ export function AIInsights() {
       <div className="flex items-center gap-2 px-1 text-xs font-bold uppercase tracking-wider text-textColor">
         <span>🤖</span> AI Insights
       </div>
-      <div className="bg-card border border-cyan-500/10 rounded-2xl p-5 shadow-xl flex flex-col justify-between gap-6 h-full">
+      <div className="custom-surface rounded-2xl p-5 shadow-xl flex flex-col justify-between gap-6 h-full">
 
 
         <div className="flex items-center gap-3">

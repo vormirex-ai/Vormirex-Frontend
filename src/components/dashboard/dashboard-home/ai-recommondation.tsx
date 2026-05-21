@@ -1,5 +1,3 @@
-// AIRecommendations.tsx
-
 import {
   Brain,
   ArrowUpRight,
@@ -16,10 +14,9 @@ import { recommendations } from "@/components/data/dashboard";
 
 export function AIRecommendations() {
   return (
-    <Card className="border border-cyan-500/10 bg-card">
+    <Card >
       <CardHeader>
         <div className="flex items-center gap-3">
-          {/* Header Icon */}
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 to-emerald-400 shadow-lg">
             <Brain className="h-5 w-5 text-black" />
           </div>
@@ -43,7 +40,7 @@ export function AIRecommendations() {
           return (
             <div
               key={item.title}
-              className="group flex items-center justify-between rounded-2xl border border-white/5 bg-white/[0.03] p-4 transition-all duration-300 hover:bg-white/[0.05]"
+              className="group flex items-center justify-between rounded-2xl border dark:border-white/5 border-primary bg-primary/5 dark:bg-[#154249]/40  p-4 transition-all duration-300 hover:bg-white/[0.05]"
             >
               <div className="flex items-center gap-4">
                 <div

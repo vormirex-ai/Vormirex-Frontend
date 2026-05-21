@@ -4,9 +4,8 @@ import {
 } from "@/components/ui/card";
 
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-
 import { Clock } from "lucide-react";
+import { CustomProgress } from "@/components/common/custom-progress";
 
 interface SubjectCardProps {
   title: string;
@@ -31,7 +30,7 @@ export const SubjectCard = ({
 }: SubjectCardProps) => {
   return (
     <Card
-      className=" group relative overflow-hidden rounded-2xl border border-cyan-500/10 bg-card transition-all duration-500 hover:-translate-y-1 hover:border-cyan-400/20 hover:shadow-[0_0_30px_rgba(99,231,220,0.08)]">
+      className=" group relative overflow-hidden rounded-2xl custom-surface transition-all duration-500 hover:-translate-y-1 hover:border-cyan-400/20 hover:shadow-[0_0_30px_rgba(99,231,220,0.08)]">
 
       <div
         className=" absolute left-0 top-0 h-[2px] w-0 bg-gradient-to-r from-[#63E7DC] via-[#46D3C9] to-[#26BDB3] transition-all duration-500 group-hover:w-full" />
@@ -92,9 +91,9 @@ export const SubjectCard = ({
           </div>
 
           <div className="relative">
-            <Progress
+            <CustomProgress
               value={progress}
-              className="h-2 bg-slate-800"
+              className="h-2"
             />
 
             <div

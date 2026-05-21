@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import {
   Play,
@@ -94,7 +92,7 @@ export function TimerCard() {
     (progress / 100) * circumference;
 
   return (
-    <div className="rounded-2xl sm:rounded-3xl border bg-card border-cyan-500/10 p-2 md:p-4 sm:p-6 shadow-lg">
+    <div className="rounded-2xl sm:rounded-3xl custom-surface p-2 md:p-4 sm:p-6 shadow-lg">
 
       <div className="grid grid-cols-3 overflow-hidden rounded-xl sm:rounded-2xl border border-primary dark:border-white/10 p-1 bg-card dark:bg-[#154249]">
 
@@ -103,7 +101,7 @@ export function TimerCard() {
             key={tab.label}
             onClick={() => changeTab(index)}
             className={`rounded-lg sm:rounded-xl py-2 sm:py-4 text-center transition-all duration-300 ${activeTab === index
-              ? "bg-primary-gradient shadow-inner"
+              ? "bg-primary-gradient shadow-inner text-slateText"
               : "text-slate-400 hover:bg-white/5"
               }`}
           >

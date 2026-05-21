@@ -13,7 +13,6 @@ export function RoadmapTimeline() {
         {roadmapTimeline.map((item, index) => (
           <div key={index} className="flex gap-3 sm:gap-5">
 
-            {/* Timeline */}
             <div className="flex flex-col items-center">
 
               <div
@@ -39,7 +38,6 @@ export function RoadmapTimeline() {
               )}
             </div>
 
-            {/* Content */}
             <div className="flex-1 pb-5 sm:pb-6 min-w-0">
 
               <p className="text-[10px] sm:text-xs tracking-widest text-textColor mb-1 sm:mb-2">
@@ -47,8 +45,6 @@ export function RoadmapTimeline() {
               </p>
 
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-
-                {/* Title */}
                 <div className="min-w-0">
                   <h4
                     className={`text-xs sm:text-sm leading-relaxed break-words ${item.completed
@@ -60,7 +56,6 @@ export function RoadmapTimeline() {
                   </h4>
                 </div>
 
-                {/* Right Side */}
                 <div className="flex items-center flex-wrap gap-2 sm:gap-4">
 
                   <span className="text-[10px] sm:text-sm text-textColor whitespace-nowrap">

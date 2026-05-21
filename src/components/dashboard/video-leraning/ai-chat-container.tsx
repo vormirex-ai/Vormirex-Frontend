@@ -42,7 +42,7 @@ export function AIChatSidebar() {
   };
 
   return (
-    <div className="w-full lg:w-[400px] h-[85vh] border border-cyan-500/10 bg-card rounded-xl flex flex-col shadow-2xl transition-all duration-300 hover:shadow-[0_0_25px_rgba(34,211,238,0.25)] hover:border-cyan-400/5">
+    <div className="w-full lg:w-[400px] h-[85vh] custom-surface rounded-xl flex flex-col shadow-2xl transition-all duration-300 hover:shadow-[0_0_25px_rgba(34,211,238,0.25)] hover:border-cyan-400/5">
       <div className="p-4 border-b border-slate-800 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="bg-primary-gradient p-2 rounded-lg text-white">

@@ -1,6 +1,6 @@
 export function RoadmapProgressCard() {
   return (
-    <div className="rounded-2xl sm:rounded-3xl border border-cyan-500/10 bg-card p-4 sm:p-6 lg:p-8 mb-6 lg:mb-8">
+    <div className="rounded-2xl sm:rounded-3xl custom-surface p-4 sm:p-6 lg:p-8 mb-6 lg:mb-8">
 
       <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between mb-6">
         <div className="min-w-0">
@@ -26,7 +26,7 @@ export function RoadmapProgressCard() {
         </div>
       </div>
 
-      <div className="w-full h-3 rounded-full bg-muted overflow-hidden mb-5">
+      <div className="w-full h-3 rounded-full dark:bg-muted bg-gray-400 overflow-hidden mb-5">
         <div className="h-full w-[38%] bg-primary-gradient rounded-full" />
       </div>
       <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-5 lg:gap-6 text-xs sm:text-sm text-textColor">

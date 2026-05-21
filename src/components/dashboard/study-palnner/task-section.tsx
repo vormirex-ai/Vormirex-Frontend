@@ -8,7 +8,7 @@ export function TaskSection({ type }: TaskSectionProps) {
   const isCompleted = type === "completed";
 
   return (
-    <div className="bg-card border border-cyan-500/10 rounded-3xl p-6">
+    <div className="custom-surface rounded-3xl p-6">
 
       <div className="flex items-center gap-2 mb-6">
         <div

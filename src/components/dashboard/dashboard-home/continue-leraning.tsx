@@ -1,5 +1,4 @@
 import { Play } from "lucide-react";
-
 import {
   Card,
   CardContent,
@@ -13,7 +12,7 @@ import { Button } from "@/components/ui/button";
 
 export function ContinueLearning() {
   return (
-    <Card className="col-span-2 border border-cyan-500/10 ">
+    <Card className="lg:col-span-2 border border-cyan-500/10 ">
       <CardHeader>
         <CardTitle>Continue Learning</CardTitle>
       </CardHeader>
@@ -22,7 +21,7 @@ export function ContinueLearning() {
         {continueLearning.map((item) => (
           <div
             key={item.title}
-            className="flex items-center gap-4 rounded-2xl border border-white/5 bg-gray-100 dark:bg-white/[0.02] p-4"
+            className="flex items-center gap-4 rounded-2xl border border-white/5 bg-primary/15 dark:bg-white/[0.02] p-4"
           >
 
             <Button className="rounded-full h-14 w-14">

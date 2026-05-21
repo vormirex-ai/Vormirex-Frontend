@@ -24,6 +24,8 @@ import Leaderboard from "./pages/analytics/Leaderboard";
 import StudyPlannerPage from "./pages/productivity/study-planner";
 import CourseDetails from "./pages/dashboard/course-detail";
 import NotesPage from "./pages/productivity/notes";
+import InterviewBotPage from "./pages/practice/Interview-bot";
+import SettingsPage from "./pages/account/settings";
 
 function App() {
   return (
@@ -50,6 +52,7 @@ function App() {
         <Route path="ai-chat" element={<AIChatPage />} />
         <Route path="roadmap" element={<RoadmapPage />} />
         <Route path="course-details" element={<CourseDetails />} />
+        <Route path="settings" element={<SettingsPage />} />
       </Route>
       {/* </Route> */}
 
@@ -58,6 +61,7 @@ function App() {
         <Route path="quiz" element={<QuizPage />} />
         <Route path="flash-cards" element={<FlashcardPage />} />
         <Route path="daily-challenges" element={<DailyChallengePage />} />
+        <Route path="interview-bot" element={<InterviewBotPage />} />
       </Route>
 
 

@@ -42,7 +42,7 @@ const days = [
 
 export function WeekCalendar() {
   return (
-    <div className="bg-card border border-cyan-500/10 shadow-md rounded-3xl p-6 overflow-x-auto">
+    <div className="custom-surface shadow-md rounded-3xl p-6 overflow-x-auto">
       <div className="grid grid-cols-7 gap-4 min-w-[1100px]">
         {days.map((item, index) => (
           <CalendarDay key={index} {...item} />

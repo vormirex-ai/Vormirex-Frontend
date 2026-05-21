@@ -10,7 +10,7 @@ export function RoadmapTipCard({
   icon,
 }: Props) {
   return (
-    <div className="rounded-3xl border border-cyan-500/10 bg-card p-6">
+    <div className="rounded-3xl custom-surface p-6">
       <div className="flex items-start gap-4">
         <div className="text-2xl">
           {icon}

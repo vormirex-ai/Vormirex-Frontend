@@ -3,6 +3,7 @@ import { containerStagger, fadeUpItem } from "@/lib/motion";
 import { SubjectCard } from "@/components/dashboard/subjects/subject-cards";
 import { SubjectHeader } from "@/components/dashboard/subjects/subject-header";
 
+
 const subjectsData = [
   { title: "Mathematics", icon: "📐", topics: 156, lessons: 48, progress: 72, timeStudied: "42h", status: "In Progress", color: "#6366f1" },
   { title: "Python Programming", icon: "💻", topics: 203, lessons: 32, progress: 48, timeStudied: "28h", status: "In Progress", color: "#ec4899" },

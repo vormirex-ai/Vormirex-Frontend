@@ -89,7 +89,7 @@ export default function QuizCard({
         </div>
       </div>
 
-      <div className="bg-card border border-cyan-500/10 rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl">
+      <div className="custom-surface rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl">
         <div className="flex flex-wrap gap-2 mb-5 sm:mb-6">
 
           <span className="bg-border text-slateText dark:bg-purple-950/60 dark:text-purple-400 text-[10px] sm:text-xs font-semibold px-3 py-1 rounded-full border border-purple-900/30">
@@ -111,8 +111,17 @@ export default function QuizCard({
             const isCorrect =
               option.id === currentQuestion.correctAnswer;
 
-            let optionStyles =
-              "bg-border border-transparent dark:hover:bg-[#1a2133] hover:bg-card hover:border-cyan-200";
+            let optionStyles = `
+  border border-slate-200 
+  bg-slate-50 
+  hover:bg-cyan-50 
+  hover:border-cyan-300
+  dark:border-white/10 
+  dark:bg-[#154249] 
+  dark:hover:bg-[#1b5660] 
+  dark:hover:border-cyan-400/30
+  transition-colors duration-200
+`;
 
             let badgeStyles =
               "bg-primary text-slateText";

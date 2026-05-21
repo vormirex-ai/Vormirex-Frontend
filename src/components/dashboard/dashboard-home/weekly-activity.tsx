@@ -19,7 +19,7 @@ import {
 
 export function WeeklyActivity() {
   return (
-    <Card className="col-span-2 border border-cyan-500/10 ">
+    <Card className="lg:col-span-2">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
