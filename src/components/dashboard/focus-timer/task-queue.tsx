@@ -41,7 +41,7 @@ export function TaskQueue() {
             className={`rounded-xl border p-4 transition-all duration-300
         ${task.status === "Active"
                 ? `
-              border-primary 
+              border-primary/20 
               bg-primary/5 
               shadow-primary
               dark:bg-[#154249]/40

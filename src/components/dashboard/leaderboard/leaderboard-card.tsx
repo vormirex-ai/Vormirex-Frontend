@@ -24,7 +24,7 @@ export function LeaderboardCard() {
   const currentUser = ALL_TIME_DATA.find((user) => user.isUser);
 
   return (
-    <div className="w-full max-w-4xl mx-auto min-h-screen   p-4 md:p-8 flex flex-col gap-6 select-none font-sans">
+    <div className="w-full max-w-4xl mx-auto min-h-screen  p-4 md:p-8 flex flex-col gap-6 select-none font-sans">
       <LeaderboardPodium topThree={topThree} />
       <LeaderboardList listData={remainingRows} currentUser={currentUser} />
     </div>

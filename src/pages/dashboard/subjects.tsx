@@ -3,6 +3,9 @@ import { containerStagger, fadeUpItem } from "@/lib/motion";
 import { SubjectCard } from "@/components/dashboard/subjects/subject-cards";
 import { SubjectHeader } from "@/components/dashboard/subjects/subject-header";
 
+import { getAllCourses } from "@/services/courses";
+import { useEffect } from "react";
+
 
 const subjectsData = [
   { title: "Mathematics", icon: "📐", topics: 156, lessons: 48, progress: 72, timeStudied: "42h", status: "In Progress", color: "#6366f1" },
@@ -14,7 +17,22 @@ const subjectsData = [
 ];
 
 
+
 export default function SubjectPage() {
+
+  useEffect(() => {
+    const fetchSubjects = async () => {
+      try {
+        const response = await getAllCourses();
+        console.log("Fetched subjects data:", response);
+
+      } catch (error) {
+        console.error("Error fetching subjects:", error);
+      }
+    };
+
+    fetchSubjects();
+  }, []);
   return (
     <div className="min-h-screen  p-1 lg:p-10">
       <div className=" mx-auto space-y-10">

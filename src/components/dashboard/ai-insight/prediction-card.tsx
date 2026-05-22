@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 export default function PredictionCard() {
   return (
     <div className="space-y-6 h-full">
-      <Card className="border border-cyan-500/10 relative overflow-hidden">
+      <Card className="relative overflow-hidden">
         <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-blue-600/10 blur-3xl" />
 
         <CardContent className="p-6 space-y-6">

@@ -13,6 +13,7 @@ import {
 import { ThemeToggle } from "../theme/theme-toggle";
 import { Button } from "../ui/button";
 import CommandMenu from "./command-menu";
+import NotificationDropdown from "../notification/notification-dropdown";
 
 const allNavItems = navGroups.flatMap((group) => group.items);
 
@@ -87,10 +88,11 @@ const DashboardNavbar = ({
             className="bg-card border border-border text-foreground text-sm pl-10 pr-4 py-2 rounded-xl w-64 outline-none"
           />
         </div>
-
+        {/* 
         <Button variant="secondary" size="icon">
           <Bell size={18} />
-        </Button>
+        </Button> */}
+        <NotificationDropdown />
 
         <ThemeToggle />
 

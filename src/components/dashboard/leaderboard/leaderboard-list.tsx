@@ -25,13 +25,13 @@ export function LeaderboardList({
       <div
         className={`flex items-center justify-between p-3 sm:p-4 rounded-xl  cursor-pointer transition-all duration-200
   ${row.isUser
-            ? "bg-[#dff4f7] dark:bg-[#154249] border border-primary"
+            ? "bg-[#dff4f7] dark:bg-primary/20 border border-primary"
             : `
     hover:border 
     hover:border-primary 
     hover:bg-[#eefbfd]
     
-    hover:dark:bg-[#154249]/40
+    hover:dark:bg-primary/40
   `
           }`}
       >

@@ -110,7 +110,7 @@ export const ChallengeQuiz: React.FC<ChallengeQuizProps> = ({
             idx === currentQuestion.correctAnswerIndex;
 
           let optionStyle =
-            "bg-card border-border text-foreground hover:bg-muted/60";
+            "custom-surface text-foreground hover:border hover:border-primary/30";
 
           if (isAnswered) {
             if (isCorrectAns) {

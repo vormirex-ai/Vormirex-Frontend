@@ -112,7 +112,6 @@ export default function DailyChallengePage() {
             </motion.div>
           )}
 
-          {/* QUIZ */}
           {step === "quiz" && (
             <motion.div
               key="quiz"

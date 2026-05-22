@@ -26,6 +26,7 @@ import CourseDetails from "./pages/dashboard/course-detail";
 import NotesPage from "./pages/productivity/notes";
 import InterviewBotPage from "./pages/practice/Interview-bot";
 import SettingsPage from "./pages/account/settings";
+import NotificationsPage from "./pages/dashboard/notifications";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
         <Route path="roadmap" element={<RoadmapPage />} />
         <Route path="course-details" element={<CourseDetails />} />
         <Route path="settings" element={<SettingsPage />} />
+        <Route path="notifications" element={<NotificationsPage />} />
       </Route>
       {/* </Route> */}
 

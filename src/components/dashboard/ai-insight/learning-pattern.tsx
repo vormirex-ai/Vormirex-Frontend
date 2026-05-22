@@ -12,16 +12,17 @@ const data = [
 
 export default function LearningPattern() {
   return (
-    <Card className="border border-cyan-500/10 h-full">
+
+    <Card className="h-full flex flex-col">
       <CardHeader>
         <h3 className="text-lg font-semibold">
           📈 Learning Pattern (Last 7 Days)
         </h3>
       </CardHeader>
 
-      <CardContent className="h-full flex flex-col justify-between">
-        {/* Chart */}
-        <div className="flex items-end gap-4 h-[260px] mt-4">
+      <CardContent className="flex-1 flex flex-col justify-between">
+
+        <div className="flex-1 flex items-end gap-4 mt-6 min-h-[260px]">
           {data.map((item) => (
             <div
               key={item.day}
@@ -31,7 +32,7 @@ export default function LearningPattern() {
                 <div
                   className="w-full rounded-t-md bg-primary-gradient"
                   style={{
-                    height: `${item.value * 45}px`,
+                    height: `${item.value * 55}px`,
                   }}
                 />
               </div>
@@ -48,7 +49,6 @@ export default function LearningPattern() {
           ))}
         </div>
 
-        {/* Footer */}
         <div className="mt-8 flex items-center justify-between text-sm text-slate-500 border-t border-white/5 pt-5">
           <p>Peak: Thursday (4.1h)</p>
           <p>Avg: 3.2h/day</p>

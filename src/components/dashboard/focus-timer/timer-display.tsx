@@ -116,7 +116,7 @@ export function TimerCard() {
         ))}
       </div>
 
-      <div className="flex flex-col items-center py-8 sm:py-14">
+      <div className="flex flex-col items-center pt-8 pb-4 sm:pt-14">
         <div className="relative flex aspect-square w-full max-w-[180px] sm:max-w-[300px] items-center justify-center">
 
           <svg
@@ -204,14 +204,13 @@ export function TimerCard() {
           </button>
         </div>
 
-        <div className="mt-6 sm:mt-10 w-full rounded-xl sm:rounded-2xl border border-cyan-500/10 bg-border p-3 sm:p-4 text-center">
-          <p className="text-xs sm:text-sm text-slate-400">
-            Working on:
+        <div className="mt-6 sm:mt-10 w-full rounded-xl sm:rounded-2xl border border-primary/30 bg-primary/10 p-3 sm:p-4 flex items-center justify-center text-center">
+          <p className="text-xs sm:text-sm text-slate-400 flex items-center justify-center flex-wrap">
+            Working on: &nbsp;
+            <span className="text-sm sm:text-base font-semibold dark:text-white text-slateText">
+              Partial Fractions — Introduction
+            </span>
           </p>
-
-          <h3 className="mt-1 text-sm sm:text-base font-semibold">
-            Partial Fractions — Introduction
-          </h3>
         </div>
       </div>
     </div>
