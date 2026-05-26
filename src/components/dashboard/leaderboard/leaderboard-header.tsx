@@ -25,7 +25,7 @@ const LeaderBoardHeader = () => {
                 key={tab}
                 onClick={() => setFilter(tab)}
                 className={`px-4 py-1.5 text-xs md:text-sm font-medium rounded-lg transition-all capitalize ${filter === tab
-                  ? "bg-primary  shadow-sm ring-1 ring-slate-700"
+                  ? "bg-primary-gradient  shadow-sm ring-1 ring-slate-700 text-slateText"
                   : "text-slate-400 dark:hover:text-slate-200 hover:text-primary"
                   }`}
               >

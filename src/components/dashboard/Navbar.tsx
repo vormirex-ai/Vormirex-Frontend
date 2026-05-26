@@ -40,7 +40,7 @@ const DashboardNavbar = ({
   const firstLetter =
     user?.name?.charAt(0)?.toUpperCase() ||
     user?.email?.charAt(0)?.toUpperCase() ||
-    "A";
+    "S";
 
   return (
     <header className="h-16 fixed top-0 left-0 lg:left-64 right-0 bg-background/90 backdrop-blur-xl border-b border-border px-4 lg:px-6 flex items-center justify-between z-40">

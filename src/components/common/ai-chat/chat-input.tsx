@@ -40,7 +40,7 @@ export function ChatInput({
           onClick={handleSend}
           className="absolute right-2 top-1/2 -translate-y-1/2 rounded-xl"
         >
-          <Send size={16} /> Send
+          <Send size={16} />  &nbsp; Send
         </Button>
       </div>
     </div>

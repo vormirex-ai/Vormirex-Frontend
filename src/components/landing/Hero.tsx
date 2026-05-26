@@ -20,11 +20,7 @@ const Hero = () => {
   };
 
   const handleWatchDemo = () => {
-    if (isAuthenticated) {
-      navigate("/dashboard/video-learning");
-    } else {
-      navigate("/login");
-    }
+    navigate("/ai-chat");
   };
 
   return (
@@ -58,7 +54,7 @@ text-xs text-primary mb-8"
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          {/* Start Learning Button */}
+
           <Button
             onClick={handleStartLearning}
             className="py-6 font-bold px-8"
@@ -66,14 +62,13 @@ text-xs text-primary mb-8"
             <FaRocket /> &nbsp; Start Learning Free
           </Button>
 
-          {/* Watch Demo Button */}
           <Button
             onClick={handleWatchDemo}
             variant="secondary"
-            className="border-slate-700 bg-slate-900/50 px-8 py-6 text-white"
+            className="border-slate-700 bg-slate-900/50 px-8 py-6 text-white hover:border hover:border-primary"
           >
             <Play className="w-4 h-4 mr-2 fill-current text-primary" />
-            Watch Demo
+            Try AI Demo
           </Button>
         </div>
 

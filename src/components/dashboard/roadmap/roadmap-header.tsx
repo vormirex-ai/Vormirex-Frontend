@@ -1,7 +1,22 @@
 import { Button } from "@/components/ui/button";
+import { generateRoadmap } from "@/services/roadmap";
 import { Map } from "lucide-react";
 
+
 export function RoadmapHeader() {
+
+
+  // const hendleGenerateRoadmap = async () => {
+  //   try {
+  //     const response = await generateRoadmap();
+  //     console.log("Generated Roadmap:", response);
+  //   }
+  //   catch (error) {
+  //     console.error("Error generating roadmap:", error);
+  //   }
+  // }
+
+
   return (
     <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between mb-6 lg:mb-8">
 
@@ -24,7 +39,13 @@ export function RoadmapHeader() {
         <div className="px-4 py-2 rounded-full bg-green-500/10 text-green-400 text-xs sm:text-sm font-medium border border-green-500/20 text-center">
           Week 3 of 8
         </div>
-        <Button className="w-full sm:w-auto bg-primary-gradient text-black font-semibold">
+        {/* <Button className="w-full sm:w-auto bg-primary-gradient text-black font-semibold">
+          Regenerate Plan
+        </Button> */}
+        <Button
+          // onClick={hendleGenerateRoadmap}
+          className="w-full sm:w-auto bg-primary-gradient text-black font-semibold"
+        >
           Regenerate Plan
         </Button>
       </div>

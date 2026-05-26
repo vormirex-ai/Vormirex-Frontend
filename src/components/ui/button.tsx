@@ -12,7 +12,7 @@ const buttonVariants = cva(
         default:
           "bg-primary-gradient text-[#031B1A] font-semibold rounded-2xl shadow-primary-glow hover:brightness-105 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300",
         secondary:
-          "bg-card border border-border text-foreground font-semibold rounded-2xl hover:bg-muted transition-all duration-300 shadow-sm",
+          "bg-card border border-border text-foreground font-semibold rounded-2xl hover:bg-muted transition-all duration-300 shadow-sm hover:scale-[1.02] active:scale-[0.98] transition-all duration-300",
 
         outline:
           "border-border bg-background hover:bg-muted hover:text-foreground border border-primary",

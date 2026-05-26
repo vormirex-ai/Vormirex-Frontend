@@ -5,8 +5,26 @@ import { RoadmapProgressCard } from "@/components/dashboard/roadmap/roadmap-prog
 import { RoadmapTimeline } from "@/components/dashboard/roadmap/roadmap-timeline";
 import { RoadmapTipCard } from "@/components/dashboard/roadmap/roadmap-tip-card";
 import { RoadmapChatCard } from "@/components/dashboard/roadmap/roadmap-chat-card";
+import { getMyRoadmap } from "@/services/roadmap";
+import { useEffect } from "react";
 
 export default function RoadmapPage() {
+
+  // useEffect(() => {
+  //   const fetchRoadmap = async () => {
+  //     try {
+  //       const response = await getMyRoadmap();
+  //       console.log("My Roadmap:", response);
+  //     }
+  //     catch (error) {
+  //       console.error("Error fetching roadmap:", error);
+  //     }
+  //   }
+  //   fetchRoadmap();
+
+  // }, [])
+
+
   return (
     <motion.div
       variants={containerStagger(0.12)}

@@ -27,6 +27,7 @@ import NotesPage from "./pages/productivity/notes";
 import InterviewBotPage from "./pages/practice/Interview-bot";
 import SettingsPage from "./pages/account/settings";
 import NotificationsPage from "./pages/dashboard/notifications";
+import AiChatNavbar from "./components/landing/ai-chat-navbar";
 
 function App() {
   return (
@@ -85,7 +86,9 @@ function App() {
         </Route>
       </Route>
 
-
+      <Route path="/" element={<AiChatNavbar />}>
+        <Route path="ai-chat" element={<AIChatPage />} />
+      </Route>
     </Routes>
   );
 }

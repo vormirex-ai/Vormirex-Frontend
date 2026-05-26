@@ -1,7 +1,6 @@
-"use client";
-
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { fadeUpItem } from "@/lib/motion";
 
 import {
   ChallengeStep,
@@ -14,7 +13,7 @@ import { ChallengeQuiz } from "@/components/dashboard/daily-challanges/challenge
 import { ChallengeResult } from "@/components/dashboard/daily-challanges/challenge-result";
 import { ChallengesHeaders } from "@/components/dashboard/daily-challanges/challenges-header";
 
-import { fadeUpItem } from "@/lib/motion";
+
 
 const MOCK_QUESTIONS: Question[] = [
   {
@@ -83,6 +82,7 @@ export default function DailyChallengePage() {
 
     setStep("result");
   };
+
 
   return (
     <div className="min-h-screen p-1 lg:p-10">
@@ -158,3 +158,4 @@ export default function DailyChallengePage() {
     </div>
   );
 }
+

@@ -7,9 +7,12 @@ import { ChatMessage } from "@/components/common/ai-chat/chat-message";
 import { ChatLoading } from "@/components/common/ai-chat/chat-loading";
 import { ChatInput } from "@/components/common/ai-chat/chat-input";
 import { Message } from "@/interface/chatMsg.interface";
-
+import { useLocation } from "react-router-dom";
 
 export default function AIChatPage() {
+  const location = useLocation();
+
+  const isPublicChat = location.pathname === "/ai-chat";
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "ai",
@@ -50,8 +53,16 @@ export default function AIChatPage() {
       initial="hidden"
       animate="show"
     >
-      <div className="h-[calc(100vh-80px)] flex flex-col max-w-5xl mx-auto p-1 lg:p-10 overflow-hidden">
-
+      <div
+        className={`
+    h-[calc(100dvh-50px)]
+    flex flex-col max-w-5xl mx-auto  overflow-hidden
+    ${isPublicChat
+            ? "rounded-2xl border border-white/10 bg-[#16363b]/40 backdrop-blur-xl shadow-2xl mt-24 p-6"
+            : "bg-transparent border-0 shadow-none p-1 lg:p-10"
+          }
+  `}
+      >
         <motion.div variants={fadeUpItem}>
           <div className="shrink-0">
             <ChatHeader />
@@ -83,9 +94,7 @@ export default function AIChatPage() {
               placeholder="Ask your AI Tutor anything..."
               showSuggestions={messages.length <= 1}
             >
-              <ChatSuggestions
-                onSuggestionClick={handleSendMessage}
-              />
+              <ChatSuggestions onSuggestionClick={handleSendMessage} />
             </ChatInput>
           </div>
         </motion.div>

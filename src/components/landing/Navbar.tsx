@@ -92,8 +92,8 @@ const Navbar = () => {
                 className={`
                   relative text-sm transition-all duration-300 group pb-1
                   ${activeSection === item.id
-                    ? "text-[#6aece1]"
-                    : "text-slate-300 hover:text-[#6aece1]"
+                    ? "text-primary"
+                    : "text-slate-300 hover:text-primary"
                   }
                 `}
               >
@@ -102,7 +102,7 @@ const Navbar = () => {
                 <span
                   className={`
                     absolute left-0 bottom-0 h-[2px]
-                    bg-[#6aece1]
+                    bg-primary
                     transition-all duration-300
                     ${activeSection === item.id
                       ? "w-full"
@@ -118,7 +118,7 @@ const Navbar = () => {
                 onClick={() => navigate("/dashboard")}
                 className="
                   relative text-sm text-slate-300
-                  hover:text-[#6aece1]
+                  hover:text-primary
                   transition-all duration-300
                   group pb-1
                 "
@@ -128,7 +128,7 @@ const Navbar = () => {
                 <span
                   className="
                     absolute left-0 bottom-0 h-[2px] w-0
-                    bg-[#6aece1]
+                    bg-primary
                     group-hover:w-full
                     transition-all duration-300
                   "
@@ -186,8 +186,8 @@ const Navbar = () => {
               className={`
                 block w-full text-left transition-all duration-300
                 ${activeSection === item.id
-                  ? "text-[#6aece1]"
-                  : "text-slate-300 hover:text-[#6aece1]"
+                  ? "text-primary"
+                  : "text-slate-300 hover:text-primary"
                 }
               `}
             >

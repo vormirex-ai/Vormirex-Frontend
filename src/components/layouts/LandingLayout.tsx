@@ -1,4 +1,3 @@
-import InfiniteTunnel from "../waveParticales";
 import LandingNavbar from "../landing/Navbar";
 import Hero from "../landing/Hero";
 import FeaturesSection from "../landing/FeaturesSection";

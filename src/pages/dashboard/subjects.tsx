@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { containerStagger, fadeUpItem } from "@/lib/motion";
 import { SubjectCard } from "@/components/dashboard/subjects/subject-cards";
 import { SubjectHeader } from "@/components/dashboard/subjects/subject-header";
-
 import { getAllCourses } from "@/services/courses";
 import { useEffect } from "react";
 
@@ -15,8 +14,6 @@ const subjectsData = [
   { title: "History", icon: "📜", topics: 98, lessons: 0, progress: 0, timeStudied: "—", status: "Not Started", color: "#94a3b8" },
   { title: "Geography", icon: "🌍", topics: 88, lessons: 0, progress: 0, timeStudied: "—", status: "Not Started", color: "#94a3b8" },
 ];
-
-
 
 export default function SubjectPage() {
 
@@ -33,6 +30,8 @@ export default function SubjectPage() {
 
     fetchSubjects();
   }, []);
+
+
   return (
     <div className="min-h-screen  p-1 lg:p-10">
       <div className=" mx-auto space-y-10">
