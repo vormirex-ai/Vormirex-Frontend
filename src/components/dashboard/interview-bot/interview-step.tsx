@@ -1,7 +1,5 @@
-"use client";
-
 import React, { useState } from "react";
-import { ChevronLeft, RotateCcw, ArrowRight, Lightbulb, Dumbbell, CheckCircle2, Send, ChevronRight } from "lucide-react";
+import { ChevronLeft, RotateCcw, ArrowRight, Lightbulb, Dumbbell, CheckCircle2, Send } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";

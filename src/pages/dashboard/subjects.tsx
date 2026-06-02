@@ -1,9 +1,9 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { containerStagger, fadeUpItem } from "@/lib/motion";
 import { SubjectCard } from "@/components/dashboard/subjects/subject-cards";
 import { SubjectHeader } from "@/components/dashboard/subjects/subject-header";
-import { getAllCourses } from "@/services/courses";
-import { useEffect } from "react";
+
 
 
 const subjectsData = [
@@ -16,21 +16,6 @@ const subjectsData = [
 ];
 
 export default function SubjectPage() {
-
-  useEffect(() => {
-    const fetchSubjects = async () => {
-      try {
-        const response = await getAllCourses();
-        console.log("Fetched subjects data:", response);
-
-      } catch (error) {
-        console.error("Error fetching subjects:", error);
-      }
-    };
-
-    fetchSubjects();
-  }, []);
-
 
   return (
     <div className="min-h-screen  p-1 lg:p-10">

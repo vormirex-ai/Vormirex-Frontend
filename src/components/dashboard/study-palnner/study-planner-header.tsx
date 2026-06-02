@@ -11,7 +11,7 @@ export const StudyPannerHeader = () => {
           <h1 className="text-2xl md:text-4xl  font-bold  flex items-center gap-2">
             📅 Study Planner
           </h1>
-          <p className="text-textColor mt-1">Your weekly study schedule. Stay consistent, stay ahead.</p>
+          <p className="text-textColor mt-1 text-sm md:text-base">Your weekly study schedule. Stay consistent, stay ahead.</p>
         </div>
 
         <div className="flex gap-3">

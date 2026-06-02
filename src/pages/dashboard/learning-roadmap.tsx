@@ -24,7 +24,6 @@ export default function RoadmapPage() {
 
   // }, [])
 
-
   return (
     <motion.div
       variants={containerStagger(0.12)}

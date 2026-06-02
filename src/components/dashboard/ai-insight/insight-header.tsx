@@ -8,7 +8,7 @@ export const InsightHeader = () => {
           <h1 className=" text-2xl md:text-4xl  font-bold  flex items-center gap-2">
             📊 AI Insights
           </h1>
-          <p className="text-slate-400 text-sm">
+          <p className="text-slate-400 text-sm md:text-base">
             Deep analytics and predictions tailored to your learning journey.
           </p>
         </div>

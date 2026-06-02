@@ -19,7 +19,7 @@ export function ChatHeader() {
 
         </div>
 
-        <p className="text-xs sm:text-sm text-slate-500 mt-1 leading-relaxed">
+        <p className="text-sm md:text-base text-slate-500 mt-1 leading-relaxed">
           Your personal AI tutor — ask anything, anytime
         </p>
       </div>

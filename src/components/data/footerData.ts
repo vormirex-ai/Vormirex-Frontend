@@ -1,9 +1,11 @@
-import { FaFacebook, FaLinkedin } from "react-icons/fa";
+import { FaFacebook, FaLinkedin, FaInstagram } from "react-icons/fa";
 
-export const defaultFooterConfig = {
+export const footerConfig = {
   companyName: "VORMIREX",
+
   description:
-    "Making learning feel like playing. Your AI-powered education companion.",
+    "Making learning feel like playing. Your AI-powered education companion designed for modern students.",
+
   socialLinks: [
     {
       icon: FaFacebook,
@@ -13,24 +15,74 @@ export const defaultFooterConfig = {
       icon: FaLinkedin,
       url: "https://www.linkedin.com/company/vormirex/",
     },
+    {
+      icon: FaInstagram,
+      url: "https://www.instagram.com/vormirex/",
+    },
   ],
+
   sections: [
     {
-      title: "Company",
+      title: "Quick Links",
+
       links: [
-        { label: "Features", href: "/features" },
-        { label: "Courses", href: "/courses" },
-        { label: "Pricing", href: "/pricing" },
-        { label: "About Us", href: "/about" },
+        {
+          label: "Pricing",
+          href: "/pricing",
+        },
+        {
+          label: "Features",
+          href: "/features",
+        },
+        {
+          label: "AI Chat",
+          href: "/ai-chat",
+        },
       ],
     },
+
     {
-      title: "Get in touch",
+      title: "Legal",
+
       links: [
-        { label: "+91 8967838500", href: "tel:+918967838500" },
-        { label: "info@vormirex.com", href: "mailto:info@vormirex.com" },
+        {
+          label: "Privacy Policy",
+          href: "/privacy-policy",
+        },
+        {
+          label: "Terms & Conditions",
+          href: "/terms-and-conditions",
+        },
+        {
+          label: "Support",
+          href: "/support",
+        },
+        {
+          label: "Help Center",
+          href: "/help-center",
+        },
+      ],
+    },
+
+    {
+      title: "Get In Touch",
+
+      links: [
+        {
+          label: "+91 8967838500",
+          href: "tel:+918967838500",
+        },
+        {
+          label: "info@vormirex.com",
+          href: "mailto:info@vormirex.com",
+        },
+        {
+          label: "AI-Powered Learning Platform",
+          href: "#",
+        },
       ],
     },
   ],
-  copyright: "© 2025 Vormirex. All rights reserved.",
+
+  copyright: "© 2026 Vormirex. All rights reserved.",
 };

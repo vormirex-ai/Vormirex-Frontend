@@ -3,7 +3,7 @@ import { featuresData } from "../data/featuresData";
 
 const FeaturesSection = () => {
   return (
-    <section className="py-24 px-4 relative bg-[#0A0B14] ">
+    <section className="py-16 lg:py-20 px-4 relative bg-[#0A0B14] ">
       <div className="max-w-[18rem] sm:max-w-[40rem] md:max-w-[65rem] mx-auto">
         <div className="text-center mb-16">
           <div className="inline-flex items-center px-3 py-1 rounded-full  text-[10px] 

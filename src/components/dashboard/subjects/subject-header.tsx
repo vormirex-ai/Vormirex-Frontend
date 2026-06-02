@@ -8,7 +8,7 @@ export const SubjectHeader = () => {
           <h1 className="text-2xl md:text-4xl  font-bold  flex items-center gap-2">
             📚 Subjects
           </h1>
-          <p className="text-textColor mt-1">Explore and continue your learning journey across all subjects.</p>
+          <p className="text-textColor mt-1 text-sm md:text-base">Explore and continue your learning journey across all subjects.</p>
         </div>
 
         <div className="flex custom-surface p-1 rounded-lg">

@@ -48,7 +48,7 @@ export function ResultsStep({ onRestart }: ResultsStepProps) {
 
   return (
     <div className="w-full max-w-5xl mx-auto space-y-6 ">
-      <h1 className="text-2xl font-bold tracking-tight flex items-center gap-2">
+      <h1 className="text-2xl font-bold tracking-tight flex items-center gap-2 dark:text-slate-300 text-slateText">
         📊 Interview Complete!
       </h1>
 
@@ -109,7 +109,7 @@ export function ResultsStep({ onRestart }: ResultsStepProps) {
                   </div>
                   <div className="space-y-0.5">
                     <h4 className="text-xs font-bold  tracking-wide">{sug.title}</h4>
-                    <p className="text-xs text-slate-400 leading-normal ">{sug.desc}</p>
+                    <p className="text-xs text-slate-500 leading-normal ">{sug.desc}</p>
                   </div>
                 </div>
               ))}

@@ -45,8 +45,6 @@ const ForgotPassword = () => {
       setLoading(true);
 
       const response = await ForgetPassword({ email });
-      console.log("Forgot Password Response:", response);
-
       if (response?.success) {
         toast.success("Reset link sent to email 📩");
         setEmail("");

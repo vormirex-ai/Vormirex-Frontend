@@ -10,7 +10,7 @@ export const FlashCardHeader = () => {
           <span>Flashcards</span>
         </h1>
 
-        <p className="text-sm sm:text-base text-textColor max-w-xl leading-relaxed">
+        <p className="text-sm md:text-base text-textColor max-w-xl leading-relaxed">
           AI-generated flashcards with spaced repetition.
         </p>
       </div>

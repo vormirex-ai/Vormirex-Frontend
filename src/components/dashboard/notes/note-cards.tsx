@@ -104,7 +104,7 @@ export const NoteCard: React.FC<NoteCardProps> = ({
           className="
             text-lg font-semibold tracking-tight
             transition-colors
-            group-hover:text-primary
+            dark:group-hover:text-primary group-hover:text-cyan-600
           "
         >
           {note.title}

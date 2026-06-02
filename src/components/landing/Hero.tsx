@@ -24,7 +24,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative pt-10 pb-20 px-4 text-center overflow-hidden">
+    <section className="relative pt-10 pb-14 md:pb-20 px-4 text-center overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[#0A0B14] pointer-events-none" />
 
       <div className="max-w-4xl mx-auto relative z-10">

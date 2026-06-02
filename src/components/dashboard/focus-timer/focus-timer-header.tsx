@@ -12,7 +12,7 @@ const FocusTimerHeader = () => {
             ⏱ Focus Timer
           </h1>
 
-          <p className="mt-2 text-sm leading-relaxed text-textColor sm:text-base">
+          <p className="mt-2 text-sm md:text-base leading-relaxed text-textColor ">
             Stay in deep focus with Pomodoro technique —
             25 min work, 5 min break.
           </p>

@@ -8,7 +8,7 @@ export const InterviewBotHeader = () => {
           <h1 className=" text-2xl md:text-4xl  font-bold  flex items-center gap-2">
             🎤 Interview Bot
           </h1>
-          <p className="text-slate-400 text-sm">
+          <p className="text-slate-400 text-sm md:text-base">
             Paste your resume, pick the job — AI generates real interview questions and coaches you.
           </p>
         </div>

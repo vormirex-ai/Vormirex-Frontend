@@ -39,8 +39,8 @@ export function ChatMessage({
       </div>
 
       {!isAI && (
-        <div className="w-6 h-6 sm:w-9 sm:h-9 shrink-0 rounded-full bg-primary-gradient flex items-center justify-center border border-cyan-500/10">
-          <User size={16} className="text-black h-3 w-3 md:w-4 md:h-4" />
+        <div className="w-6 h-6 sm:w-9 sm:h-9 shrink-0 rounded-full bg-primary/10 flex items-center justify-center border border-primary">
+          <User size={16} className=" h-3 w-3 md:w-4 md:h-4" />
         </div>
       )}
     </div>

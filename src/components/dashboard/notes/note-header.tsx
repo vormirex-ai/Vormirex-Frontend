@@ -55,7 +55,7 @@ export const NoteHeader = ({
             📝 Notes & Resources
           </h1>
 
-          <p className="text-slate-500 mt-1">
+          <p className="text-slate-500 mt-1 text-sm md:text-base">
             Your saved answers, uploaded notes,
             and bookmarked content.
           </p>
@@ -137,7 +137,7 @@ export const NoteHeader = ({
                 transition-all
 
                 ${activeTab === tab
-                  ? "bg-white dark:bg-[#1a233d] text-blue-600 dark:text-blue-400 shadow-sm"
+                  ? "bg-primary-gradient dark:bg-none dark:bg-[#1a233d] text-slateText dark:text-primary shadow-sm"
                   : "text-slate-500 hover:text-slate-900 dark:hover:text-slate-200"
                 }
               `}

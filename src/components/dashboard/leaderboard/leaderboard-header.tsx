@@ -12,7 +12,7 @@ const LeaderBoardHeader = () => {
             🏆 Leaderboard
           </h1>
 
-          <p className="text-slate-400 text-sm my-2">
+          <p className="text-slate-400 text-sm md:text-base my-2">
             Top learners this week. Keep grinding to climb the ranks!
           </p>
         </div>
