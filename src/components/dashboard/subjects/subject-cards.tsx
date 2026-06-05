@@ -6,19 +6,16 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Clock } from "lucide-react";
 import { CustomProgress } from "@/components/common/custom-progress";
+import { DynamicIcon } from "@/components/iconMapper";
+import { SubjectCardProps } from "@/interface/subject.interface";
+import { useDispatch } from "react-redux";
+import { setSelectedSubjectId } from "@/store/slice/subjectSlice";
+import { useNavigate } from "react-router";
 
-interface SubjectCardProps {
-  title: string;
-  icon: string;
-  topics: number;
-  lessons: number;
-  progress: number;
-  timeStudied: string;
-  status: "In Progress" | "New" | "Not Started" | "Started";
-  color: string;
-}
+
 
 export const SubjectCard = ({
+  _id,
   title,
   icon,
   topics,
@@ -27,23 +24,39 @@ export const SubjectCard = ({
   timeStudied,
   status,
   color,
+  description,
+  subtitle,
+  isPro,
+  price,
+  tags,
+  hasCertificate,
 }: SubjectCardProps) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(setSelectedSubjectId(_id));
+    navigate(`/dashboard/course-details/${_id}`);
+  };
+
   return (
     <Card
-      className=" group relative overflow-hidden rounded-2xl custom-surface transition-all duration-500 hover:-translate-y-1 hover:border-cyan-400/20 hover:shadow-[0_0_30px_rgba(99,231,220,0.08)]">
+      onClick={handleClick}
+      className=" group relative overflow-hidden rounded-2xl cursor-pointer custom-surface transition-all duration-500 hover:-translate-y-1 hover:border-cyan-400/20 hover:shadow-[0_0_30px_rgba(99,231,220,0.08)]">
 
       <div
         className=" absolute left-0 top-0 h-[2px] w-0 bg-gradient-to-r from-[#63E7DC] via-[#46D3C9] to-[#26BDB3] transition-all duration-500 group-hover:w-full" />
       <CardContent className="p-6">
         <div className="mb-4 flex items-start justify-between">
           <div className="rounded-2xl bg-border p-3 text-2xl transition-transform duration-300 group-hover:scale-105">
-            {icon}
+            {/* {icon} */}
+            <DynamicIcon icon={icon} />
           </div>
 
           <Badge
             variant="secondary"
             className={`
-              border-none
+              border-none rounded-lg
 
               ${status === "In Progress"
                 ? "bg-blue-500/10 text-blue-400"

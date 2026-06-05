@@ -1,11 +1,46 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { containerStagger, fadeUpItem } from "@/lib/motion";
 import { CourseChapterCard } from '@/components/dashboard/course-details/chapter-card'
 import { CourseHeader } from '@/components/dashboard/course-details/course-header'
 import { chaptersData } from '@/components/data/course-mock-data'
 import { ArrowLeft } from 'lucide-react'
+import { getSubjectCurriculumById, getSubjectDetailsById } from "@/services/subjects";
+
+
 
 const CourseDetails = () => {
+
+  const { id } = useParams();
+  const reduxId = useSelector(
+    (state: any) => state.subject.selectedSubjectId
+  );
+
+  const [subjectData, setSubjectData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchSubjectDetails = async () => {
+      try {
+        setLoading(true);
+
+        const subjectId = id || reduxId;
+        const response = await getSubjectDetailsById(subjectId);
+        const subject = response?.data;
+        setSubjectData(subject);
+      } catch (error) {
+        console.error("Error fetching subject details:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSubjectDetails();
+  }, [id, reduxId]);
+
+
   return (
     <motion.div
       variants={containerStagger(0.12)}
@@ -30,6 +65,7 @@ const CourseDetails = () => {
               quizzes: 5,
               hasCertificate: true
             }}
+            id={subjectData?.id}
           />
         </motion.div>
 

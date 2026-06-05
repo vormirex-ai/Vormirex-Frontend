@@ -51,7 +51,6 @@ export const LogoutUser = async () => {
     return response.data;
   } catch (error: any) {
     console.error("Error while logging out:", error.response);
-
     return error.response.data;
   }
 };

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { navGroups } from "../data/sidebar-Items";
 import logo from "../../assets/logo.png";
 import { X } from "lucide-react";
@@ -10,15 +10,12 @@ interface SidebarProps {
   setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Sidebar = ({
-  sidebarOpen,
-  setSidebarOpen,
-}: SidebarProps) => {
+const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const location = useLocation();
 
   useEffect(() => {
     const savedScroll = sessionStorage.getItem("sidebar-scroll");
-
     if (scrollRef.current && savedScroll) {
       scrollRef.current.scrollTop = Number(savedScroll);
     }
@@ -33,6 +30,16 @@ const Sidebar = ({
     }
   };
 
+  const isActiveRoute = (path: string) => {
+    const current = location.pathname;
+    if (current === path) return true;
+
+    if (path !== "/dashboard" && current.startsWith(path + "/")) {
+      return true;
+    }
+
+    return false;
+  };
   return (
     <>
       {sidebarOpen && (
@@ -43,22 +50,18 @@ const Sidebar = ({
       )}
 
       <aside
-        className={` fixed top-0 left-0 z-50 h-screen w-[17rem] border-r border-border bg-background flex flex-col transition-transform duration-300
-          ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
-          lg:translate-x-0
-        `}
+        className={`fixed top-0 left-0 z-50 h-screen w-[17rem] border-r border-border bg-background flex flex-col transition-transform duration-300
+        ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
+        lg:translate-x-0`}
       >
         <div className="h-16 px-6 flex items-center justify-between border-b border-border">
-
-          <Link
-            to="/"
-            className="flex items-center gap-2 px-3 py-2 w-fit"
-          >
-            <img alt="logo" src={logo} className="w-5 h-5 dark:brightness-100 brightness-0" />
-
-            <span className="font-bold text-foreground">
-              Vormirex
-            </span>
+          <Link to="/" className="flex items-center gap-2 px-3 py-2 w-fit">
+            <img
+              alt="logo"
+              src={logo}
+              className="w-5 h-5 dark:brightness-100 brightness-0"
+            />
+            <span className="font-bold text-foreground">Vormirex</span>
           </Link>
 
           <button
@@ -81,24 +84,24 @@ const Sidebar = ({
               </h3>
 
               <div className="space-y-1">
-                {group.items.map((item) => (
-                  <NavLink
-                    key={`${group.groupLabel}-${item.path}-${item.title}`}
-                    to={item.path}
-                    end
-                    onClick={() => setSidebarOpen(false)}
-                    className={({ isActive }) =>
-                      `relative flex items-center gap-3 p-4 rounded-xl transition-all
-                      ${isActive
-                        ? "bg-primary-gradient text-primary-foreground"
-                        : "text-foreground hover:text-foreground hover:bg-muted"
-                      }`
-                    }
-                  >
-                    {({ isActive }) => (
+                {group.items.map((item) => {
+                  const active = isActiveRoute(item.path);
+
+                  return (
+                    <NavLink
+                      key={`${group.groupLabel}-${item.title}-${item.path}`}
+                      to={item.path}
+                      onClick={() => setSidebarOpen(false)}
+                      className={() =>
+                        `relative flex items-center gap-3 p-4 rounded-xl transition-all
+                        ${active
+                          ? "bg-primary-gradient text-primary-foreground"
+                          : "text-foreground hover:bg-muted"
+                        }`
+                      }
+                    >
                       <>
                         <item.icon size={18} />
-
                         <span className="text-sm font-medium">
                           {item.title}
                         </span>
@@ -109,36 +112,35 @@ const Sidebar = ({
                           </span>
                         )}
 
-                        {isActive && (
+                        {active && (
                           <motion.div
                             layoutId="active"
                             className="absolute right-0 -translate-y-1/2 w-1 h-6 bg-primary-gradient rounded-l-full"
                           />
                         )}
                       </>
-                    )}
-                  </NavLink>
-                ))}
+                    </NavLink>
+                  );
+                })}
               </div>
             </div>
           ))}
         </div>
 
-        <div className="bg-primary dark:bg-[#154249]  rounded-2xl p-3 mx-4 mb-4">
+        <div className="bg-primary dark:bg-[#154249] rounded-2xl p-3 mx-4 mb-4">
           <div className="space-y-1">
             <p className="text-slateText dark:text-gray-300 text-sm">
               Upgrade
             </p>
-
-            <p className="font-bold">
-              Go Pro
-            </p>
-
+            <p className="font-bold">Go Pro</p>
             <p className="text-slateText dark:text-gray-300 text-xs">
               Unlock Unlimited AI Sessions
             </p>
           </div>
-          <button className="bg-white rounded-2xl text-black text-xs py-1 px-5 w-52 my-5 ">Upgrade Now</button>
+
+          <button className="bg-white rounded-2xl text-black text-xs py-1 px-5 w-52 my-5">
+            Upgrade Now
+          </button>
         </div>
       </aside>
     </>

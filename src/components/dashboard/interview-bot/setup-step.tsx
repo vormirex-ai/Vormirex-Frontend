@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from "react";
 import { Briefcase, FileText, Target, Sparkles } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";

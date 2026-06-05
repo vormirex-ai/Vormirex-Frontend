@@ -1,5 +1,3 @@
-"use client";
-
 import { studyTimes } from "@/components/data/onboardingData";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";

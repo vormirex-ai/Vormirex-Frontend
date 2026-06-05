@@ -1,23 +1,13 @@
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 const PublicRoute = () => {
-  const { isAuthenticated } = useSelector((state: any) => state.auth);
-  const location = useLocation();
-
-  const publicRoutes = [
-    "/login",
-    "/sign-up",
-    "/forgot-password",
-    "/reset-password",
-    "/onboarding",
-  ];
-
-  const isPublicRoute = publicRoutes.some((path) =>
-    location.pathname.startsWith(path)
+  const { isAuthenticated } = useSelector(
+    (state: RootState) => state.auth
   );
 
-  if (isAuthenticated && isPublicRoute) {
+  if (isAuthenticated) {
     return <Navigate to="/dashboard" replace />;
   }
 

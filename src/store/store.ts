@@ -4,18 +4,20 @@ import storage from "redux-persist/lib/storage";
 import authReducer from "./slice/authSlice";
 import onboardingReducer from "./slice/onboardingSlice";
 // import notificationsReducer from "./slice/notificationSlice";
+import subjectReducer from "./slice/subjectSlice";
 
 const persistConfig = {
   key: "root",
   storage,
 
-  whitelist: ["auth", "onboarding"],
+  whitelist: ["auth", "onboarding", "subject"],
 };
 
 const rootReducer = combineReducers({
   auth: authReducer,
   onboarding: onboardingReducer,
   // notifications: notificationsReducer,
+  subject: subjectReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

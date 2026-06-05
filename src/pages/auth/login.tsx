@@ -79,7 +79,6 @@ const Login = () => {
         email,
         password,
       });
-      // console.log("Login Response:", response);
 
       if (response?.success) {
 
@@ -90,7 +89,6 @@ const Login = () => {
           })
         );
         toast.success("Login Successful ✅");
-        // navigate("/dashboard");
         if (onboardingCompleted) {
           navigate("/dashboard");
         } else {
@@ -98,19 +96,12 @@ const Login = () => {
         }
 
       } else {
-
         setError(response?.message);
-
-        toast.error(
-          response?.message || "Login failed ❌"
-        );
+        toast.error(response?.message || "Login failed ❌");
       }
 
     } catch (error: any) {
-      toast.error(
-        error?.response?.data?.message ||
-        "Something went wrong ❌"
-      );
+      toast.error(error?.response?.data?.message || "Something went wrong ❌");
 
     } finally {
       setLoading(false);
@@ -122,7 +113,6 @@ const Login = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/10 blur-[120px] rounded-full" />
 
       <Card className="w-full max-w-md backdrop-blur-xl  bg-[#051522] text-white shadow-[0_0_40px_rgba(56,189,248,0.15)] z-10 p-2 md:p-6">
-
         <CardHeader className="space-y-1 flex flex-col items-center">
 
           <div className="flex items-center gap-2 cursor-pointer my-5">
@@ -173,7 +163,6 @@ const Login = () => {
               <div className="relative">
 
                 <Mail className="absolute left-3 top-[18px] h-4 w-4 text-gray-500" />
-
                 <Input
                   id="email"
                   value={email}
@@ -184,21 +173,18 @@ const Login = () => {
                   className="bg-white/5 border-white/10 pl-10 py-6"
                 />
               </div>
-              {errors.name && (
+              {errors.email && (
                 <p className="text-red-500 text-xs mt-1">
-                  {errors.name}
+                  {errors.email}
                 </p>
               )}
             </div>
 
             <div className="grid gap-2">
-
               <div className="flex items-center justify-between">
-
                 <Label
                   htmlFor="password"
-                  className="text-gray-400 ml-1"
-                >
+                  className="text-gray-400 ml-1">
                   Password
                 </Label>
 
@@ -260,11 +246,31 @@ const Login = () => {
           <Button
             onClick={handleLogin}
             className="py-6 text-lg"
+            disabled={loading}
           >
-            <LogIn className="mr-2 h-5 w-5 font-bold" />
-
-            {/* {loading ? "Loading..." : "Sign In"} */}
-            Sign In
+            {loading ? (
+              <span className="flex items-center gap-1">
+                Signing In
+                <span className="animate-pulse">.</span>
+                <span
+                  className="animate-pulse"
+                  style={{ animationDelay: "0.2s" }}
+                >
+                  .
+                </span>
+                <span
+                  className="animate-pulse"
+                  style={{ animationDelay: "0.4s" }}
+                >
+                  .
+                </span>
+              </span>
+            ) : (
+              <>
+                <LogIn className="mr-2 h-5 w-5 font-bold" />
+                Sign In
+              </>
+            )}
           </Button>
 
           <p className="text-sm text-gray-400 text-center">

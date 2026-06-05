@@ -33,9 +33,15 @@ const DashboardNavbar = ({
     (state: RootState) => state.auth
   );
 
-  const currentPage = allNavItems.find(
-    (item) => item.path === location.pathname
-  );
+  const currentPage =
+    allNavItems
+      .filter((item) => {
+        return (
+          location.pathname === item.path ||
+          location.pathname.startsWith(item.path + "/")
+        );
+      })
+      .sort((a, b) => b.path.length - a.path.length)[0];
 
   const firstLetter =
     user?.name?.charAt(0)?.toUpperCase() ||
@@ -47,7 +53,6 @@ const DashboardNavbar = ({
 
       <div className="flex items-center gap-4">
 
-        {/* Mobile Toggle */}
         <Button
           variant="secondary"
           size="icon"
@@ -88,10 +93,7 @@ const DashboardNavbar = ({
             className="bg-card border border-border text-foreground text-sm pl-10 pr-4 py-2 rounded-xl w-64 outline-none"
           />
         </div>
-        {/* 
-        <Button variant="secondary" size="icon">
-          <Bell size={18} />
-        </Button> */}
+
         <NotificationDropdown />
 
         <ThemeToggle />

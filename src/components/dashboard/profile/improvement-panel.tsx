@@ -20,7 +20,6 @@ function TopicRow({ title, score, color }: TopicProps) {
         </span>
       </div>
 
-      {/* Background Track bar */}
       <div className="w-full h-2 rounded-full bg-gray-200 dark:bg-slate-900 overflow-hidden">
         <div
           className={`h-full rounded-full bg-gradient-to-r ${score < 55

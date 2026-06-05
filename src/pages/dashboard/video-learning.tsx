@@ -5,8 +5,12 @@ import { VideoPlayer } from "@/components/dashboard/video-leraning/video-player"
 import { ActionButtons } from "@/components/dashboard/video-leraning/action-buttons";
 import { TranscriptSection } from "@/components/dashboard/video-leraning/transcript-view";
 import { AIChatSidebar } from "@/components/dashboard/video-leraning/ai-chat-container";
+import { useParams } from "react-router-dom";
 
 export default function VideoLearning() {
+  const { id } = useParams();
+  // console.log("VideoLearning ID:", id);
+
   return (
     <motion.div
       variants={containerStagger(0.12)}
@@ -46,7 +50,7 @@ export default function VideoLearning() {
             className="w-full xl:w-[360px] shrink-0"
           >
             <aside className="w-full">
-              <AIChatSidebar />
+              <AIChatSidebar id={id} />
             </aside>
           </motion.div>
         </div>

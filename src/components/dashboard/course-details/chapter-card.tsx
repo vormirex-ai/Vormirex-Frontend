@@ -1,4 +1,3 @@
-import React from 'react';
 import { Check, Play, Lock } from 'lucide-react';
 
 export interface Lesson {

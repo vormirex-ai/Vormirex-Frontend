@@ -6,8 +6,6 @@ const SUGGESTIONS = [
   "Explain Newton's 3 Laws",
   "What is integration by parts?",
   "Python list comprehension",
-  // "Explain photosynthesis simply",
-  // "Difference between DNA & RNA",
 ];
 
 export function ChatSuggestions({

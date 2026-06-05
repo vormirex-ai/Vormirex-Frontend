@@ -40,6 +40,11 @@ export const navGroups: NavGroup[] = [
       { title: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
       { title: "Subjects", path: "/dashboard/subjects", icon: BookOpen },
       {
+        title: "Subject Detail",
+        path: "/dashboard/course-details",
+        icon: FileText,
+      },
+      {
         title: "Video Library",
         path: "/dashboard/video-learning",
         icon: Video,
@@ -79,11 +84,7 @@ export const navGroups: NavGroup[] = [
         icon: Calendar,
       },
       { title: "Notes", path: "/productivity/notes", icon: PenLine },
-      {
-        title: "Course Detail",
-        path: "/dashboard/course-details",
-        icon: FileText,
-      },
+
       { title: "Interview Bot", path: "/practice/interview-bot", icon: Mic2 },
     ],
   },

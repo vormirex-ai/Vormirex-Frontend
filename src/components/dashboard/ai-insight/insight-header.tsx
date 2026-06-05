@@ -1,5 +1,3 @@
-import { Search, Zap } from "lucide-react";
-
 export const InsightHeader = () => {
   return (
     <div className="space-y-6 mb-6 ">

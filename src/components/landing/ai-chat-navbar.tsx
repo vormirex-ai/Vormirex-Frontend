@@ -1,13 +1,8 @@
 import { useState } from "react";
-
 import { Button } from "../ui/button";
-
 import logo from "../../assets/logo.png";
-
 import { Outlet, useNavigate } from "react-router";
-
 import { useSelector } from "react-redux";
-
 import UserMenu from "./userMenu";
 
 const AiChatNavbar = () => {

@@ -35,59 +35,63 @@ function App() {
       <Route path="/" element={<LandingLayout />} />
 
       {/* Auth Routes */}
-      {/* <Route element={<PublicRoute />}> */}
-      <Route element={<AuthLayout />}>
-        <Route path="/login" element={<Login />} />
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password" element={<ResetPasswordPage />} />
-        <Route path="/onboarding" element={<Onboarding />} />
-      </Route>
-      {/* </Route> */}
-
-      {/* Dashboard */}
-      {/* <Route element={<ProtectedRoute />}> */}
-      <Route path="/dashboard" element={<DashboardLayout />}>
-        <Route index element={<DashboardHome />} />
-        <Route path="subjects" element={<SubjectPage />} />
-        <Route path="video-learning" element={<VideoLearning />} />
-        <Route path="ai-chat" element={<AIChatPage />} />
-        <Route path="roadmap" element={<RoadmapPage />} />
-        <Route path="course-details" element={<CourseDetails />} />
-        <Route path="settings" element={<SettingsPage />} />
-        <Route path="notifications" element={<NotificationsPage />} />
-      </Route>
-      {/* </Route> */}
-
-
-      <Route path="/practice" element={<DashboardLayout />}>
-        <Route path="quiz" element={<QuizPage />} />
-        <Route path="flash-cards" element={<FlashcardPage />} />
-        <Route path="daily-challenges" element={<DailyChallengePage />} />
-        <Route path="interview-bot" element={<InterviewBotPage />} />
-      </Route>
-
-
-      <Route path="/productivity" element={<DashboardLayout />}>
-        <Route path="timer" element={<PromodoroTimer />} />
-        <Route path="study-planner" element={<StudyPlannerPage />} />
-        <Route path="notes" element={<NotesPage />} />
-      </Route>
-
-      <Route path="/analytics" element={<DashboardLayout />}>
-        <Route path="Insights" element={<AiInsightsPage />} />
-        <Route path="Leaderboard" element={<Leaderboard />} />
-      </Route>
-
-      {/* account */}
-      <Route element={<ProtectedRoute />}>
-        <Route path="/account/profile" element={<DashboardLayout />}>
-          <Route index element={<Profile />} />
+      <Route element={<PublicRoute />}>
+        <Route element={<AuthLayout />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route path="/onboarding" element={<Onboarding />} />
         </Route>
       </Route>
 
-      <Route path="/" element={<AiChatNavbar />}>
-        <Route path="ai-chat" element={<AIChatPage />} />
+      {/* Dashboard */}
+      <Route element={<ProtectedRoute />}>
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route index element={<DashboardHome />} />
+          <Route path="subjects" element={<SubjectPage />} />
+          <Route
+            path="video-learning/:id?"
+            element={<VideoLearning />}
+          />
+          <Route path="ai-chat" element={<AIChatPage />} />
+          <Route path="roadmap" element={<RoadmapPage />} />
+          <Route path="course-details/:id?" element={<CourseDetails />} />
+          <Route path="settings" element={<SettingsPage />} />
+          <Route path="notifications" element={<NotificationsPage />} />
+        </Route>
+
+
+
+        <Route path="/practice" element={<DashboardLayout />}>
+          <Route path="quiz" element={<QuizPage />} />
+          <Route path="flash-cards" element={<FlashcardPage />} />
+          <Route path="daily-challenges" element={<DailyChallengePage />} />
+          <Route path="interview-bot" element={<InterviewBotPage />} />
+        </Route>
+
+
+        <Route path="/productivity" element={<DashboardLayout />}>
+          <Route path="timer" element={<PromodoroTimer />} />
+          <Route path="study-planner" element={<StudyPlannerPage />} />
+          <Route path="notes" element={<NotesPage />} />
+        </Route>
+
+        <Route path="/analytics" element={<DashboardLayout />}>
+          <Route path="Insights" element={<AiInsightsPage />} />
+          <Route path="Leaderboard" element={<Leaderboard />} />
+        </Route>
+
+        {/* account */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/account/profile" element={<DashboardLayout />}>
+            <Route index element={<Profile />} />
+          </Route>
+        </Route>
+
+        <Route path="/" element={<AiChatNavbar />}>
+          <Route path="ai-chat" element={<AIChatPage />} />
+        </Route>
       </Route>
     </Routes>
   );

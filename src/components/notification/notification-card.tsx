@@ -1,5 +1,3 @@
-// src/data/notifications-data.ts
-
 import {
   Trophy,
   Flame,

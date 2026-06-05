@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router";
 import { Play, BookOpen, Clock, Target, Trophy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CustomProgress } from '@/components/common/custom-progress';
+import { useEffect, useState } from 'react';
+import { getSubjectContinueById } from '@/services/subjects';
+
 
 interface CourseHeaderProps {
   title: string;
@@ -12,9 +16,31 @@ interface CourseHeaderProps {
     quizzes: number;
     hasCertificate: boolean;
   };
+  id?: string;
 }
 
-export function CourseHeader({ title, progress, description, stats }: CourseHeaderProps) {
+export function CourseHeader({ title, progress, description, stats, id }: CourseHeaderProps) {
+  const navigate = useNavigate();
+  const [lessonId, setLessonId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchSubjectContinue = async () => {
+      if (!id) return;
+
+      try {
+        const response = await getSubjectContinueById(id);
+        const fetchedLessonId = response?.data?.lessonId;
+        setLessonId(fetchedLessonId);
+      } catch (error) {
+        console.error("Error fetching subject continue:", error);
+      }
+    };
+
+    fetchSubjectContinue();
+  }, [id]);
+
+
+
   return (
     <div className="relative overflow-hidden custom-surface rounded-2xl p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 shadow-md">
       <div className="space-y-4 max-w-2xl">
@@ -61,8 +87,17 @@ export function CourseHeader({ title, progress, description, stats }: CourseHead
           <p className="text-xs text-slate-500 font-medium tracking-wide uppercase mt-1">Complete</p>
         </div>
 
-        <Button className="flex items-center gap-2  rounded-xl">
-          <Play className="w-4 h-4 fill-current" />
+        <Button
+          onClick={() => {
+            if (!lessonId) {
+              console.warn("Lesson ID not found yet");
+              return;
+            }
+
+            navigate(`/dashboard/video-learning/${lessonId}`);
+          }}
+          className="flex items-center gap-2 rounded-xl"
+        >
           Continue
         </Button>
       </div>
