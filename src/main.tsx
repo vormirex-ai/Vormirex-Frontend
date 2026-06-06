@@ -3,8 +3,7 @@ import App from "./App";
 import { StrictMode, useEffect, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { Provider, useSelector } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
-import { store, persistor, RootState } from "./store/store";
+import { store, RootState } from "./store/store";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { BrowserRouter } from "react-router-dom";
 import { Toaster } from "sonner";
@@ -35,16 +34,14 @@ function Root() {
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
-      <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
-        <ErrorBoundary>
-          <Suspense fallback={<SuspenseFallback />}>
-            <BrowserRouter>
-              <Root />
-              <GlobalLoader />
-            </BrowserRouter>
-          </Suspense>
-        </ErrorBoundary>
-      </PersistGate>
+      <ErrorBoundary>
+        <Suspense fallback={<SuspenseFallback />}>
+          <BrowserRouter>
+            <Root />
+            <GlobalLoader />
+          </BrowserRouter>
+        </Suspense>
+      </ErrorBoundary>
     </Provider>
   </StrictMode>
 );
