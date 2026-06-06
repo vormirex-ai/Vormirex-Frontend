@@ -28,8 +28,50 @@ import InterviewBotPage from "./pages/practice/Interview-bot";
 import SettingsPage from "./pages/account/settings";
 import NotificationsPage from "./pages/dashboard/notifications";
 import AiChatNavbar from "./components/landing/ai-chat-navbar";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setCredentials, logout } from "@/store/slice/authSlice";
+import { axiosInstance } from "@/services/axiosInstance";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const initializeAuth = async () => {
+      try {
+        // 1. Silent refresh to retrieve access token
+        const refreshResponse = await axiosInstance.post("/auth/refresh");
+        const token = refreshResponse.data.accessToken || refreshResponse.data.token;
+
+        if (token) {
+          // 2. Fetch current user profile with token
+          const profileResponse = await axiosInstance.get("/auth/me", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (profileResponse.data?.success && profileResponse.data?.user) {
+            dispatch(
+              setCredentials({
+                user: profileResponse.data.user,
+                token,
+              })
+            );
+          } else {
+            dispatch(logout());
+          }
+        } else {
+          dispatch(logout());
+        }
+      } catch (error) {
+        dispatch(logout());
+      }
+    };
+
+    initializeAuth();
+  }, [dispatch]);
+
   return (
     <Routes>
       <Route path="/" element={<LandingLayout />} />

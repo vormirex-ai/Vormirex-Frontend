@@ -61,8 +61,6 @@ axiosInstance.interceptors.response.use(
     if (originalRequest?.url?.includes("/auth/refresh")) {
       store.dispatch(logout());
 
-      window.location.href = "/login";
-
       return Promise.reject(error);
     }
 
@@ -115,10 +113,6 @@ axiosInstance.interceptors.response.use(
         processQueue(err, null);
 
         store.dispatch(logout());
-
-        localStorage.removeItem("accessToken");
-
-        window.location.href = "/login";
 
         return Promise.reject(err);
       } finally {
