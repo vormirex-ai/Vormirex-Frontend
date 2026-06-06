@@ -1,16 +1,19 @@
-import { FaMoon } from "react-icons/fa"
+import { FaMoon } from "react-icons/fa";
 import { IoSunny } from "react-icons/io5";
 import { Button } from "../ui/button";
-import { useTheme } from "./theme-provider"
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { toggleTheme } from "@/store/slice/themeSlice";
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
+  const dispatch = useDispatch();
+  const theme = useSelector((state: RootState) => state.theme.theme);
 
   return (
     <Button
       variant="secondary"
       size="icon"
-      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      onClick={() => dispatch(toggleTheme())}
     >
       {theme === "light" ? (
         <FaMoon className="h-[1.2rem] w-[1.2rem]" />
@@ -19,5 +22,5 @@ export function ThemeToggle() {
       )}
       <span className="sr-only">Toggle theme</span>
     </Button>
-  )
+  );
 }

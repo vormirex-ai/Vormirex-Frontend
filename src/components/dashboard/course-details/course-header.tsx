@@ -2,8 +2,7 @@ import { useNavigate } from "react-router";
 import { Play, BookOpen, Clock, Target, Trophy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CustomProgress } from '@/components/common/custom-progress';
-import { useEffect, useState } from 'react';
-import { getSubjectContinueById } from '@/services/subjects';
+import { useGetSubjectContinueQuery } from '@/store/api/subjectsApi';
 
 
 interface CourseHeaderProps {
@@ -21,23 +20,8 @@ interface CourseHeaderProps {
 
 export function CourseHeader({ title, progress, description, stats, id }: CourseHeaderProps) {
   const navigate = useNavigate();
-  const [lessonId, setLessonId] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchSubjectContinue = async () => {
-      if (!id) return;
-
-      try {
-        const response = await getSubjectContinueById(id);
-        const fetchedLessonId = response?.data?.lessonId;
-        setLessonId(fetchedLessonId);
-      } catch (error) {
-        console.error("Error fetching subject continue:", error);
-      }
-    };
-
-    fetchSubjectContinue();
-  }, [id]);
+  const { data: continueData } = useGetSubjectContinueQuery(id, { skip: !id });
+  const lessonId = continueData?.data?.lessonId;
 
 
 

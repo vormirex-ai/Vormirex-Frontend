@@ -1,25 +1,25 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { useLogoutMutation } from "@/store/api/authApi";
 import { setCredentials } from "@/store/slice/authSlice";
-import { LogoutUser } from "@/services/auth";
 
 const UserMenu = () => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state: any) => state.auth);
+  const [logoutApi] = useLogoutMutation();
 
   const handleLogout = async () => {
     try {
-      await LogoutUser();
+      await logoutApi(undefined).unwrap();
       dispatch(
         setCredentials({
           user: null,
           token: null,
         })
       );
-      localStorage.removeItem("accessToken");
       setOpen(false);
       navigate("/");
     } catch (error) {

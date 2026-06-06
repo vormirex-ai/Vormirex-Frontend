@@ -7,9 +7,7 @@ import { CourseChapterCard } from '@/components/dashboard/course-details/chapter
 import { CourseHeader } from '@/components/dashboard/course-details/course-header'
 import { chaptersData } from '@/components/data/course-mock-data'
 import { ArrowLeft } from 'lucide-react'
-import { getSubjectCurriculumById, getSubjectDetailsById } from "@/services/subjects";
-
-
+import { useGetSubjectDetailsQuery } from "@/store/api/subjectsApi";
 
 const CourseDetails = () => {
 
@@ -18,27 +16,11 @@ const CourseDetails = () => {
     (state: any) => state.subject.selectedSubjectId
   );
 
-  const [subjectData, setSubjectData] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchSubjectDetails = async () => {
-      try {
-        setLoading(true);
-
-        const subjectId = id || reduxId;
-        const response = await getSubjectDetailsById(subjectId);
-        const subject = response?.data;
-        setSubjectData(subject);
-      } catch (error) {
-        console.error("Error fetching subject details:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchSubjectDetails();
-  }, [id, reduxId]);
+  const subjectId = id || reduxId;
+  const { data: subjectDetails, isLoading: loading } = useGetSubjectDetailsQuery(subjectId, {
+    skip: !subjectId,
+  });
+  const subjectData = subjectDetails?.data;
 
 
   return (

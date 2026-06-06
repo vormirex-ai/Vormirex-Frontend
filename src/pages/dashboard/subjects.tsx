@@ -5,7 +5,7 @@ import { containerStagger, fadeUpItem } from "@/lib/motion";
 import { SubjectCard } from "@/components/dashboard/subjects/subject-cards";
 import { SubjectHeader } from "@/components/dashboard/subjects/subject-header";
 import { PaginationWithLinks } from "@/components/pagination-with-link";
-import { getAllSubjects } from "@/services/subjects";
+import { useGetSubjectsQuery } from "@/store/api/subjectsApi";
 import { Subject } from "@/interface/subject.interface";
 import { SubjectSkeletonCard } from "@/components/skeleton/SubjectSkeletonCard";
 
@@ -15,32 +15,16 @@ export default function SubjectPage() {
   const pageSize = parseInt(searchParams.get("pageSize") || "10");
   const activeTab = searchParams.get("tab") || "All Subjects";
   const search = searchParams.get("search") || "";
-  const [subjects, setSubjects] = useState<Subject[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [totalCount, setTotalCount] = useState(0);
 
-  useEffect(() => {
-    const fetchSubjects = async () => {
-      try {
-        setLoading(true);
-        const response = await getAllSubjects();
-        setSubjects(response?.subjects || []);
-        setTotalCount(response?.total || 0);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const { data, isLoading: loading } = useGetSubjectsQuery({ page, limit: pageSize });
+  const subjects: Subject[] = data?.subjects || [];
+  const totalCount = data?.total || 0;
 
-    fetchSubjects();
-  }, [page, pageSize]);
-
-  const filteredSubjects = subjects.filter((subject) => {
+  const filteredSubjects = subjects.filter((subject: Subject) => {
     const matchSearch =
       subject.title.toLowerCase().includes(search.toLowerCase()) ||
       subject.description?.toLowerCase().includes(search.toLowerCase()) ||
-      subject.tags?.some((tag) =>
+      subject.tags?.some((tag: string) =>
         tag.toLowerCase().includes(search.toLowerCase())
       );
 
@@ -102,7 +86,7 @@ export default function SubjectPage() {
               animate="show"
               className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
             >
-              {filteredSubjects.map((subject) => (
+              {filteredSubjects.map((subject: Subject) => (
                 <motion.div key={subject._id} variants={fadeUpItem}>
                   <SubjectCard
                     _id={subject._id}

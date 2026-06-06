@@ -7,85 +7,56 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { FaRocket, FaUser } from "react-icons/fa";
 import logo from "../../assets/logo.png";
-import { AuthenticateSignup } from "@/services/auth";
+import { useSignupMutation } from "@/store/api/authApi";
 import { toast } from "sonner";
 import GoogleLoginButton from "@/components/auth/googleLoginButton";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+const signupSchema = Yup.object().shape({
+  name: Yup.string()
+    .required("Name is required")
+    .matches(/^[A-Za-z\s]+$/, "Name cannot contain numbers"),
+  email: Yup.string()
+    .required("Email is required")
+    .email("Enter a valid email"),
+  password: Yup.string()
+    .required("Password is required")
+    .min(6, "Password must be at least 6 characters"),
+});
 
 const SignUp = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState<any>({});
-  const [loading, setLoading] = useState(false);
+  
+  const [signup, { isLoading: loading }] = useSignupMutation();
 
-  const validate = () => {
-    let newErrors: any = {};
-
-    if (!name.trim()) {
-      newErrors.name = "Name is required";
-    } else if (!/^[A-Za-z\s]+$/.test(name)) {
-      newErrors.name = "Name cannot contain numbers";
-    }
-
-    if (!email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (
-      !/^[a-zA-Z0-9][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/.test(
-        email
-      )
-    ) {
-      newErrors.email = "Enter a valid email";
-    }
-
-    if (!password.trim()) {
-      newErrors.password = "Password is required";
-    } else if (password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters";
-    }
-
-    setErrors(newErrors);
-
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSignup = async () => {
-    if (!validate()) return;
-
-    try {
-      setLoading(true);
-
-      const payload = {
-        name,
-        email,
-        password,
-      };
-
-      const response = await AuthenticateSignup(payload);
-
-      if (response?.success) {
-        toast.success("Signup Successful ✅");
-        setName("");
-        setEmail("");
-        setPassword("");
-        setErrors({});
-
-        // navigate("/onboarding");
-        navigate("/login");
-      } else {
-        toast.error(response?.message || "Signup failed ❌");
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+    validationSchema: signupSchema,
+    onSubmit: async (values) => {
+      try {
+        const response = await signup(values).unwrap();
+        if (response?.success) {
+          toast.success("Signup Successful ✅");
+          formik.resetForm();
+          navigate("/login");
+        } else {
+          toast.error(response?.message || "Signup failed ❌");
+        }
+      } catch (error: any) {
+        toast.error(
+          error?.data?.message ||
+          error?.message ||
+          "Something went wrong. Please try again."
+        );
       }
-
-    } catch (error: any) {
-      toast.error(
-        error?.response?.data?.message ||
-        "Something went wrong. Please try again."
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+    },
+  });
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center  relative overflow-hidden px-4">
@@ -128,15 +99,17 @@ const SignUp = () => {
                 <FaUser className="absolute left-3 top-[18px] h-4 w-4 text-gray-500" />
                 <Input
                   id="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  name="name"
+                  value={formik.values.name}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   placeholder="Enter your full name"
                   className="bg-white/5 border-white/10 pl-10 py-6 "
                 />
               </div>
-              {errors.name && (
+              {formik.touched.name && formik.errors.name && (
                 <p className="text-red-500 text-xs mt-1">
-                  {errors.name}
+                  {formik.errors.name}
                 </p>
               )}
             </div>
@@ -147,15 +120,17 @@ const SignUp = () => {
                 <Mail className="absolute left-3 top-[18px] h-4 w-4 text-gray-500" />
                 <Input
                   id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  name="email"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   placeholder="user@example.com"
                   className="bg-white/5 border-white/10 pl-10 py-6 "
                 />
               </div>
-              {errors.email && (
+              {formik.touched.email && formik.errors.email && (
                 <p className="text-red-500 text-xs mt-1">
-                  {errors.email}
+                  {formik.errors.email}
                 </p>
               )}
             </div>
@@ -163,15 +138,16 @@ const SignUp = () => {
             <div className="grid gap-2">
               <div className="flex items-center justify-between">
                 <Label htmlFor="password" className=" ml-1 text-gray-400">Password</Label>
-
               </div>
               <div className="relative">
                 <Lock className="absolute left-3 top-4 h-4 w-4 text-gray-500" />
 
                 <Input
                   id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  name="password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   type={showPassword ? "text" : "password"}
                   placeholder="••••••••"
                   className="bg-white/5 border-white/10 pl-10 pr-10 py-6"
@@ -189,9 +165,9 @@ const SignUp = () => {
                   )}
                 </button>
 
-                {errors.password && (
+                {formik.touched.password && formik.errors.password && (
                   <p className="text-red-500 text-xs mt-1">
-                    {errors.password}
+                    {formik.errors.password}
                   </p>
                 )}
               </div>
@@ -201,9 +177,8 @@ const SignUp = () => {
             </p>
           </div>
 
-
           <Button className="py-6 text-lg"
-            onClick={handleSignup}
+            onClick={() => formik.handleSubmit()}
             disabled={loading}
           >
             <FaRocket className="mr-2 h-5  w-5" /> Create Account

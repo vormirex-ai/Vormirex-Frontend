@@ -28,39 +28,44 @@ import InterviewBotPage from "./pages/practice/Interview-bot";
 import SettingsPage from "./pages/account/settings";
 import NotificationsPage from "./pages/dashboard/notifications";
 import AiChatNavbar from "./components/landing/ai-chat-navbar";
+import NotFound from "./pages/not-found";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCredentials, logout } from "@/store/slice/authSlice";
-import { axiosInstance } from "@/services/axiosInstance";
+import { useLazyMeQuery } from "@/store/api/authApi";
+import { RootState } from "@/store/store";
 
 function App() {
   const dispatch = useDispatch();
+  const [triggerMe] = useLazyMeQuery();
+  const token = useSelector((state: RootState) => state.auth.token);
 
   useEffect(() => {
     const initializeAuth = async () => {
       try {
-        // 1. Silent refresh to retrieve access token
-        const refreshResponse = await axiosInstance.post("/auth/refresh");
-        const token = refreshResponse.data.accessToken || refreshResponse.data.token;
+        // triggerMe will automatically attempt baseQuery, which calls /auth/refresh under the hood if it fails with 401/403
+        const result = await triggerMe(undefined).unwrap();
 
-        if (token) {
-          // 2. Fetch current user profile with token
-          const profileResponse = await axiosInstance.get("/auth/me", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+        // After triggerMe resolves, if it was successful, the access token is in the store
+        // Let's verify we have both user details and the new token
+        if (result?.success && result?.user) {
+          // Triggering a reauth would have set the token in the Redux store.
+          // Let's retrieve it from the store or check it.
+          // Wait, since triggerMe successfully returned the user, we can read the token and set the full credentials.
+          // Let's retrieve the token from the active state.
+          import("@/store/store").then(({ store }) => {
+            const currentToken = store.getState().auth.token;
+            if (currentToken) {
+              dispatch(
+                setCredentials({
+                  user: result.user,
+                  token: currentToken,
+                })
+              );
+            } else {
+              dispatch(logout());
+            }
           });
-
-          if (profileResponse.data?.success && profileResponse.data?.user) {
-            dispatch(
-              setCredentials({
-                user: profileResponse.data.user,
-                token,
-              })
-            );
-          } else {
-            dispatch(logout());
-          }
         } else {
           dispatch(logout());
         }
@@ -70,7 +75,7 @@ function App() {
     };
 
     initializeAuth();
-  }, [dispatch]);
+  }, [dispatch, triggerMe]);
 
   return (
     <Routes>
@@ -135,6 +140,9 @@ function App() {
           <Route path="ai-chat" element={<AIChatPage />} />
         </Route>
       </Route>
+
+      {/* Catch-all route */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

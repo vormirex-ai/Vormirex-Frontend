@@ -5,12 +5,15 @@ import authReducer from "./slice/authSlice";
 import onboardingReducer from "./slice/onboardingSlice";
 // import notificationsReducer from "./slice/notificationSlice";
 import subjectReducer from "./slice/subjectSlice";
+import themeReducer from "./slice/themeSlice";
+import loaderReducer from "./slice/loaderSlice";
+import { apiSlice } from "./api/apiSlice";
 
 const persistConfig = {
   key: "root",
   storage,
 
-  whitelist: ["onboarding", "subject"],
+  whitelist: ["onboarding", "subject", "theme"],
 };
 
 const rootReducer = combineReducers({
@@ -18,6 +21,9 @@ const rootReducer = combineReducers({
   onboarding: onboardingReducer,
   // notifications: notificationsReducer,
   subject: subjectReducer,
+  theme: themeReducer,
+  loader: loaderReducer,
+  [apiSlice.reducerPath]: apiSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -28,7 +34,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }),
+    }).concat(apiSlice.middleware),
 });
 
 export const persistor = persistStore(store);

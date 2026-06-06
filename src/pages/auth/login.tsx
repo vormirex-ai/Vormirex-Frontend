@@ -21,11 +21,22 @@ import {
 import logo from "../../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import GoogleLoginButton from "@/components/auth/googleLoginButton";
-import { AuthenticateLogin } from "@/services/auth";
+import { useLoginMutation } from "@/store/api/authApi";
 import { useDispatch, useSelector } from "react-redux";
 import { setCredentials } from "@/store/slice/authSlice";
 import { toast } from "sonner";
 import { RootState } from "@/store/store";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+const loginSchema = Yup.object().shape({
+  email: Yup.string()
+    .required("Email is required")
+    .email("Enter a valid email"),
+  password: Yup.string()
+    .required("Password is required")
+    .min(6, "Password must be at least 6 characters"),
+});
 
 const Login = () => {
   const navigate = useNavigate();
@@ -35,78 +46,48 @@ const Login = () => {
     (state: RootState) => state.onboarding.completed
   );
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  
+  const [login, { isLoading: loading }] = useLoginMutation();
 
-  const [errors, setErrors] = useState<any>({});
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: loginSchema,
+    onSubmit: async (values) => {
+      setError("");
+      try {
+        const response = await login(values).unwrap();
 
-  const validate = () => {
-    let newErrors: any = {};
+        if (response?.success) {
 
-    if (!email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (
-      !/^[a-zA-Z0-9][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/.test(
-        email
-      )
-    ) {
-      newErrors.email = "Enter a valid email";
-    }
+          dispatch(
+            setCredentials({
+              user: response.user,
+              token: response.accessToken,
+            })
+          );
+          toast.success("Login Successful ✅");
+          if (onboardingCompleted) {
+            navigate("/dashboard");
+          } else {
+            navigate("/onboarding");
+          }
 
-    if (!password.trim()) {
-      newErrors.password = "Password is required";
-    } else if (password.length < 6) {
-      newErrors.password =
-        "Password must be at least 6 characters";
-    }
-
-    setErrors(newErrors);
-
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleLogin = async () => {
-    setError("");
-
-    if (!validate()) return;
-
-    try {
-      setLoading(true);
-
-      const response = await AuthenticateLogin({
-        email,
-        password,
-      });
-
-      if (response?.success) {
-
-        dispatch(
-          setCredentials({
-            user: response.user,
-            token: response.accessToken,
-          })
-        );
-        toast.success("Login Successful ✅");
-        if (onboardingCompleted) {
-          navigate("/dashboard");
         } else {
-          navigate("/onboarding");
+          setError(response?.message);
+          toast.error(response?.message || "Login failed ❌");
         }
 
-      } else {
-        setError(response?.message);
-        toast.error(response?.message || "Login failed ❌");
+      } catch (err: any) {
+        const errMsg = err?.data?.message || err?.message || "Something went wrong ❌";
+        setError(errMsg);
+        toast.error(errMsg);
       }
-
-    } catch (error: any) {
-      toast.error(error?.response?.data?.message || "Something went wrong ❌");
-
-    } finally {
-      setLoading(false);
-    }
-  };
+    },
+  });
   return (
     <div className="min-h-screen w-full flex items-center justify-center  relative overflow-hidden px-4">
 
@@ -165,17 +146,17 @@ const Login = () => {
                 <Mail className="absolute left-3 top-[18px] h-4 w-4 text-gray-500" />
                 <Input
                   id="email"
-                  value={email}
-                  onChange={(e) =>
-                    setEmail(e.target.value)
-                  }
+                  name="email"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   placeholder="user@example.com"
                   className="bg-white/5 border-white/10 pl-10 py-6"
                 />
               </div>
-              {errors.email && (
+              {formik.touched.email && formik.errors.email && (
                 <p className="text-red-500 text-xs mt-1">
-                  {errors.email}
+                  {formik.errors.email}
                 </p>
               )}
             </div>
@@ -203,11 +184,11 @@ const Login = () => {
 
                 <Input
                   id="password"
+                  name="password"
                   type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) =>
-                    setPassword(e.target.value)
-                  }
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   placeholder="••••••••"
                   className="bg-white/5 border-white/10 pl-10 py-6 "
                 />
@@ -225,9 +206,9 @@ const Login = () => {
                     <Eye className="h-4 w-4" />
                   )}
                 </button>
-                {errors.password && (
+                {formik.touched.password && formik.errors.password && (
                   <p className="text-red-500 text-xs mt-1">
-                    {errors.password}
+                    {formik.errors.password}
                   </p>
                 )}
 
@@ -244,7 +225,7 @@ const Login = () => {
           </div>
 
           <Button
-            onClick={handleLogin}
+            onClick={() => formik.handleSubmit()}
             className="py-6 text-lg"
             disabled={loading}
           >

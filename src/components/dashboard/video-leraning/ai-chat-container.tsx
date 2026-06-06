@@ -7,99 +7,43 @@ import { ChatInput } from "@/components/common/ai-chat/chat-input";
 import { ChatMessage } from "@/components/common/ai-chat/chat-message";
 import { Message } from "@/interface/chatMsg.interface";
 
-import {
-  getAiTutorChats,
-  sendAiTutorMessage,
-} from "@/services/ai-tutor";
+import { useGetAiChatHistoryQuery, useSendAiMessageMutation } from "@/store/api/aiTutorApi";
 
 export function AIChatSidebar({ id }: { id?: string }) {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [loading, setLoading] = useState(false);
+  const { data: chatHistory, isLoading: fetchingChats } = useGetAiChatHistoryQuery(id, { skip: !id });
+  const [sendMessage, { isLoading: sendingMessage }] = useSendAiMessageMutation();
 
-  useEffect(() => {
-    const fetchChats = async () => {
-      if (!id) return;
+  const loading = fetchingChats || sendingMessage;
 
-      try {
-        setLoading(true);
-
-        const response = await getAiTutorChats(id);
-
-        console.log("AI Chats:", response);
-
-        const chats = response?.data?.messages || [];
-
-        if (chats.length > 0) {
-          const formatted: Message[] = chats.map((msg: any) => ({
-            role: msg.role === "model" ? "ai" : "user",
-            content: msg.content,
-          }));
-
-          setMessages(formatted);
-        } else {
-          setMessages([
-            {
-              role: "ai",
-              content:
-                "👋 Hi! I'm watching this lesson with you. Ask me anything...",
-            },
-          ]);
-        }
-      } catch (error) {
-        console.error("Chat fetch error:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchChats();
-  }, [id]);
-
+  const chats = chatHistory?.data?.messages || [];
+  const messages: Message[] = chats.length > 0
+    ? chats.map((msg: any) => ({
+        role: msg.role === "model" ? "ai" : "user",
+        content: msg.content,
+      }))
+    : [
+        {
+          role: "ai",
+          content: "👋 Hi! I'm watching this lesson with you. Ask me anything...",
+        },
+      ];
 
   const handleSend = async (text: string) => {
     if (!text.trim() || !id) return;
 
-    const userMessage: Message = {
-      role: "user",
-      content: text,
-    };
-
-    setMessages((prev) => [...prev, userMessage]);
-
     try {
-      setLoading(true);
-      const response = await sendAiTutorMessage(id, {
+      await sendMessage({
+        lessonId: id,
         message: text,
-      });
-
-      const messages = response?.data?.messages || [];
-
-      const lastAiMessage = [...messages]
-        .reverse()
-        .find((msg: any) => msg.role === "model");
-
-      const aiMessage: Message = {
-        role: "ai",
-        content:
-          lastAiMessage?.content || "No response from AI",
-      };
-      setMessages((prev) => [...prev, aiMessage]);
+      }).unwrap();
     } catch (error) {
       console.error("Send message error:", error);
-    } finally {
-      setLoading(false);
     }
   };
 
-
   const handleClear = () => {
-    setMessages([
-      {
-        role: "ai",
-        content:
-          "👋 Hi! I'm watching this lesson with you. Ask me anything...",
-      },
-    ]);
+    // Clear chat is mock/local in UI or can be extended if backend supports clearing chats.
+    // For now we do nothing or could extend.
   };
 
 
