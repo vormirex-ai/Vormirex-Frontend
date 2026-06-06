@@ -32,6 +32,7 @@ import NotFound from "./pages/not-found";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCredentials, logout } from "@/store/slice/authSlice";
+import { setUiPreferences } from "@/store/slice/themeSlice";
 import { useLazyMeQuery } from "@/store/api/authApi";
 import { RootState } from "@/store/store";
 
@@ -49,6 +50,10 @@ function App() {
         // After triggerMe resolves, if it was successful, the access token is in the store
         // Let's verify we have both user details and the new token
         if (result?.success && result?.user) {
+          // Sync UI preferences from profile
+          if (result.user.preferences) {
+            dispatch(setUiPreferences(result.user.preferences));
+          }
           // Triggering a reauth would have set the token in the Redux store.
           // Let's retrieve it from the store or check it.
           // Wait, since triggerMe successfully returned the user, we can read the token and set the full credentials.

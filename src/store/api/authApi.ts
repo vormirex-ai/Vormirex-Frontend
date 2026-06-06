@@ -39,6 +39,13 @@ export const authApi = apiSlice.injectEndpoints({
     me: builder.query({
       query: () => "/auth/me",
     }),
+    updateUiPreferences: builder.mutation({
+      query: (preferences) => ({
+        url: "/users/me/ui-preferences",
+        method: "PATCH",
+        body: preferences,
+      }),
+    }),
   }),
   overrideExisting: false,
 });
@@ -50,4 +57,5 @@ export const {
   useResetPasswordMutation,
   useLogoutMutation,
   useLazyMeQuery,
+  useUpdateUiPreferencesMutation,
 } = authApi;
